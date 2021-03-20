@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.05"
-            android:text="Insert your login and password"
+            android:text="@string/insert_your_login_and_password"
             android:textAlignment="center" />
 
         <EditText
@@ -36,7 +36,8 @@
             android:layout_weight="0.1"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="@string/login"
+            android:hint="@string/login"
+            android:importantForAutofill="no"
             android:textColor="#E11456" />
 
         <EditText
@@ -47,7 +48,8 @@
             android:layout_weight="0.1"
             android:ems="10"
             android:inputType="numberPassword"
-            android:text="@string/password"
+            android:importantForAutofill="no"
+            android:hint="@string/password"
             android:textColor="#854561" />
 
         <Button
