@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/MainViewFragment"
-        android:name="com.wpam.pressheart.MainViewWindow"
+        android:name="com.wpam.pressheart.fragments.MainViewWindow"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/main_view_window">
 
@@ -20,7 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/MainLoggedFragment"
-        android:name="com.wpam.pressheart.MainLoggedWindow"
+        android:name="com.wpam.pressheart.fragments.MainLoggedWindow"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/main_logged_window">
 
@@ -31,9 +31,11 @@
 
     <fragment
         android:id="@+id/SignUpFragment"
-        android:name="com.wpam.pressheart.SignUpWindow"
+        android:name="com.wpam.pressheart.fragments.SignUpWindow"
         android:label="Sign Up Fragment"
         tools:layout="@layout/fragment_sign_up_window">
-
+        <action
+            android:id="@+id/action_SignUpFragment_to_MainLoggedFragment"
+            app:destination="@id/MainLoggedFragment" />
     </fragment>
 </navigation>

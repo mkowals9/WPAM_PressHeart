@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".SignUpWindow">
+    tools:context=".fragments.SignUpWindow">
 
     <TextView
         android:id="@+id/createProfileTextSignUp"
@@ -76,7 +76,7 @@
         android:textColorHint="#E11456" />
 
     <Button
-        android:id="@+id/signUpButtonSignUp"
+        android:id="@+id/sign_up_buttonSignUp"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
