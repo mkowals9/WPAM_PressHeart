@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "971282033343",
+    "project_id": "pressheart-e79ef",
+    "storage_bucket": "pressheart-e79ef.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:971282033343:android:bbf830634a34def704f40a",
+        "android_client_info": {
+          "package_name": "com.wpam.pressheart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "971282033343-sr03607s0rlv28be868dnai487m44f10.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDH8q7ooHgPe_DGVGZ5tK6_xUmKawNbZmY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "971282033343-sr03607s0rlv28be868dnai487m44f10.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
