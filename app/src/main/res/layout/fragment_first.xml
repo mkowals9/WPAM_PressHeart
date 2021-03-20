@@ -13,53 +13,60 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/imageView_logo"
             android:layout_width="match_parent"
             android:layout_height="397dp"
             android:layout_weight="0.01"
-            android:src="@drawable/logo"/>
+            android:src="@drawable/logo"
+            android:contentDescription="@string/app_name"/>
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView"
-            android:layout_weight="0.05"/>
+            android:layout_weight="0.05"
+            android:text="Insert your login and password"
+            android:textAlignment="center" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName"
+            android:id="@+id/editTextLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.1"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Name"
-            android:layout_weight="0.1"
-            android:layout_gravity="center_vertical"/>
+            android:text="@string/login"
+            android:textColor="#E11456" />
 
         <EditText
             android:id="@+id/editTextNumberPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.1"
             android:ems="10"
             android:inputType="numberPassword"
-            android:layout_weight="0.1"
-            android:layout_gravity="center_vertical"/>
+            android:text="@string/password"
+            android:textColor="#854561" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/button_log_in"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Log in"
+            android:layout_gravity="center_vertical"
             android:layout_weight="0.1"
-            android:layout_gravity="center_vertical"/>
+            android:text="@string/log_in" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/button_sign_up"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_weight="0.01"
-            android:text="Button"
-            android:layout_gravity="center_vertical"/>
+            android:text="@string/sign_up" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
