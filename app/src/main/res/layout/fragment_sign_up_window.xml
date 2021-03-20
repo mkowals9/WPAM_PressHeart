@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SignUpWindow">
+
+    <TextView
+        android:id="@+id/createProfileTextSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.5"
+        android:gravity="start|center"
+        android:text="Create new profile"
+        android:textAlignment="center"
+        android:textColor="#E11456"
+        android:textSize="36sp"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/nameTextSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.1"
+        android:text="@string/login" />
+
+    <EditText
+        android:id="@+id/editNameSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.25"
+        android:ems="10"
+        android:hint="@string/login"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:textColor="#E11456"
+        android:textColorHint="#E11456" />
+
+    <TextView
+        android:id="@+id/emailTextSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.1"
+        android:text="@string/e_mail" />
+
+    <EditText
+        android:id="@+id/editTextTextEmailAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.25"
+        android:ems="10"
+        android:importantForAutofill="no"
+        android:hint="@string/e_mail"
+        android:inputType="textEmailAddress"
+        android:textColor="#E11456"
+        android:textColorHint="#E11456" />
+
+    <TextView
+        android:id="@+id/passwordTextSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.1"
+        android:text="@string/password" />
+
+    <EditText
+        android:id="@+id/editPasswordSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.25"
+        android:ems="10"
+        android:hint="@string/password"
+        android:importantForAutofill="no"
+        android:inputType="numberPassword"
+        android:textColor="#E11456"
+        android:textColorHint="#E11456" />
+
+    <Button
+        android:id="@+id/signUpButtonSignUp"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.25"
+        android:text="@string/sign_up" />
+
+</LinearLayout>
