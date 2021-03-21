@@ -41,7 +41,7 @@
             android:textColor="#E11456" />
 
         <EditText
-            android:id="@+id/editTextNumberPassword"
+            android:id="@+id/editTextNumberPasswordSignIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"

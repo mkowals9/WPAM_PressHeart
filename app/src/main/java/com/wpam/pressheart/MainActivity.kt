@@ -1,6 +1,8 @@
 package com.wpam.pressheart
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.wpam.pressheart.fragments.MainLoggedWindow
 
 
 class MainActivity : AppCompatActivity(), CommunicatorFragmentsMainActivity {
@@ -21,8 +24,20 @@ class MainActivity : AppCompatActivity(), CommunicatorFragmentsMainActivity {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        setSupportActionBar(findViewById(R.id.toolbar))
+        //setContentView(R.layout.activity_main)
+        //setSupportActionBar(findViewById(R.id.toolbar))
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        if(currentUser != null){
+            Log.d( "User is available","User is available")
+            val intent = Intent(this@MainActivity, MainLoggedMenu::class.java)
+            startActivity(intent)
+            //setContentView(R.layout.main_logged_window)
+        }
+        else{
+            Log.d( "User is not available","User is not available")
+            setContentView(R.layout.activity_main)
+            setSupportActionBar(findViewById(R.id.toolbar))
+        }
 // ...
 // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()
@@ -32,10 +47,7 @@ class MainActivity : AppCompatActivity(), CommunicatorFragmentsMainActivity {
     public override fun onStart() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
-        val currentUser = auth.currentUser
-        if(currentUser != null){
-            findNavController(R.layout.main_view_window).navigate(R.id.action_MainViewFragment_to_MainLoggedFragment)
-        }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
