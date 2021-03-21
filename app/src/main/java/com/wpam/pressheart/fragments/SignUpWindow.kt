@@ -1,6 +1,8 @@
 package com.wpam.pressheart.fragments
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,25 +39,35 @@ class SignUpWindow : Fragment(){
         sign_up_buttonSignUp.setOnClickListener{
 
             var email = editTextTextEmailAddress.text.toString()
-            var password = editTextNumberPassword.text.toString()
-
-            if(!email.isEmpty() && !password.isEmpty()){
+            //var password = editTextNumberPassword.text.toString()
+            val password = "123456"
+            Log.d(TAG, "email: $email")
+            Log.d(TAG,"password: $password")
+            if(!email.isEmpty() && !password.isEmpty())
+            {
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this.activity as MainActivity) { task ->
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
-                        //Log.d(TAG, "createUserWithEmail:success")
+                        Log.d(TAG, "createUserWithEmail:success")
+                        Log.d(TAG, "success email: $email")
+                        Log.d(TAG, "success password: $password")
                         val user = FirebaseAuth.getInstance().currentUser
                         updateUI(user)
                     } else {
                         // If sign in fails, display a message to the user.
-                        //Log.w(TAG, "createUserWithEmail:failure", task.exception)
+                        Log.w(TAG, "createUserWithEmail:failure", task.exception)
                         //Toast.makeText(baseContext, "Authentication failed.",
                           //  Toast.LENGTH_SHORT).show()
+                        Log.d(TAG, "ble email: $email")
+                        Log.d(TAG, "ble password: $password")
                         updateUI(null)
                     }
                 }
             findNavController().navigate(R.id.action_SignUpFragment_to_MainLoggedFragment)
+            }
+            else{
+                Log.d(TAG, "Something went wrong honey")
             }
         }
 
