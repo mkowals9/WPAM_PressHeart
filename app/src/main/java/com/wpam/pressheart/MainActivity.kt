@@ -3,23 +3,15 @@ package com.wpam.pressheart
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
-import com.wpam.pressheart.fragments.MainLoggedWindow
 
 
 class MainActivity : AppCompatActivity(), CommunicatorFragmentsMainActivity {
 
     private lateinit var auth: FirebaseAuth
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,7 +38,6 @@ class MainActivity : AppCompatActivity(), CommunicatorFragmentsMainActivity {
 
     public override fun onStart() {
         super.onStart()
-        // Check if user is signed in (non-null) and update UI accordingly.
 
     }
 

@@ -10,23 +10,9 @@
         android:name="com.wpam.pressheart.fragments.MainViewWindow"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/main_view_window">
-
-        <action
-            android:id="@+id/action_MainViewFragment_to_MainLoggedFragment"
-            app:destination="@id/MainLoggedFragment" />
         <action
             android:id="@+id/action_MainViewFragment_to_SignUpFragment"
             app:destination="@+id/SignUpFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/MainLoggedFragment"
-        android:name="com.wpam.pressheart.fragments.MainLoggedWindow"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/main_logged_window">
-
-        <action
-            android:id="@+id/action_MainLoggedFragment_to_MainViewFragment"
-            app:destination="@id/MainViewFragment" />
     </fragment>
 
     <fragment
@@ -34,28 +20,7 @@
         android:name="com.wpam.pressheart.fragments.SignUpWindow"
         android:label="Sign Up Fragment"
         tools:layout="@layout/fragment_sign_up_window">
-        <action
-            android:id="@+id/action_SignUpFragment_to_MainLoggedFragment"
-            app:destination="@id/MainLoggedFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.wpam.pressheart.fragments.MainLoggedMenuFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
 
-        <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.wpam.pressheart.fragments.SecondFragmentFromMainLoggedMenu"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
 
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
-    </fragment>
 </navigation>

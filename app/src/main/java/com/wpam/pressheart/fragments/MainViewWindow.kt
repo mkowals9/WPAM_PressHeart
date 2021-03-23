@@ -1,6 +1,7 @@
 package com.wpam.pressheart.fragments
 
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.wpam.pressheart.MainActivity
+import com.wpam.pressheart.MainLoggedMenu
 import com.wpam.pressheart.R
 import kotlinx.android.synthetic.main.fragment_sign_up_window.*
 import kotlinx.android.synthetic.main.main_view_window.*
@@ -42,7 +44,9 @@ class MainViewWindow : Fragment() {
                         Log.d(TAG, "signInWithEmail:success")
                         val user = FirebaseAuth.getInstance().currentUser
                         updateUI(user)
-                        findNavController().navigate(R.id.action_MainViewFragment_to_MainLoggedFragment)
+                        val intent = Intent(this.activity as MainActivity, MainLoggedMenu::class.java)
+                        startActivity(intent)
+                    //findNavController().navigate(R.id.action_MainViewFragment_to_MainLoggedFragment)
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "signInWithEmail:failure", task.exception)
