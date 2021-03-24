@@ -61,6 +61,7 @@ class SignUpWindow : Fragment(){
                                 updateUI(user)
                                 val intent = Intent(this.activity as MainActivity, MainLoggedMenu::class.java)
                                 startActivity(intent)
+                                //(this.activity as MainActivity).finish()
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, "createUserWithEmail:failure", task.exception)

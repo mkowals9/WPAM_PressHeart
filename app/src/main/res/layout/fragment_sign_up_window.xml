@@ -14,7 +14,7 @@
         android:gravity="start|center"
         android:text="Create new profile"
         android:textAlignment="center"
-        android:textColor="#E11456"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="36sp"
         tools:ignore="HardcodedText" />
 
@@ -34,8 +34,8 @@
         android:hint="@string/login"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
-        android:textColor="#E11456"
-        android:textColorHint="#E11456" />
+        android:textColor="@color/colorPrimary"
+        android:textColorHint="@color/colorPrimary" />
 
     <TextView
         android:id="@+id/emailTextSignUp"
@@ -50,11 +50,11 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.25"
         android:ems="10"
-        android:importantForAutofill="no"
         android:hint="@string/e_mail"
+        android:importantForAutofill="no"
         android:inputType="textEmailAddress"
-        android:textColor="#E11456"
-        android:textColorHint="#E11456" />
+        android:textColor="@color/colorPrimary"
+        android:textColorHint="@color/colorPrimary" />
 
     <TextView
         android:id="@+id/passwordTextSignUp"
@@ -72,8 +72,8 @@
         android:hint="@string/password"
         android:importantForAutofill="no"
         android:inputType="numberPassword"
-        android:textColor="#E11456"
-        android:textColorHint="#E11456" />
+        android:textColor="@color/colorPrimary"
+        android:textColorHint="@color/colorPrimary" />
 
     <Button
         android:id="@+id/sign_up_buttonSignUp"
@@ -81,6 +81,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.25"
-        android:text="@string/sign_up" />
+        android:background="@color/colorPrimaryDark"
+        android:text="@string/sign_up"
+        android:textCursorDrawable="@color/colorPrimaryDark" />
 
 </LinearLayout>

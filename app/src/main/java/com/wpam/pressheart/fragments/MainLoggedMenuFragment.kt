@@ -52,17 +52,17 @@ class MainLoggedMenuFragment : Fragment() {
 //                        Log.d(ContentValues.TAG, "UPS SOMETHING WENT WRONG WITH LOGGING OUT")}
 //                }
             FirebaseAuth.getInstance().signOut()
-            if(FirebaseAuth.getInstance().currentUser != null)
-            {
-                Log.d("Successful log out" , "Successful log out")
-                //findNavController().navigate(R.id.action_MainLoggedMenu_to_MainViewFragment)
-                val intent = Intent(this.activity as MainLoggedMenu, MainActivity::class.java)
-                startActivity(intent)
-            }
-            else{
-                Log.d("Something went wrong", "Something went wrong")
-            }
 
+            Log.d("Successful log out" , "Successful log out")
+            updateUI(null)
+            //findNavController().navigate(R.id.action_MainLoggedMenu_to_MainViewFragment)
+            (this.activity as MainLoggedMenu).onBackPressed()
+            //findNavController().navigate(R.id.action_MainLoggedMenu_to_MainViewFragment)
+
+        }
+
+        medicinesButton.setOnClickListener{
+            findNavController().navigate(R.id.action_MainLoggedMenu_to_MedicinesFragment)
         }
     }
 

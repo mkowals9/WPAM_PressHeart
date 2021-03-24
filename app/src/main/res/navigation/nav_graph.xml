@@ -20,6 +20,9 @@
         android:name="com.wpam.pressheart.fragments.SignUpWindow"
         android:label="Sign Up Fragment"
         tools:layout="@layout/fragment_sign_up_window">
+        <action
+            android:id="@+id/action_SingUpFragment_to_MainViewFragment"
+            app:destination="@+id/MainViewFragment" />
 
     </fragment>
 

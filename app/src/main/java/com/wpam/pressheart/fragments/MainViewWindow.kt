@@ -35,9 +35,10 @@ class MainViewWindow : Fragment() {
 
         button_log_in.setOnClickListener{
             var email = editTextLogin.text.toString()
-            var password = editTextNumberPasswordSignIn.text.toString()
-            Log.d(TAG, "email: $email and password: $password")
-            FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
+            //var password = editTextNumberPasswordSignIn.text.toString()
+            Log.d(TAG, "email: $email and password: password")
+            if(false){
+            FirebaseAuth.getInstance().signInWithEmailAndPassword(email, email)
                 .addOnCompleteListener(this.activity as MainActivity) { task ->
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
@@ -53,6 +54,12 @@ class MainViewWindow : Fragment() {
                         updateUI(null)
                     }
                 }
+            }
+            else
+            {
+                val intent = Intent(this.activity as MainActivity, MainLoggedMenu::class.java)
+                startActivity(intent)
+            }
         }
 
         button_sign_up.setOnClickListener{

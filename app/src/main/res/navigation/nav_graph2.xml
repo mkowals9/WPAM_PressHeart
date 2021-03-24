@@ -5,6 +5,8 @@
     android:id="@+id/nav_graph2"
     app:startDestination="@id/MainLoggedMenu">
 
+    <include app:graph="@navigation/nav_graph" />
+
     <fragment
         android:id="@+id/MainLoggedMenu"
         android:name="com.wpam.pressheart.fragments.MainLoggedMenuFragment"
@@ -16,7 +18,7 @@
             app:destination="@id/MeasurementsFragment" />
         <action
             android:id="@+id/action_MainLoggedMenu_to_MainViewFragment"
-            app:destination="@+id/MainViewFragment"/>
+            app:destination="@+id/nav_graph"/>
     </fragment>
     <fragment
         android:id="@+id/MeasurementsFragment"
@@ -27,5 +29,14 @@
         <action
             android:id="@+id/action_MeasurementsFragment_to_MainLoggedMenuFragment"
             app:destination="@id/MainLoggedMenu" />
+    </fragment>
+    <fragment
+        android:id="@+id/MedicinesFragment"
+        android:name="com.wpam.pressheart.fragments.MediciniesFragment"
+        android:label="Medicines Fragment"
+        tools:layout="@layout/fragment_medicines">
+        <action
+            android:id="@+id/action_MainLoggedMenu_to_MedicinesFragment"
+            app:destination="@id/MedicinesFragment"/>
     </fragment>
 </navigation>

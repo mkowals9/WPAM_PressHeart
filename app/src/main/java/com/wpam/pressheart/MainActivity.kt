@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity(), CommunicatorFragmentsMainActivity {
         val currentUser = FirebaseAuth.getInstance().currentUser
         if(currentUser != null){
             Log.d( "User is available","User is available")
+
             val intent = Intent(this@MainActivity, MainLoggedMenu::class.java)
             startActivity(intent)
             //setContentView(R.layout.main_logged_window)

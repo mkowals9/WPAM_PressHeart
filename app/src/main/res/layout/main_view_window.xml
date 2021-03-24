@@ -35,10 +35,10 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="0.1"
             android:ems="10"
-            android:inputType="textPersonName"
             android:hint="@string/login"
             android:importantForAutofill="no"
-            android:textColor="#E11456" />
+            android:inputType="textPersonName"
+            android:textColor="@color/colorPrimaryDark" />
 
         <EditText
             android:id="@+id/editTextNumberPasswordSignIn"
@@ -47,19 +47,23 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="0.1"
             android:ems="10"
-            android:inputType="numberPassword"
-            android:importantForAutofill="no"
             android:hint="@string/password"
-            android:textColor="#854561" />
+            android:importantForAutofill="no"
+            android:inputType="numberPassword"
+            android:textColor="@color/colorPrimaryDark" />
 
         <Button
             android:id="@+id/button_log_in"
-            style="@style/Widget.AppCompat.Button.Colored"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="0.1"
-            android:text="@string/log_in" />
+            android:background="@color/colorPrimary"
+            android:text="@string/log_in"
+            android:textColor="#FFFFFF"
+            android:textColorHighlight="#FFFFFF"
+            android:textColorLink="#FFFFFF" />
 
         <Button
             android:id="@+id/button_sign_up"
