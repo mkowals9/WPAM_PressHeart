@@ -11,7 +11,7 @@
         android:id="@+id/MainLoggedMenu"
         android:name="com.wpam.pressheart.fragments.MainLoggedMenuFragment"
         android:label="Main Logged Menu Fragment"
-        tools:layout="@layout/main_logged_menu_fragment">
+        tools:layout="@layout/fragment_main_logged_menu">
 
         <action
             android:id="@+id/action_MainLoggedMenu_to_MeasurementsFragment"

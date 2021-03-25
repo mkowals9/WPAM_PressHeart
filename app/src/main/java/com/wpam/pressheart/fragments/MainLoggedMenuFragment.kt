@@ -1,25 +1,22 @@
 package com.wpam.pressheart.fragments
 
-import android.content.ContentValues
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.wpam.pressheart.MainActivity
 import com.wpam.pressheart.MainLoggedMenu
 import com.wpam.pressheart.R
-import kotlinx.android.synthetic.main.main_logged_menu_fragment.*
+import kotlinx.android.synthetic.main.fragment_main_logged_menu.*
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
+
 class MainLoggedMenuFragment : Fragment() {
 
 
@@ -28,7 +25,7 @@ class MainLoggedMenuFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.main_logged_menu_fragment, container, false)
+        return inflater.inflate(R.layout.fragment_main_logged_menu, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -60,4 +57,9 @@ class MainLoggedMenuFragment : Fragment() {
     }
 
     private fun updateUI(user: FirebaseUser?) {}
+
+
+
 }
+
+

@@ -14,7 +14,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.wpam.pressheart.MainActivity
 import com.wpam.pressheart.MainLoggedMenu
 import com.wpam.pressheart.R
-import kotlinx.android.synthetic.main.fragment_sign_up_window.*
+import com.wpam.pressheart.dialogs.EmptyValuesDialog
 import kotlinx.android.synthetic.main.main_view_window.*
 
 /**
@@ -57,6 +57,7 @@ class MainViewWindow : Fragment() {
             }
             else
             {
+                EmptyValuesDialog(this.activity as MainActivity).show()
 //                val intent = Intent(this.activity as MainActivity, MainLoggedMenu::class.java)
 //                startActivity(intent)
             }
