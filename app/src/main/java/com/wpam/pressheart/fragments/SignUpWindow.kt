@@ -40,23 +40,23 @@ class SignUpWindow : Fragment(){
 
         sign_up_buttonSignUp.setOnClickListener{
 
-
             //if (TextUtils.isEmpty(editTextTextEmailAddress.text.toString()) || TextUtils.isEmpty(editTextNumberPasswordSignIn.text.toString()))
 
                 var email = editTextTextEmailAddress.text.toString()
-                //var passwordFromEdit = editTextNumberPasswordSignIn.text.toString()
+                var passwordFromEdit = editPasswordSignUp.getText().toString()
                 val password = "123456"
                 Log.d(TAG, "email: $email")
-                //Log.d(TAG,"passwordfromEdit : $passwordFromEdit")
-                if(!email.isEmpty() && !password.isEmpty())
+                Log.d(TAG,"passwordfromEdit : $passwordFromEdit")
+                Log.d(TAG, "password: $password")
+                if(!email.isEmpty() && !passwordFromEdit.isEmpty())
                 {
-                    FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
+                    FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, passwordFromEdit)
                         .addOnCompleteListener(this.activity as MainActivity) { task ->
                             if (task.isSuccessful) {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d(TAG, "createUserWithEmail:success")
                                 Log.d(TAG, "success email: $email")
-                                Log.d(TAG, "success password: $password")
+                                Log.d(TAG, "success password: $passwordFromEdit")
                                 val user = FirebaseAuth.getInstance().currentUser
                                 updateUI(user)
                                 val intent = Intent(this.activity as MainActivity, MainLoggedMenu::class.java)

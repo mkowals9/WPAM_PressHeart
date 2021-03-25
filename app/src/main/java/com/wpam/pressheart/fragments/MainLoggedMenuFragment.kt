@@ -43,14 +43,7 @@ class MainLoggedMenuFragment : Fragment() {
 
         logOutButton.setOnClickListener{
 
-//            FirebaseAuth.getInstance()
-//                .signOut().addOnCompleteListener(this.activity as MainLoggedMenu) { task ->
-//                    if (task.isSuccessful) {
-//                        updateUI(null)
-//                        findNavController().navigate(R.id.action_MainLoggedMenu_to_MainViewFragment) }
-//                    else {
-//                        Log.d(ContentValues.TAG, "UPS SOMETHING WENT WRONG WITH LOGGING OUT")}
-//                }
+//
             FirebaseAuth.getInstance().signOut()
 
             Log.d("Successful log out" , "Successful log out")
