@@ -40,49 +40,49 @@ class SignUpWindow : Fragment(){
 
         sign_up_buttonSignUp.setOnClickListener{
 
-                var email = editTextTextEmailAddress.text.toString()
-                var passwordFromEdit = editPasswordSignUp.getText().toString()
+            var email = editTextTextEmailAddress.text.toString()
+            var passwordFromEdit = editPasswordSignUp.getText().toString()
 
-                if(!email.isEmpty() && !passwordFromEdit.isEmpty())
-                {
-                    FirebaseAuth.getInstance().createUserWithEmailAndPassword(
-                        email,
-                        passwordFromEdit
-                    )
-                        .addOnCompleteListener(this.activity as MainActivity) { task ->
-                            if (task.isSuccessful) {
-                                // Sign in success, update UI with the signed-in user's information
-                                val user = FirebaseAuth.getInstance().currentUser
-                                updateUI(user)
-                                val intent = Intent(
-                                    this.activity as MainActivity,
-                                    MainLoggedMenu::class.java
-                                )
-                                startActivity(intent)
-                            } else {
-                                // If sign in fails, display a message to the user.
-                                Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                                // TO DO DIALOG WINDOW WITH ERROR IN SINGING UP
-                                EmptyValuesDialog(this.activity as MainActivity).show()
-                                updateUI(null)
-                            }
+            if(!email.isEmpty() && !passwordFromEdit.isEmpty())
+            {
+                FirebaseAuth.getInstance().createUserWithEmailAndPassword(
+                    email,
+                    passwordFromEdit
+                )
+                    .addOnCompleteListener(this.activity as MainActivity) { task ->
+                        if (task.isSuccessful) {
+                            // Sign in success, update UI with the signed-in user's information
+                            val user = FirebaseAuth.getInstance().currentUser
+                            updateUI(user)
+                            val intent = Intent(
+                                this.activity as MainActivity,
+                                MainLoggedMenu::class.java
+                            )
+                            startActivity(intent)
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "createUserWithEmail:failure", task.exception)
+                            // TO DO DIALOG WINDOW WITH ERROR IN SINGING UP
+                            EmptyValuesDialog(this.activity as MainActivity).show()
+                            updateUI(null)
                         }
+                    }
 
+            }
+            else {
+                if (email.isEmpty() && passwordFromEdit.isEmpty()){
+                    Toast.makeText((this.activity as MainActivity), "E-mail and password can't be empty.",
+                        Toast.LENGTH_LONG).show()
                 }
-                else {
-                    if (email.isEmpty() && passwordFromEdit.isEmpty()){
-                        Toast.makeText((this.activity as MainActivity), "E-mail and password can't be empty.",
-                            Toast.LENGTH_LONG).show()
-                    }
-                    if(email.isEmpty()){
-                        Toast.makeText((this.activity as MainActivity), "E-mail is empty. Fill the gap.",
-                              Toast.LENGTH_SHORT).show()
-                    }
-                    if(passwordFromEdit.isEmpty()){
-                        Toast.makeText((this.activity as MainActivity), "Password is empty. Fill the gap.",
-                            Toast.LENGTH_SHORT).show()
-                    }
+                if(email.isEmpty()){
+                    Toast.makeText((this.activity as MainActivity), "E-mail is empty. Fill the gap.",
+                        Toast.LENGTH_SHORT).show()
                 }
+                if(passwordFromEdit.isEmpty()){
+                    Toast.makeText((this.activity as MainActivity), "Password is empty. Fill the gap.",
+                        Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
     }
