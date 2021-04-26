@@ -11,16 +11,24 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.wpam.pressheart.MainActivity
 import com.wpam.pressheart.MainLoggedMenu
 import com.wpam.pressheart.R
 import com.wpam.pressheart.dialogs.EmptyValuesDialog
 import kotlinx.android.synthetic.main.fragment_sign_up_window.*
 import kotlinx.android.synthetic.main.main_view_window.*
+import java.util.concurrent.LinkedBlockingQueue
+import java.util.concurrent.ThreadPoolExecutor
+import java.util.concurrent.TimeUnit
+
+
 
 
 class SignUpWindow : Fragment(){
 
+    private val db = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +47,7 @@ class SignUpWindow : Fragment(){
         super.onViewCreated(view, savedInstanceState)
 
         sign_up_buttonSignUp.setOnClickListener{
-
+            var login = editNameSignUp.text.toString()
             var email = editTextTextEmailAddress.text.toString()
             var passwordFromEdit = editPasswordSignUp.getText().toString()
 
@@ -58,6 +66,13 @@ class SignUpWindow : Fragment(){
                                 this.activity as MainActivity,
                                 MainLoggedMenu::class.java
                             )
+
+                            val userNewInfo = hashMapOf(
+                                "email" to email,
+                                "name" to login
+                            )
+                            val newId = FirebaseAuth.getInstance().currentUser.uid
+                            db.collection("Users_info").document(newId).set(userNewInfo)
                             startActivity(intent)
                         } else {
                             // If sign in fails, display a message to the user.
