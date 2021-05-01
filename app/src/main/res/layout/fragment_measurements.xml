@@ -20,25 +20,25 @@
             android:textSize="36sp" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/AddNewMeasurementButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="Button" />
+            android:text="Add new measure" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/BrowseMeasurementsButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="Button" />
+            android:text="Browse your measurements" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/BackToMainFromMeasureButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="Button" />
+            android:text="Back to main menu" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,7 +17,7 @@
             android:layout_height="match_parent"
             android:layout_weight="120"
             android:gravity="center"
-            android:text="Hello Cindy"
+            android:text="Hello User"
             android:textAlignment="center"
             android:textSize="36sp" />
 
