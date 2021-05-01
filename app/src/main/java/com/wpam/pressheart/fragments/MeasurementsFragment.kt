@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.wpam.pressheart.MainActivity
 import com.wpam.pressheart.MainLoggedMenuActivity
 import com.wpam.pressheart.MeasurementsActivity
@@ -24,6 +25,11 @@ class MeasurementsFragment : Fragment()  {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        AddNewMeasurementButton.setOnClickListener() {
+            findNavController().navigate(R.id.action_MeasurementMain_to_AddMeasurement)
+        }
+
 
         BackToMainFromMeasureButton.setOnClickListener(){
             (this.activity as MeasurementsActivity).onBackPressed()

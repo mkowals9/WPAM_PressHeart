@@ -13,6 +13,15 @@
         android:label="Measurements Main Fragment"
         tools:layout="@layout/fragment_measurements">
 
+        <action
+            android:id="@+id/action_MeasurementMain_to_AddMeasurement"
+            app:destination="@id/AddNewMeasurementFragment"/>
     </fragment>
+
+    <fragment
+        android:id="@+id/AddNewMeasurementFragment"
+        android:name="com.wpam.pressheart.fragments.AddNewMeasurementFragment"
+        android:label="Add New Measurement Fragment"
+        tools:layout="@layout/fragment_add_new_measurement"/>
 
 </navigation>

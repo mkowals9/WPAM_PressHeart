@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragments.AddNewMeasurementFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="100000000"
+        android:text="ADD NEW MEASUREMENT"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:textSize="36sp" />
+
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.005"
+            android:text="Date:" />
+
+        <EditText
+            android:id="@+id/editTextDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.001"
+            android:ems="10"
+            android:inputType="date" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.0001"
+            android:text="Time:" />
+
+        <EditText
+            android:id="@+id/editTextTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.001"
+            android:ems="10"
+            android:inputType="time" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.05"
+            android:text="Systolic Blood Pressure:" />
+
+        <EditText
+            android:id="@+id/editTextNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.05"
+            android:ems="10"
+            android:inputType="number" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.05"
+            android:text="Diastolic Blood Pressure:" />
+
+        <EditText
+            android:id="@+id/editTextNumber2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.05"
+            android:ems="10"
+            android:inputType="number" />
+
+    <Button
+        android:id="@+id/button"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="@android:integer/config_mediumAnimTime"
+        android:background="@color/colorPrimaryDark"
+        android:text="Save your measurement"
+        android:textColor="@android:color/white" />
+</LinearLayout>
