@@ -14,16 +14,10 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.wpam.pressheart.MainActivity
-import com.wpam.pressheart.MainLoggedMenu
+import com.wpam.pressheart.MainLoggedMenuActivity
 import com.wpam.pressheart.R
 import com.wpam.pressheart.dialogs.EmptyValuesDialog
 import kotlinx.android.synthetic.main.fragment_sign_up_window.*
-import kotlinx.android.synthetic.main.main_view_window.*
-import java.util.concurrent.LinkedBlockingQueue
-import java.util.concurrent.ThreadPoolExecutor
-import java.util.concurrent.TimeUnit
-
-
 
 
 class SignUpWindow : Fragment(){
@@ -64,7 +58,7 @@ class SignUpWindow : Fragment(){
                             updateUI(user)
                             val intent = Intent(
                                 this.activity as MainActivity,
-                                MainLoggedMenu::class.java
+                                MainLoggedMenuActivity::class.java
                             )
 
                             val userNewInfo = hashMapOf(

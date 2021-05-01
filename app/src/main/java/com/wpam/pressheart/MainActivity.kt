@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity(), CommunicatorFragmentsMainActivity {
         if(currentUser != null){
             Log.d( "User is available","User is available")
 
-            val intent = Intent(this@MainActivity, MainLoggedMenu::class.java)
+            val intent = Intent(this@MainActivity, MainLoggedMenuActivity::class.java)
             startActivity(intent)
             //setContentView(R.layout.main_logged_window)
         }

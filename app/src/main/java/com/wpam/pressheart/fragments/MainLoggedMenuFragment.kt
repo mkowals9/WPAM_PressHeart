@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
@@ -15,7 +14,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.wpam.pressheart.MainActivity
-import com.wpam.pressheart.MainLoggedMenu
+import com.wpam.pressheart.MainLoggedMenuActivity
 import com.wpam.pressheart.MeasurementsActivity
 import com.wpam.pressheart.R
 import kotlinx.android.synthetic.main.fragment_main_logged_menu.*
@@ -67,7 +66,7 @@ class MainLoggedMenuFragment : Fragment() {
         //}
         measurementsButton.setOnClickListener{
             //findNavController().navigate(R.id.action_MainLoggedMenu_to_MeasurementsFragment)
-            val intent = Intent(this.activity as MainLoggedMenu, MeasurementsActivity::class.java)
+            val intent = Intent(this.activity as MainLoggedMenuActivity, MeasurementsActivity::class.java)
             startActivity(intent)
         }
 
@@ -79,8 +78,8 @@ class MainLoggedMenuFragment : Fragment() {
             Log.d("Successful log out" , "Successful log out")
             updateUI(null)
             //findNavController().navigate(R.id.action_MainLoggedMenu_to_MainViewFragment)
-            (this.activity as MainLoggedMenu).onBackPressed()
-            val intent = Intent(this.activity as MainLoggedMenu, MainActivity::class.java)
+            (this.activity as MainLoggedMenuActivity).onBackPressed()
+            val intent = Intent(this.activity as MainLoggedMenuActivity, MainActivity::class.java)
             startActivity(intent)
             //findNavController().navigate(R.id.action_MainLoggedMenu_to_MainViewFragment)
 

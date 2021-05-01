@@ -12,7 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.wpam.pressheart.MainActivity
-import com.wpam.pressheart.MainLoggedMenu
+import com.wpam.pressheart.MainLoggedMenuActivity
 import com.wpam.pressheart.R
 import com.wpam.pressheart.dialogs.EmptyValuesDialog
 import kotlinx.android.synthetic.main.main_view_window.*
@@ -45,7 +45,7 @@ class MainViewWindow : Fragment() {
                         Log.d(TAG, "signInWithEmail:success")
                         val user = FirebaseAuth.getInstance().currentUser
                         updateUI(user)
-                        val intent = Intent(this.activity as MainActivity, MainLoggedMenu::class.java)
+                        val intent = Intent(this.activity as MainActivity, MainLoggedMenuActivity::class.java)
                         startActivity(intent)
                     //findNavController().navigate(R.id.action_MainViewFragment_to_MainLoggedFragment)
                     } else {

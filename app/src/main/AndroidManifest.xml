@@ -14,7 +14,7 @@
 
 
         <activity
-            android:name=".MainLoggedMenu"
+            android:name=".MainLoggedMenuActivity"
             android:label="@string/title_activity_main_logged_menu"
             android:theme="@style/AppTheme.NoActionBar" />
 
@@ -31,7 +31,7 @@
         </activity>
 
         <activity android:name=".MeasurementsActivity"
-            android:parentActivityName=".MainLoggedMenu"
+            android:parentActivityName=".MainLoggedMenuActivity"
             android:label="MeasurementsActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:noHistory="true"
