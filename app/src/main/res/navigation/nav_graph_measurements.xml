@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_measurements"
+    app:startDestination="@id/MeasurementsActivity">
+
+    <include app:graph="@navigation/nav_graph2" />
+
+    <fragment
+        android:id="@+id/MeasurementsActivity"
+        android:name="com.wpam.pressheart.fragments.MeasurementsFragment"
+        android:label="Measurements Main Fragment"
+        tools:layout="@layout/fragment_measurements">
+
+    </fragment>
+
+</navigation>

@@ -13,9 +13,7 @@
         android:label="Main Logged Menu Fragment"
         tools:layout="@layout/fragment_main_logged_menu">
 
-        <action
-            android:id="@+id/action_MainLoggedMenu_to_MeasurementsFragment"
-            app:destination="@id/MeasurementsFragment" />
+
         <action
             android:id="@+id/action_MainLoggedMenu_to_MainViewFragment"
             app:destination="@+id/nav_graph"/>
@@ -23,16 +21,8 @@
             android:id="@+id/action_MainLoggedMenu_to_MedicinesFragment"
             app:destination="@id/MedicinesFragment"/>
     </fragment>
-    <fragment
-        android:id="@+id/MeasurementsFragment"
-        android:name="com.wpam.pressheart.fragments.MeasurementsFragment"
-        android:label="Measurements Fragment"
-        tools:layout="@layout/fragment_measurements">
 
-        <action
-            android:id="@+id/action_MeasurementsFragment_to_MainLoggedMenuFragment"
-            app:destination="@id/MainLoggedMenu" />
-    </fragment>
+
     <fragment
         android:id="@+id/MedicinesFragment"
         android:name="com.wpam.pressheart.fragments.MediciniesFragment"

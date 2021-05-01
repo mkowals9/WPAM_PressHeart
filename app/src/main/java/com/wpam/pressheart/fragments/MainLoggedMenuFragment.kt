@@ -1,5 +1,6 @@
 package com.wpam.pressheart.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.wpam.pressheart.MainLoggedMenu
+import com.wpam.pressheart.MeasurementsActivity
 import com.wpam.pressheart.R
 import kotlinx.android.synthetic.main.fragment_main_logged_menu.*
 
@@ -35,7 +37,9 @@ class MainLoggedMenuFragment : Fragment() {
           //  findNavController().navigate(R.id.action_MainLoggedMenu_to_MeasurementsFragment)
         //}
         measurementsButton.setOnClickListener{
-            findNavController().navigate(R.id.action_MainLoggedMenu_to_MeasurementsFragment)
+            //findNavController().navigate(R.id.action_MainLoggedMenu_to_MeasurementsFragment)
+            val intent = Intent(this.activity as MainLoggedMenu, MeasurementsActivity::class.java)
+            startActivity(intent)
         }
 
         logOutButton.setOnClickListener{
