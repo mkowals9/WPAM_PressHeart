@@ -10,74 +10,143 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="100000000"
-        android:text="ADD NEW MEASUREMENT"
         android:gravity="center"
+        android:text="ADD NEW MEASUREMENT"
         android:textAlignment="center"
         android:textSize="36sp" />
 
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.005"
-            android:text="Date:" />
-
-        <EditText
-            android:id="@+id/editTextDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.001"
-            android:ems="10"
-            android:inputType="date" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.0001"
-            android:text="Time:" />
-
-        <EditText
-            android:id="@+id/editTextTime"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.001"
-            android:ems="10"
-            android:inputType="time" />
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.05"
-            android:text="Systolic Blood Pressure:" />
-
-        <EditText
-            android:id="@+id/editTextNumber"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.05"
-            android:ems="10"
-            android:inputType="number" />
-
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.05"
-            android:text="Diastolic Blood Pressure:" />
-
-        <EditText
-            android:id="@+id/editTextNumber2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.05"
-            android:ems="10"
-            android:inputType="number" />
+    <TextView
+        android:id="@+id/dateTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.005"
+        android:text="Date:" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/dateButton"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="10000"
+        android:background="@color/colorAccent"
+        android:text="Choose date"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/timeTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.0001"
+        android:text="Time:" />
+
+    <Button
+        android:id="@+id/timeButton"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="10000"
+        android:background="@color/colorAccent"
+        android:text="Choose time"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/SbpTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.05"
+        android:text="Systolic Blood Pressure:" />
+
+    <EditText
+        android:id="@+id/SbpEditTextNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.05"
+        android:ems="10"
+        android:hint="Higher number from the measurement"
+        android:importantForAutofill="no"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/DbpTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.05"
+        android:text="Diastolic Blood Pressure:" />
+
+    <EditText
+        android:id="@+id/DbpEditTextNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.05"
+        android:ems="10"
+        android:hint="Lower number from the measurement"
+        android:importantForAutofill="no"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/chooseMoodTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.000001"
+        android:gravity="center"
+        android:text="Choose your mood:"
+        android:textAlignment="center" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="150000000"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:showDividers="middle">
+
+        <ImageButton
+            android:id="@+id/happyButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_happy_mood" />
+
+        <View
+            android:layout_width="20sp"
+            android:layout_height="0dp"
+            />
+
+        <ImageButton
+            android:id="@+id/angryButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_angry_mood" />
+
+        <View
+            android:layout_width="20sp"
+            android:layout_height="0dp"
+            />
+
+        <ImageButton
+            android:id="@+id/sadButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_sad_mood" />
+
+        <View
+            android:layout_width="20sp"
+            android:layout_height="0dp"
+            />
+        <ImageButton
+            android:id="@+id/tiredButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_tired_mood" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/saveMeasurementButton"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
