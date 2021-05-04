@@ -23,6 +23,7 @@ import kotlinx.android.synthetic.main.fragment_sign_up_window.*
 class SignUpWindow : Fragment(){
 
     private val db = Firebase.firestore
+    private var gender = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,12 +41,20 @@ class SignUpWindow : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        femaleImageButton.setOnClickListener {
+            this.gender = "female"
+        }
+
+        maleImageButton.setOnClickListener {
+            this.gender = "male"
+        }
+
         sign_up_buttonSignUp.setOnClickListener{
             var login = editNameSignUp.text.toString()
             var email = editTextTextEmailAddress.text.toString()
             var passwordFromEdit = editPasswordSignUp.getText().toString()
 
-            if(!email.isEmpty() && !passwordFromEdit.isEmpty())
+            if(!email.isEmpty() && !passwordFromEdit.isEmpty() && !this.gender.isEmpty() && !login.isEmpty())
             {
                 FirebaseAuth.getInstance().createUserWithEmailAndPassword(
                     email,
@@ -63,7 +72,8 @@ class SignUpWindow : Fragment(){
 
                             val userNewInfo = hashMapOf(
                                 "email" to email,
-                                "name" to login
+                                "name" to login,
+                                "gender" to this.gender
                             )
                             val newId = FirebaseAuth.getInstance().currentUser.uid
                             db.collection("Users_info").document(newId).set(userNewInfo)
@@ -89,6 +99,16 @@ class SignUpWindow : Fragment(){
                 }
                 if(passwordFromEdit.isEmpty()){
                     Toast.makeText((this.activity as MainActivity), "Password is empty. Fill the gap.",
+                        Toast.LENGTH_SHORT).show()
+                }
+
+                if(login.isEmpty()){
+                    Toast.makeText((this.activity as MainActivity), "Login is empty. Fill the gap.",
+                        Toast.LENGTH_SHORT).show()
+                }
+
+                if(this.gender.isEmpty()){
+                    Toast.makeText((this.activity as MainActivity), "Choose your gender.",
                         Toast.LENGTH_SHORT).show()
                 }
             }

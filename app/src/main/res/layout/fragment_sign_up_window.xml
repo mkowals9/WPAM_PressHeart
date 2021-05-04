@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,7 +11,7 @@
         android:id="@+id/createProfileTextSignUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1.5"
+        android:layout_weight="100000000000.5"
         android:gravity="start|center"
         android:text="Create new profile"
         android:textAlignment="center"
@@ -29,7 +30,7 @@
         android:id="@+id/editNameSignUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.25"
+        android:layout_weight="0.2"
         android:ems="10"
         android:hint="@string/login"
         android:importantForAutofill="no"
@@ -48,7 +49,7 @@
         android:id="@+id/editTextTextEmailAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.25"
+        android:layout_weight="0.2"
         android:ems="10"
         android:hint="@string/e_mail"
         android:importantForAutofill="no"
@@ -67,7 +68,7 @@
         android:id="@+id/editPasswordSignUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.25"
+        android:layout_weight="0.2"
         android:ems="10"
         android:hint="@string/password"
         android:importantForAutofill="no"
@@ -75,12 +76,59 @@
         android:textColor="@color/colorPrimary"
         android:textColorHint="@color/colorPrimary" />
 
+    <TextView
+        android:id="@+id/genderTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.1"
+        android:text="Gender:" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="298dp"
+        android:layout_weight="0.0000000005"
+        android:orientation="horizontal">
+
+
+        <ImageButton
+            android:id="@+id/femaleImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.00022"
+            android:background="@android:color/transparent"
+            android:scaleType="fitStart"
+            android:src="@drawable/ic_female_sign" />
+
+        <View
+            android:layout_width="20sp"
+            android:layout_height="20sp"
+            android:layout_weight="0.0000005" />
+
+        <ImageButton
+            android:id="@+id/maleImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.00022"
+            android:background="@android:color/transparent"
+            android:scaleType="fitStart"
+            android:src="@drawable/ic_male_sign" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.00022"
+        android:text=" "
+        android:textSize="40sp" />
+
     <Button
         android:id="@+id/sign_up_buttonSignUp"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.25"
+        android:layout_weight="0.0005"
         android:background="@color/colorPrimaryDark"
         android:text="@string/sign_up"
         android:textCursorDrawable="@color/colorPrimaryDark" />
