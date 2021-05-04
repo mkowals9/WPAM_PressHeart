@@ -24,21 +24,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="Add new measure" />
+            android:background="@color/colorAccent"
+            android:text="Add new measure"
+            android:textColor="@android:color/white"
+            android:textSize="30sp" />
 
         <Button
             android:id="@+id/BrowseMeasurementsButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="Browse your measurements" />
+            android:background="@color/colorAccent2"
+            android:text="Browse your measurements"
+            android:textColor="@android:color/white"
+            android:textSize="30sp" />
 
         <Button
             android:id="@+id/BackToMainFromMeasureButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="Back to main menu" />
+            android:background="@color/colorAccent3"
+            android:text="Back to main menu"
+            android:textColor="@android:color/white"
+            android:textSize="30sp" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
