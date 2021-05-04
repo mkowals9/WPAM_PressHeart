@@ -11,9 +11,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.google.firebase.Timestamp
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import com.wpam.pressheart.MainActivity
 import com.wpam.pressheart.MeasurementsActivity
 import com.wpam.pressheart.R
 import kotlinx.android.synthetic.main.fragment_add_new_measurement.*
@@ -32,7 +37,8 @@ class AddNewMeasurementFragment : Fragment() {
 
     private var datelbl = ""
     private var timelbl = ""
-
+    private var mood = ""
+    private val db = Firebase.firestore
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,8 +67,7 @@ class AddNewMeasurementFragment : Fragment() {
                     // Display Selected date in textbox
                     c.set(chosenYear, monthOfYear, dayOfMonth)
                     this.datelbl = SimpleDateFormat("yyyy-MM-dd").format(c.time)
-                    Log.d(TAG, "lblDate : ${this.datelbl}")
-                    Log.d(TAG, "day: ${day} month: ${month} year: ${year}")
+
                 },
                 year,
                 month,
@@ -82,7 +87,6 @@ class AddNewMeasurementFragment : Fragment() {
 
                 timelbl = SimpleDateFormat("HH:mm").format(c.time)
 
-                Log.d(TAG, "timelbl: ${timelbl}")
             }
             TimePickerDialog(
                 this.activity as MeasurementsActivity,
@@ -95,19 +99,47 @@ class AddNewMeasurementFragment : Fragment() {
             ).show()
         }
 
+        happyButton.setOnClickListener{
+            this.mood = "happy"
+        }
+
+        angryButton.setOnClickListener {
+            this.mood = "angry"
+        }
+
+        sadButton.setOnClickListener {
+            this.mood = "sad"
+        }
+
+        tiredButton.setOnClickListener {
+            this.mood = "tired"
+        }
 
         saveMeasurementButton.setOnClickListener {
-            Log.d(TAG, "data przed timestamp: ${datelbl}, time przed timestamp: ${timelbl}")
-
             val together = datelbl +" "+  timelbl
             var formatter = SimpleDateFormat("yyyy-MM-dd HH:mm")
             val temporaryDate : Date = formatter.parse(together)
-            val temporaryDateString = temporaryDate.toString()
             val timeStampMeasure = Timestamp(temporaryDate)
-            Log.d(TAG, "tempDate: ${temporaryDateString} ,  timeStaml: ${timeStampMeasure.toDate().toString()}")
+            val SbpPressure = SbpEditTextNumber.getText().toString()
+            val DbpPressure = DbpEditTextNumber.getText().toString()
 
+            if(SbpPressure.toInt()<300 && DbpPressure.toInt()<SbpPressure.toInt() && DbpPressure.toInt()<300){
+            val newMeasurement = hashMapOf(
+                "DiastolicBP" to DbpPressure,
+                "SystolicBP" to SbpPressure,
+                "Mood" to this.mood,
+                "date" to timeStampMeasure
+            )
 
-
+            val newId = FirebaseAuth.getInstance().currentUser.uid
+            db.collection("Measurements").document(newId).collection("Measurements").add(newMeasurement)
+            Log.d(TAG, "DONE ADDDING")
+            }
+            else
+            {
+                Toast.makeText((this.activity as MeasurementsActivity), "Wrong values.",
+                    Toast.LENGTH_LONG).show()
+            }
         }
     }
 }
