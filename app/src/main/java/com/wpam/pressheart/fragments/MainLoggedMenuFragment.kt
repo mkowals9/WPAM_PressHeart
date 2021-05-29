@@ -91,7 +91,7 @@ class MainLoggedMenuFragment : Fragment() {
         }
 
         medicinesButton.setOnClickListener{
-            findNavController().navigate(R.id.action_MainLoggedMenu_to_MedicinesFragment)
+            //findNavController().navigate(R.id.action_MainLoggedMenu_to_MedicinesFragment)
         }
     }
 
