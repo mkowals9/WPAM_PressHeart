@@ -94,7 +94,7 @@
             android:id="@+id/femaleImageButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.00022"
+            android:layout_weight="0.11192"
             android:background="@android:color/transparent"
             android:scaleType="fitStart"
             android:src="@drawable/ic_female_sign" />
@@ -102,13 +102,13 @@
         <View
             android:layout_width="20sp"
             android:layout_height="20sp"
-            android:layout_weight="0.0000005" />
+            android:layout_weight="0.000000000005" />
 
         <ImageButton
             android:id="@+id/maleImageButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.00022"
+            android:layout_weight="0.11192"
             android:background="@android:color/transparent"
             android:scaleType="fitStart"
             android:src="@drawable/ic_male_sign" />

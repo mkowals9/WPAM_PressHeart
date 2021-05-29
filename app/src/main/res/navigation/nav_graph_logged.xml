@@ -17,17 +17,8 @@
         <action
             android:id="@+id/action_MainLoggedMenu_to_MainViewFragment"
             app:destination="@+id/nav_graph"/>
-        <action
-            android:id="@+id/action_MainLoggedMenu_to_MedicinesFragment"
-            app:destination="@id/MedicinesFragment"/>
-    </fragment>
-
-
-    <fragment
-        android:id="@+id/MedicinesFragment"
-        android:name="com.wpam.pressheart.fragments.MediciniesFragment"
-        android:label="Medicines Fragment"
-        tools:layout="@layout/fragment_medicines">
 
     </fragment>
+
+    
 </navigation>

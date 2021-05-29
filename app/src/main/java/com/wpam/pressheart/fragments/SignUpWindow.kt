@@ -78,6 +78,7 @@ class SignUpWindow : Fragment(){
                             val newId = FirebaseAuth.getInstance().currentUser.uid
                             db.collection("Users_info").document(newId).set(userNewInfo)
                             startActivity(intent)
+                            (this.activity as MainActivity).finish()
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.exception)

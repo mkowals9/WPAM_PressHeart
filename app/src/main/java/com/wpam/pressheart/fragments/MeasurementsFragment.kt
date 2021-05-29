@@ -30,6 +30,9 @@ class MeasurementsFragment : Fragment()  {
             findNavController().navigate(R.id.action_MeasurementMain_to_AddMeasurement)
         }
 
+        BrowseMeasurementsButton.setOnClickListener {
+            findNavController().navigate(R.id.action_MeasurementMain_to_BrowseMeasurement)
+        }
 
         BackToMainFromMeasureButton.setOnClickListener(){
             (this.activity as MeasurementsActivity).onBackPressed()

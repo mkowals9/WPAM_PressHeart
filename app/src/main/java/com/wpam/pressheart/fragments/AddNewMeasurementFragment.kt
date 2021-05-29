@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
@@ -120,20 +121,21 @@ class AddNewMeasurementFragment : Fragment() {
             var formatter = SimpleDateFormat("yyyy-MM-dd HH:mm")
             val temporaryDate : Date = formatter.parse(together)
             val timeStampMeasure = Timestamp(temporaryDate)
-            val SbpPressure = SbpEditTextNumber.getText().toString()
-            val DbpPressure = DbpEditTextNumber.getText().toString()
+            val SbpPressure = SbpEditTextNumber.getText().toString().toInt()
+            val DbpPressure = DbpEditTextNumber.getText().toString().toInt()
 
-            if(SbpPressure.toInt()<300 && DbpPressure.toInt()<SbpPressure.toInt() && DbpPressure.toInt()<300){
+            if(SbpPressure<300 && DbpPressure<SbpPressure && DbpPressure<300){
             val newMeasurement = hashMapOf(
                 "DiastolicBP" to DbpPressure,
                 "SystolicBP" to SbpPressure,
                 "Mood" to this.mood,
-                "date" to timeStampMeasure
+                "Date" to timeStampMeasure
             )
 
             val newId = FirebaseAuth.getInstance().currentUser.uid
             db.collection("Measurements").document(newId).collection("Measurements").add(newMeasurement)
             Log.d(TAG, "DONE ADDDING")
+                findNavController().navigate(R.id.action_AddMeasurement_to_MainMeasurement)
             }
             else
             {

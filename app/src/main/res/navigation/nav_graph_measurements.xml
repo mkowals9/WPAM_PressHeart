@@ -5,7 +5,7 @@
     android:id="@+id/nav_graph_measurements"
     app:startDestination="@id/MeasurementsActivity">
 
-    <include app:graph="@navigation/nav_graph2" />
+    <include app:graph="@navigation/nav_graph_logged" />
 
     <fragment
         android:id="@+id/MeasurementsActivity"
@@ -16,12 +16,35 @@
         <action
             android:id="@+id/action_MeasurementMain_to_AddMeasurement"
             app:destination="@id/AddNewMeasurementFragment"/>
+
+        <action
+            android:id="@+id/action_MeasurementMain_to_BrowseMeasurement"
+            app:destination="@+id/BrowseMeasurementsFragment"/>
     </fragment>
 
     <fragment
         android:id="@+id/AddNewMeasurementFragment"
         android:name="com.wpam.pressheart.fragments.AddNewMeasurementFragment"
         android:label="Add New Measurement Fragment"
-        tools:layout="@layout/fragment_add_new_measurement"/>
+        tools:layout="@layout/fragment_add_new_measurement">
+
+        <action
+            android:id="@+id/action_AddMeasurement_to_MainMeasurement"
+            app:destination="@id/MeasurementsActivity"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/BrowseMeasurementsFragment"
+        android:name="com.wpam.pressheart.fragments.MeasurementBrowseFragment"
+        android:label="Browse Your Measurements"
+        tools:layout="@layout/fragment_measurement_browse">
+
+        <action
+            android:id="@+id/action_BrowseMeasurement_to_MainMeasurement"
+            app:destination="@id/MeasurementsActivity"/>
+
+
+    </fragment>
 
 </navigation>

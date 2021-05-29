@@ -47,6 +47,7 @@ class MainViewWindow : Fragment() {
                         updateUI(user)
                         val intent = Intent(this.activity as MainActivity, MainLoggedMenuActivity::class.java)
                         startActivity(intent)
+                        (this.activity as MainActivity).finish()
                     //findNavController().navigate(R.id.action_MainViewFragment_to_MainLoggedFragment)
                     } else {
                         // If sign in fails, display a message to the user.
