@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
@@ -16,6 +17,8 @@ import com.google.firebase.ktx.Firebase
 import com.wpam.pressheart.MeasurementsActivity
 import com.wpam.pressheart.R
 import com.wpam.pressheart.lists_content.SingleMeasurement
+import kotlinx.android.synthetic.main.fragment_measurement_browse.*
+
 
 
 class MeasurementBrowseFragment : Fragment() {
@@ -42,6 +45,15 @@ class MeasurementBrowseFragment : Fragment() {
         measurementsArrayList = arrayListOf<SingleMeasurement>()
         getMeasurementData()
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        floatingAddingMedicineButton.setOnClickListener {
+            findNavController().navigate(R.id.action_MeasurementMain_to_AddMeasurement)
+        }
+
     }
 
     private fun getMeasurementData(){

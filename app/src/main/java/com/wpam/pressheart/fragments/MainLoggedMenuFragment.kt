@@ -1,6 +1,6 @@
 package com.wpam.pressheart.fragments
 
-import android.app.ActivityOptions
+
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
@@ -8,23 +8,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.wpam.pressheart.MainActivity
-import com.wpam.pressheart.MainLoggedMenuActivity
-import com.wpam.pressheart.MeasurementsActivity
-import com.wpam.pressheart.R
+import com.wpam.pressheart.*
 import kotlinx.android.synthetic.main.fragment_main_logged_menu.*
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
+
 
 class MainLoggedMenuFragment : Fragment() {
 
@@ -91,6 +84,8 @@ class MainLoggedMenuFragment : Fragment() {
         }
 
         medicinesButton.setOnClickListener{
+            val intent = Intent(this.activity as MainLoggedMenuActivity, MedicinesActivity::class.java)
+            startActivity(intent)
             //findNavController().navigate(R.id.action_MainLoggedMenu_to_MedicinesFragment)
         }
     }

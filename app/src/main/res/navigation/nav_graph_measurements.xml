@@ -9,17 +9,15 @@
 
     <fragment
         android:id="@+id/MeasurementsActivity"
-        android:name="com.wpam.pressheart.fragments.MeasurementsFragment"
+        android:name="com.wpam.pressheart.fragments.MeasurementBrowseFragment"
         android:label="Measurements Main Fragment"
-        tools:layout="@layout/fragment_measurements">
+        tools:layout="@layout/fragment_measurement_browse">
 
         <action
             android:id="@+id/action_MeasurementMain_to_AddMeasurement"
             app:destination="@id/AddNewMeasurementFragment"/>
 
-        <action
-            android:id="@+id/action_MeasurementMain_to_BrowseMeasurement"
-            app:destination="@+id/BrowseMeasurementsFragment"/>
+
     </fragment>
 
     <fragment
@@ -34,17 +32,6 @@
 
     </fragment>
 
-    <fragment
-        android:id="@+id/BrowseMeasurementsFragment"
-        android:name="com.wpam.pressheart.fragments.MeasurementBrowseFragment"
-        android:label="Browse Your Measurements"
-        tools:layout="@layout/fragment_measurement_browse">
 
-        <action
-            android:id="@+id/action_BrowseMeasurement_to_MainMeasurement"
-            app:destination="@id/MeasurementsActivity"/>
-
-
-    </fragment>
 
 </navigation>

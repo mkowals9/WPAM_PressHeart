@@ -19,17 +19,11 @@ import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.wpam.pressheart.MainActivity
 import com.wpam.pressheart.MeasurementsActivity
 import com.wpam.pressheart.R
 import kotlinx.android.synthetic.main.fragment_add_new_measurement.*
-import kotlinx.android.synthetic.main.fragment_measurements.*
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.ZoneId
-import java.time.format.DateTimeFormatter
-import java.time.format.DateTimeFormatter.ofPattern
-import java.time.temporal.TemporalQueries.localDate
+
 import java.util.*
 
 
@@ -63,7 +57,7 @@ class AddNewMeasurementFragment : Fragment() {
 
             val dpd = DatePickerDialog(
                 this.activity as MeasurementsActivity,
-                DatePickerDialog.OnDateSetListener { view, chosenYear, monthOfYear, dayOfMonth ->
+                DatePickerDialog.OnDateSetListener { _, chosenYear, monthOfYear, dayOfMonth ->
 
                     // Display Selected date in textbox
                     c.set(chosenYear, monthOfYear, dayOfMonth)
@@ -82,7 +76,7 @@ class AddNewMeasurementFragment : Fragment() {
 
         timeButton.setOnClickListener {
             val c = Calendar.getInstance()
-            val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
+            val timeSetListener = TimePickerDialog.OnTimeSetListener { _, hour, minute ->
                 c.set(Calendar.HOUR_OF_DAY, hour)
                 c.set(Calendar.MINUTE, minute)
 

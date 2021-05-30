@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MeasurementsActivity"
+    tools:context=".MedicinesActivity"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <LinearLayout
@@ -15,6 +15,7 @@
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:theme="@style/AppTheme.AppBarOverlay"
             tools:ignore="MissingConstraints">
 
@@ -25,16 +26,11 @@
                 android:background="?attr/colorPrimary"
                 app:navigationIcon="?attr/homeAsUpIndicator"
                 app:popupTheme="@style/AppTheme.PopupOverlay"
-                app:title="Your Measurements" />
+                app:title="Your Medicines" />
 
+            <include layout="@layout/content_medicines" />
 
         </com.google.android.material.appbar.AppBarLayout>
-
-        <include
-            layout="@layout/content_measurements"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
     </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

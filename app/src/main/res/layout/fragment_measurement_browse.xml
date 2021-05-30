@@ -1,32 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.MeasurementBrowseFragment"
-    android:id="@+id/BrowseMeasurementsFragment">
+    android:id="@+id/BrowseMeasurementsFragment"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="7500"
-            android:id="@+id/Browse_Measurements_Text"
-            android:gravity="start|center"
-            android:text="Browse Your Measurements"
-            android:textAlignment="center"
-            android:textSize="30sp" />
-
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/MeasurementsBrowseList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="5000"
-            android:id="@+id/MeasurementsBrowseList"
-            tools:listitem="@layout/single_measurement"/>
+            tools:listitem="@layout/single_measurement" />
+
+
     </LinearLayout>
 
-</FrameLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingAddingMedicineButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="end|bottom"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="20dp"
+        android:scaleType="center"
+        app:maxImageSize="36dp"
+        android:clickable="true"
+        app:backgroundTint="@color/colorAccent3"
+        app:srcCompat="@drawable/ic_add_white_plus"
+        tools:ignore="MissingConstraints,VectorDrawableCompat" />
+</RelativeLayout>

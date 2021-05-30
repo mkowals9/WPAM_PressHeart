@@ -59,7 +59,7 @@
                 android:id="@+id/logOutButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.2"
+                android:layout_weight="0.19"
                 android:background="@color/colorAccent2"
                 android:text="Log out"
                 android:textColor="@android:color/white" />
