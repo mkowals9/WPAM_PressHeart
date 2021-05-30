@@ -33,7 +33,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="0.3"
-                android:background="@color/colorAccent3"
+                android:background="@drawable/gradient_1"
+                android:topLeftRadius = "18dp"
+                android:textStyle="bold"
                 android:text="Medicines"
                 android:textColor="@android:color/white" />
 
