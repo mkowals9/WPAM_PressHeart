@@ -2,9 +2,11 @@ package com.wpam.pressheart.fragments
 
 import android.app.Activity
 import android.content.ContentValues
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -16,8 +18,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
+import com.wpam.pressheart.MedicinesActivity
 import com.wpam.pressheart.R
 import kotlinx.android.synthetic.main.fragment_add_new_medicine.*
+import java.io.ByteArrayOutputStream
 
 
 class AddNewMedicineFragment : Fragment() {
@@ -25,6 +29,7 @@ class AddNewMedicineFragment : Fragment() {
     private val db = Firebase.firestore
     private val storageFirebase = FirebaseStorage.getInstance().getReference()
     private var imageViewUri = ""
+    private var medicineName = ""
     private val CAMERA_REQUEST = 1888
     private val GALLERY_REQUEST = 1889
 
@@ -60,7 +65,7 @@ class AddNewMedicineFragment : Fragment() {
 
         addCompleteMedicineButton.setOnClickListener {
             val userId: String = FirebaseAuth.getInstance().currentUser?.uid.toString()
-            var nameMedicine = editTextNameMedicine.text.toString()
+            this.medicineName = editTextNameMedicine.text.toString()
             var amountOfPills = editTextNumberleftPills.text.toString().toInt()
             var desc = editTextDescriptionMedicine.text.toString()
 
@@ -74,7 +79,7 @@ class AddNewMedicineFragment : Fragment() {
 //            storageFirebase.child(pathInStorage)
 
             val newMedicineToAdd = hashMapOf(
-                "Name" to nameMedicine,
+                "Name" to medicineName,
                 "LeftPills" to amountOfPills,
                 "Description" to desc
             )
@@ -91,11 +96,15 @@ class AddNewMedicineFragment : Fragment() {
                     val photo = data?.extras!!["data"] as Bitmap?
                     //this.imageViewUri = data?.extras!!["data"] as String?
                     new_medicine_imageView.setImageBitmap(photo)
+                    var uriUri = getImageUri(this.activity as MedicinesActivity, data?.extras!!["data"] as Bitmap, this.medicineName)
                     Log.w(ContentValues.TAG, "data : ")
                     Log.w(ContentValues.TAG, data.toString())
 
                     Log.w(ContentValues.TAG, "data extra : ")
                     Log.w(ContentValues.TAG, data?.extras.toString())
+
+                    Log.w(ContentValues.TAG, "data extra extra")
+                    Log.w(ContentValues.TAG, data?.extras!!["data"].toString())
                 }
             }
             GALLERY_REQUEST -> {
@@ -105,5 +114,17 @@ class AddNewMedicineFragment : Fragment() {
                 }
             }
         }
+    }
+
+    fun getImageUri(inContext: Context, inImage: Bitmap, title:String): Uri? {
+        val bytes = ByteArrayOutputStream()
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+        val path = MediaStore.Images.Media.insertImage(
+            inContext.getContentResolver(),
+            inImage,
+            title,
+            null
+        )
+        return Uri.parse(path)
     }
 }

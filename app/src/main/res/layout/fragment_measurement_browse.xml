@@ -36,7 +36,7 @@
         android:scaleType="center"
         app:maxImageSize="36dp"
         android:clickable="true"
-        app:backgroundTint="@color/colorAccent3"
+        app:backgroundTint="@color/floatingButtonColor"
         app:srcCompat="@drawable/ic_add_white_plus"
         tools:ignore="MissingConstraints,VectorDrawableCompat" />
 </RelativeLayout>

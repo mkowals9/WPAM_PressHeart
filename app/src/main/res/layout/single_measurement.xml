@@ -4,11 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="16dp"
-    android:background="#80A78A7F"
+    android:background="#80B85028"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?selectableItemBackground"
-    app:cardBackgroundColor="#99A78A7F"
+    app:cardBackgroundColor="#99EAABAB"
     app:cardCornerRadius="9dp"
     app:cardElevation="8dp">
 
@@ -31,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Date:"
-                android:textColor="@color/colorAccent4"
+                android:textColor="@color/colorAccent5"
                 android:textSize="16sp"
                 android:textStyle="bold|italic" />
 
@@ -56,7 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Diastolic Blood Pressure:"
-                android:textColor="@color/colorAccent4"
+                android:textColor="@color/colorAccent5"
                 android:textSize="16sp"
                 android:textStyle="bold|italic" />
 
@@ -81,7 +81,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Systolic Blood Pressure:"
-                android:textColor="@color/colorAccent4"
+                android:textColor="@color/colorAccent5"
                 android:textSize="16sp"
                 android:textStyle="bold|italic" />
 
@@ -107,7 +107,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Mood:"
-                android:textColor="@color/colorAccent4"
+                android:textColor="@color/colorAccent5"
                 android:textSize="16dp"
                 android:textStyle="bold|italic" />
 
@@ -134,9 +134,9 @@
                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#B3735751"
+                android:background="@color/buttonsM"
                 android:text="Change"
-                android:textColor="@android:color/white"
+                android:textColor="@color/colorAccent4"
                 android:textSize="14sp" />
 
             <View
@@ -147,9 +147,9 @@
                 android:id="@+id/deleteMeasurementButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#B3735751"
+                android:background="@color/buttonsM"
                 android:text="Delete"
-                android:textColor="@android:color/white" />
+                android:textColor="@color/colorAccent4" />
 
         </LinearLayout>
 

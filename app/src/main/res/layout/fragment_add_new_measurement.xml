@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -29,9 +30,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="10000"
-        android:background="@color/colorAccent"
+        android:background="@color/colorAccent3"
         android:text="Choose date"
-        android:textColor="@android:color/white" />
+        android:textColor="@color/colorAccent5" />
 
     <TextView
         android:id="@+id/timeTextView"
@@ -46,9 +47,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="10000"
-        android:background="@color/colorAccent"
+        android:background="@color/colorAccent3"
         android:text="Choose time"
-        android:textColor="@android:color/white" />
+        android:textColor="@color/colorAccent5" />
 
     <TextView
         android:id="@+id/SbpTextView"
@@ -106,7 +107,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
-            android:src="@drawable/ic_happy_mood" />
+            app:srcCompat="@drawable/ic_happy_mood" />
 
         <View
             android:layout_width="20sp"
@@ -118,7 +119,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
-            android:src="@drawable/ic_angry_mood" />
+            app:srcCompat="@drawable/ic_angry_mood" />
 
         <View
             android:layout_width="20sp"
@@ -130,7 +131,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
-            android:src="@drawable/ic_sad_mood" />
+            app:srcCompat="@drawable/ic_sad_mood" />
 
         <View
             android:layout_width="20sp"
@@ -141,7 +142,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
-            android:src="@drawable/ic_tired_mood" />
+            app:srcCompat="@drawable/ic_tired_mood" />
 
     </LinearLayout>
 
