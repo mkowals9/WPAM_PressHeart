@@ -64,7 +64,6 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
 
                 deleteButton.setOnClickListener {
                     Log.d(TAG, "elo pomelo w delete")
-                    val batch = db.batch()
                     val userId : String = FirebaseAuth.getInstance().currentUser?.uid.toString()
                     val texttext: String = this.Date.text.toString()
                     var formatter = SimpleDateFormat("yyyy-MM-dd HH:mm")

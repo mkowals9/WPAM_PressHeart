@@ -96,15 +96,15 @@ class AddNewMedicineFragment : Fragment() {
                     val photo = data?.extras!!["data"] as Bitmap?
                     //this.imageViewUri = data?.extras!!["data"] as String?
                     new_medicine_imageView.setImageBitmap(photo)
-                    var uriUri = getImageUri(this.activity as MedicinesActivity, data?.extras!!["data"] as Bitmap, this.medicineName)
+                    //var uriUri = getImageUri(this.activity as MedicinesActivity, data?.extras!!["data"] as Bitmap, this.medicineName)
                     Log.w(ContentValues.TAG, "data : ")
                     Log.w(ContentValues.TAG, data.toString())
 
                     Log.w(ContentValues.TAG, "data extra : ")
-                    Log.w(ContentValues.TAG, data?.extras.toString())
+                    Log.w(ContentValues.TAG, data.extras.toString())
 
                     Log.w(ContentValues.TAG, "data extra extra")
-                    Log.w(ContentValues.TAG, data?.extras!!["data"].toString())
+                    Log.w(ContentValues.TAG, data.extras!!["data"].toString())
                 }
             }
             GALLERY_REQUEST -> {
@@ -116,15 +116,5 @@ class AddNewMedicineFragment : Fragment() {
         }
     }
 
-    fun getImageUri(inContext: Context, inImage: Bitmap, title:String): Uri? {
-        val bytes = ByteArrayOutputStream()
-        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
-        val path = MediaStore.Images.Media.insertImage(
-            inContext.getContentResolver(),
-            inImage,
-            title,
-            null
-        )
-        return Uri.parse(path)
-    }
+
 }

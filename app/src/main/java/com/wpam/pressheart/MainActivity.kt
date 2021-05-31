@@ -18,19 +18,11 @@ class MainActivity : AppCompatActivity(), CommunicatorFragmentsMainActivity {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_main)
         //setSupportActionBar(findViewById(R.id.toolbar))
-        val currentUser = FirebaseAuth.getInstance().currentUser
-        if(currentUser != null){
-            Log.d( "User is available","User is available")
 
-            val intent = Intent(this@MainActivity, MainLoggedMenuActivity::class.java)
-            startActivity(intent)
-            //setContentView(R.layout.main_logged_window)
-        }
-        else{
+
             Log.d( "User is not available","User is not available")
             setContentView(R.layout.activity_main)
             setSupportActionBar(findViewById(R.id.toolbar))
-        }
 // ...
 // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()

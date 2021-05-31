@@ -60,11 +60,11 @@ class MedicinesFragment: Fragment()  {
             .addOnSuccessListener { documents -> for (document in documents)
             {
                 val medicine = document.toObject<SingleMedicine>()
-                medicinesArrayList.add(medicine!!)
+                medicinesArrayList.add(medicine)
             }
 
                 medicinesRecyclerView.adapter = MedicineAdapter(medicinesArrayList)
             }
-            .addOnFailureListener{ exception -> Log.w(ContentValues.TAG, "Upsi, dupsi medicine")  }
+            .addOnFailureListener{ _ -> Log.w(ContentValues.TAG, "Upsi, dupsi medicine")  }
     }
 }

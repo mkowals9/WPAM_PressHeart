@@ -62,7 +62,7 @@ class MeasurementBrowseFragment : Fragment() {
             .addOnSuccessListener { documents -> for (document in documents)
             {
                 val measurement = document.toObject<SingleMeasurement>()
-                measurementsArrayList.add(measurement!!)
+                measurementsArrayList.add(measurement)
             }
 
                 measurementsRecyclerView.adapter = MeasurementAdapter(measurementsArrayList)
