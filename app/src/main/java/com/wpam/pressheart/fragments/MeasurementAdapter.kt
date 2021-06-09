@@ -116,6 +116,11 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                                             .addOnSuccessListener {
                                                 documents -> for (document in documents){
                                                     Log.d(TAG, " bubu doc ${document.id} => ${document.data}")
+                                                    docRef.document(document.id).delete()
+                                                    adapter.measurementsList.remove(currentPosition)
+                                                    adapter.notifyDataSetChanged()
+                                                    adapter.notifyItemRemoved(this.adapterPosition)
+                                                    adapter.notifyItemChanged(this.adapterPosition, adapter.itemCount)
                                                 }
 
                                             }
