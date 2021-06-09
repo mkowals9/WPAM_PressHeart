@@ -53,6 +53,32 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/SystolicBP_label_linerlayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Systolic Blood Pressure:"
+                android:textColor="@color/colorAccent5"
+                android:textSize="16sp"
+                android:textStyle="bold|italic" />
+
+            <TextView
+                android:id="@+id/systolicBP_Measurement_Browse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="200"
+                android:textColor="@color/colorAccent5"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/DiastolicBP_label_linerlayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -78,31 +104,7 @@
                 android:textSize="16sp" />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/SystolicBP_label_linerlayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Systolic Blood Pressure:"
-                android:textColor="@color/colorAccent5"
-                android:textSize="16sp"
-                android:textStyle="bold|italic" />
-
-            <TextView
-                android:id="@+id/systolicBP_Measurement_Browse"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="200"
-                android:textColor="@color/colorAccent5"
-                android:textSize="16sp" />
-
-        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/Mood_label_linerlayout"

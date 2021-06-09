@@ -1,20 +1,27 @@
 package com.wpam.pressheart.fragments
 
 
+import android.app.DatePickerDialog
 import android.app.Dialog
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.DialogInterface
+import android.icu.util.Calendar
+import android.os.Build
 import android.text.style.DynamicDrawableSpan.ALIGN_CENTER
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.get
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.chip.Chip
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
@@ -31,6 +38,7 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
 
     private lateinit var parentAdapter  : ViewGroup
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         parentAdapter = parent
         val itemView = LayoutInflater.from(parent.context).inflate(
@@ -60,6 +68,7 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
         return measurementsList[pos]
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     class MyViewHolder(itemView: View, adapter : MeasurementAdapter) : RecyclerView.ViewHolder(itemView) {
         val Date : TextView = itemView.findViewById(R.id.date_Measurement_Browse)
         val DiastolicBP : TextView = itemView.findViewById(R.id.diastolicBP_Measurement_Browse)
@@ -74,6 +83,38 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
             init{
                 changeButton.setOnClickListener {
                     Log.d(TAG, "elo pomelo w change")
+                    val currentPosition = adapter.getItem((this as MyViewHolder).adapterPosition)
+                    val texttext: String = this.Date.text.toString()
+                    var formatter = SimpleDateFormat("yyyy-MM-dd HH:mm")
+                    var saveChanges : Boolean = false
+                    val temporaryDate : Date = formatter.parse(texttext)
+                    val dateStampt = Timestamp(temporaryDate)
+                    val oldSystolicBP = this.SystolicBP.text
+                    val oldDiastolicBP = this.DiastolicBP.text
+                    val oldMood = this.Mood.text
+                    var newDatelbl = ""
+                    val view = LayoutInflater.from(adapter.parentAdapter.context).inflate(R.layout.dialoge_edit_measurement, null)
+                    val dialogWindowChange = AlertDialog.Builder(adapter.context)
+                        .setView(view)
+                        .setCancelable(false)
+                        .setPositiveButton("Save"){dialog, which ->
+                            run {
+                                saveChanges = true
+                            }
+                        }
+                        .setNegativeButton("Cancel"){dialog, which ->  dialog.dismiss()}
+                        .create()
+                    view.findViewById<EditText>(R.id.editText_value_SBP_change).setText(oldSystolicBP.toString())
+                    view.findViewById<EditText>(R.id.editText_value_DBP_change).setText(oldDiastolicBP.toString())
+
+
+
+                    dialogWindowChange.show()
+                    view.findViewById<Button>(R.id.button_new_date_change_measure).setOnClickListener {
+                        Log.d(TAG, "Here Iam stupid bitch")
+                    }
+
+
                 }
 
                 deleteButton.setOnClickListener {

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:layout_marginBottom="10dp"
+    android:layout_marginTop="10dp"
+    android:background="@android:color/white"
+    android:lineSpacingExtra="14dp"
+    android:id="@+id/edit_measurement_dialog_layout"
+    android:orientation="vertical"
+    tools:ignore="InvalidId">
+
+    <View
+        android:id="@+id/view6"
+        android:layout_width="match_parent"
+        android:layout_height="15dp" />
+
+        <TextView
+            android:id="@+id/textViewChangeMeasurement"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Change chosen measurement"
+            android:textSize="24dp"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent5"/>
+
+    <View
+        android:id="@+id/view5"
+        android:layout_width="match_parent"
+        android:layout_height="15dp" />
+
+    <TextView
+        android:id="@+id/textView_date_change_meas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="Date:" />
+
+    <Button
+        android:id="@+id/button_new_date_change_measure"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/colorAccent3"
+        android:text="Choose New Date"
+        android:textColor="@color/colorAccent4" />
+
+    <TextView
+        android:id="@+id/textView_time_change_meas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="Time:" />
+
+    <Button
+        android:id="@+id/button_new_time_change_meas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/colorAccent"
+        android:text="Choose new time"
+        android:textColor="#EAC3C3" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:text="New Systolic Blood Pressure" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText_value_SBP_change"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="New Value of Systolic Blood Pressure"
+        android:textColor="@color/colorAccent5" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:text="New Value of Diastolic Blood Pressure" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText_value_DBP_change"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="New Value of Diastolic Blood Pressure"
+        android:textColor="@color/colorAccent5" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:text="Change Mood:" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroupMood_ChangeMeasure"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+
+
+</LinearLayout>
