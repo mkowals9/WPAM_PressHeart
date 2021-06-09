@@ -37,43 +37,44 @@
         android:id="@+id/textView_date_change_meas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
         android:text="Date:" />
 
-    <Button
-        android:id="@+id/button_new_date_change_measure"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:background="@color/colorAccent3"
-        android:text="Choose New Date"
-        android:textColor="@color/colorAccent4" />
+    <DatePicker
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:calendarViewShown="false"
+        android:id="@+id/spinner_date"
+        android:datePickerMode="spinner" />
 
     <TextView
         android:id="@+id/textView_time_change_meas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
         android:text="Time:" />
 
-    <Button
-        android:id="@+id/button_new_time_change_meas"
+    <TimePicker
+        android:id="@+id/spinner_time"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:background="@color/colorAccent"
-        android:text="Choose new time"
-        android:textColor="#EAC3C3" />
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:timePickerMode="spinner" />
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="15dp"
+        android:layout_marginRight="0dp"
         android:layout_marginBottom="15dp"
         android:text="New Systolic Blood Pressure" />
 
@@ -90,6 +91,7 @@
         android:id="@+id/textView6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="15dp"
         android:text="New Value of Diastolic Blood Pressure" />
@@ -107,16 +109,15 @@
         android:id="@+id/textView7"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="15dp"
         android:text="Change Mood:" />
 
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipGroupMood_ChangeMeasure"
+    <Spinner
+        android:id="@+id/spinner_moods"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
-
 
 
 </LinearLayout>

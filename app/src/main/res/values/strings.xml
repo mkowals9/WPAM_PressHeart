@@ -19,4 +19,12 @@
     <string name="e_mail">E-mail</string>
     <string name="title_activity_main_logged_menu">Main Logged Menu</string>
 
+    <string-array name ="moods">
+        <item>happy</item>
+        <item>tired</item>
+        <item>angry</item>
+        <item>sad</item>
+    </string-array>
+
+
 </resources>

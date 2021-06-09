@@ -19,7 +19,7 @@ import com.wpam.pressheart.R
 import com.wpam.pressheart.dialogs.AreYouSureDialog
 import com.wpam.pressheart.lists_content.SingleMeasurement
 import kotlinx.android.synthetic.main.fragment_measurement_browse.*
-
+import kotlin.time.ExperimentalTime
 
 
 class MeasurementBrowseFragment : Fragment() {
@@ -34,6 +34,7 @@ class MeasurementBrowseFragment : Fragment() {
 
     }
 
+    @ExperimentalTime
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -57,6 +58,7 @@ class MeasurementBrowseFragment : Fragment() {
 
     }
 
+    @ExperimentalTime
     private fun getMeasurementData(){
         val userId : String = FirebaseAuth.getInstance().currentUser?.uid.toString()
         val docRef = db.collection("Measurements").document(userId).collection("Measurements").get()

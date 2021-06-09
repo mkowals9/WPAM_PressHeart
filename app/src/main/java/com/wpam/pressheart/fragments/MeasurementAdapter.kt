@@ -1,43 +1,39 @@
 package com.wpam.pressheart.fragments
 
 
-import android.app.DatePickerDialog
-import android.app.Dialog
+import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
 import android.content.Context
-import android.content.DialogInterface
-import android.icu.util.Calendar
 import android.os.Build
-import android.text.style.DynamicDrawableSpan.ALIGN_CENTER
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
-import androidx.core.view.get
+import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.chip.Chip
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.wpam.pressheart.MeasurementsActivity
 import com.wpam.pressheart.R
-import com.wpam.pressheart.dialogs.AreYouSureDialog
 import com.wpam.pressheart.lists_content.SingleMeasurement
+import kotlinx.android.synthetic.main.fragment_add_new_measurement.view.*
+import java.security.Key
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.TimeUnit
+import kotlin.time.*
 
+@ExperimentalTime
 class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasurement>, val context : Context) :
     RecyclerView.Adapter<MeasurementAdapter.MyViewHolder>(){
 
     private lateinit var parentAdapter  : ViewGroup
 
+    @ExperimentalTime
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         parentAdapter = parent
@@ -51,6 +47,7 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
 
 
 
+    @ExperimentalTime
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = measurementsList[position]
         var datedate = SimpleDateFormat("yyyy-MM-dd HH:mm").format(currentItem.Date.toDate())
@@ -68,6 +65,8 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
         return measurementsList[pos]
     }
 
+    @ExperimentalTime
+    @SuppressLint("ResourceType")
     @RequiresApi(Build.VERSION_CODES.N)
     class MyViewHolder(itemView: View, adapter : MeasurementAdapter) : RecyclerView.ViewHolder(itemView) {
         val Date : TextView = itemView.findViewById(R.id.date_Measurement_Browse)
@@ -79,6 +78,13 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
 
         private var db = Firebase.firestore
         private var result : String = ""
+        private var newDatelbl : String = ""
+        private var newDateChosen : String = ""
+        private var newHourChosen : String = ""
+        private var oldMood = ""
+        private var newSysBP = ""
+        private var newDiasBP = ""
+        private var saveChanges : Boolean = false
 
             init{
                 changeButton.setOnClickListener {
@@ -86,16 +92,14 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                     val currentPosition = adapter.getItem((this as MyViewHolder).adapterPosition)
                     val texttext: String = this.Date.text.toString()
                     var formatter = SimpleDateFormat("yyyy-MM-dd HH:mm")
-                    var saveChanges : Boolean = false
-                    val temporaryDate : Date = formatter.parse(texttext)
-                    val dateStampt = Timestamp(temporaryDate)
-                    val oldSystolicBP = this.SystolicBP.text
-                    val oldDiastolicBP = this.DiastolicBP.text
-                    val oldMood = this.Mood.text
-                    var newDatelbl = ""
-                    val view = LayoutInflater.from(adapter.parentAdapter.context).inflate(R.layout.dialoge_edit_measurement, null)
+                    var temporaryDate : Date = formatter.parse(texttext)
+                    var dateStampt = Timestamp(temporaryDate)
+                    var oldSystolicBP = this.SystolicBP.text
+                    var oldDiastolicBP = this.DiastolicBP.text
+                    oldMood = this.Mood.text.toString()
+                    val viewDialog = LayoutInflater.from(adapter.parentAdapter.context).inflate(R.layout.dialoge_edit_measurement, null)
                     val dialogWindowChange = AlertDialog.Builder(adapter.context)
-                        .setView(view)
+                        .setView(viewDialog)
                         .setCancelable(false)
                         .setPositiveButton("Save"){dialog, which ->
                             run {
@@ -104,14 +108,59 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                         }
                         .setNegativeButton("Cancel"){dialog, which ->  dialog.dismiss()}
                         .create()
-                    view.findViewById<EditText>(R.id.editText_value_SBP_change).setText(oldSystolicBP.toString())
-                    view.findViewById<EditText>(R.id.editText_value_DBP_change).setText(oldDiastolicBP.toString())
+                    viewDialog.findViewById<EditText>(R.id.editText_value_SBP_change).setText(oldSystolicBP.toString())
+                    viewDialog.findViewById<EditText>(R.id.editText_value_DBP_change).setText(oldDiastolicBP.toString())
+                    viewDialog.findViewById<TimePicker>(R.id.spinner_time).setIs24HourView(true)
 
+                    val arrayMoods = itemView.context.resources.getStringArray(R.array.moods)
+                    val arrayAdapter = ArrayAdapter(itemView.context, android.R.layout.simple_spinner_dropdown_item, arrayMoods)
+                    viewDialog.findViewById<Spinner>(R.id.spinner_moods).adapter = arrayAdapter
+                    viewDialog.findViewById<Spinner>(R.id.spinner_moods).onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+                        override fun onItemSelected(
+                            parent: AdapterView<*>?,
+                            view: View?,
+                            position: Int,
+                            id: Long
+                        ) {
+                            oldMood = arrayMoods[position]
+                            Log.d(TAG, "Chosen mood: ${arrayMoods[position]}")
+                        }
+                        override fun onNothingSelected(parent: AdapterView<*>?) {
+                            Log.d(TAG, "Nothing chosen in months")
+                        }
 
+                    }
 
                     dialogWindowChange.show()
-                    view.findViewById<Button>(R.id.button_new_date_change_measure).setOnClickListener {
-                        Log.d(TAG, "Here Iam stupid bitch")
+
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                        viewDialog.findViewById<DatePicker>(R.id.spinner_date).setOnDateChangedListener { view, year, monthOfYear, dayOfMonth ->
+                            Calendar.getInstance().set(year,monthOfYear,dayOfMonth)
+                            this.newDateChosen = SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().time).toString()
+                        }
+                    }
+                    viewDialog.findViewById<TimePicker>(R.id.spinner_time).setOnTimeChangedListener { view, hourOfDay, minute ->
+                        Calendar.getInstance().set(android.icu.util.Calendar.HOUR_OF_DAY, hourOfDay)
+                        Calendar.getInstance().set(android.icu.util.Calendar.MINUTE, minute)
+                        this.newHourChosen = SimpleDateFormat("HH:mm").format(Calendar.getInstance().time)
+                    }
+
+                    viewDialog.findViewById<EditText>(R.id.editText_value_SBP_change).addTextChangedListener{
+                        newSysBP = viewDialog.findViewById<EditText>(R.id.editText_value_SBP_change).text.toString()
+                    }
+                    viewDialog.findViewById<EditText>(R.id.editText_value_DBP_change).addTextChangedListener {
+                        newDiasBP = viewDialog.findViewById<EditText>(R.id.editText_value_DBP_change).text.toString()
+                    }
+
+                    dialogWindowChange.setOnKeyListener { dialog, keyCode, event ->
+
+                        Log.d(TAG, keyCode.toString())
+
+                            if(saveChanges){
+                                Log.d(TAG, "CHANGES : ${this.newDateChosen} ${this.newHourChosen} ${this.newDiasBP} ${this.newSysBP} ${this.oldMood}")
+                            }
+
+                        return@setOnKeyListener true
                     }
 
 
