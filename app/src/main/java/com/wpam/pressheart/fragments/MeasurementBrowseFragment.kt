@@ -16,6 +16,7 @@ import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.wpam.pressheart.MeasurementsActivity
 import com.wpam.pressheart.R
+import com.wpam.pressheart.dialogs.AreYouSureDialog
 import com.wpam.pressheart.lists_content.SingleMeasurement
 import kotlinx.android.synthetic.main.fragment_measurement_browse.*
 
@@ -65,7 +66,8 @@ class MeasurementBrowseFragment : Fragment() {
                 measurementsArrayList.add(measurement)
             }
 
-                measurementsRecyclerView.adapter = MeasurementAdapter(measurementsArrayList)
+                measurementsRecyclerView.adapter = MeasurementAdapter(measurementsArrayList, this.activity as MeasurementsActivity)
+
             }
             .addOnFailureListener{ exception -> Log.w(TAG, "Upsi, dupsi")  }
     }

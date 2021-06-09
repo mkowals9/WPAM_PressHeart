@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="16dp"
-    android:background="#80B85028"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?selectableItemBackground"
@@ -19,6 +18,14 @@
         android:layout_marginStart="16dp"
         android:background="@android:color/transparent"
         android:orientation="vertical">
+
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+
 
         <LinearLayout
             android:id="@+id/Date_label_linerlayout"
@@ -56,6 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Diastolic Blood Pressure:"
+                android:scrollHorizontally="false"
                 android:textColor="@color/colorAccent5"
                 android:textSize="16sp"
                 android:textStyle="bold|italic" />
@@ -122,6 +130,12 @@
 
         </LinearLayout>
 
+
+        <View
+            android:id="@+id/view3"
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
         <LinearLayout
             android:id="@+id/Buttons_linerlayout"
             android:layout_width="wrap_content"
@@ -134,7 +148,7 @@
                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/buttonsM"
+                android:background="@drawable/shapes"
                 android:text="Change"
                 android:textColor="@color/colorAccent4"
                 android:textSize="14sp" />
@@ -147,11 +161,17 @@
                 android:id="@+id/deleteMeasurementButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/buttonsM"
+                android:background="@drawable/shapes"
                 android:text="Delete"
                 android:textColor="@color/colorAccent4" />
 
-        </LinearLayout>
+            <View
+                android:id="@+id/view4"
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+
+    </LinearLayout>
 
     </LinearLayout>
 

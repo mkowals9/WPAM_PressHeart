@@ -38,7 +38,7 @@ class MainLoggedMenuFragment : Fragment() {
         val fromBundle:String = savedInstanceState?.getString("userLogin").toString()
 
         Log.d("user login bundle", fromBundle)
-
+        view.findViewById<TextView>(R.id.textview_first).setText("Hello " + fromBundle)
         val userId : String = FirebaseAuth.getInstance().currentUser?.uid.toString()
         Log.d(TAG, "userId: ${userId}")
         val docRef = db.collection("Users_info").document(userId)
@@ -52,7 +52,6 @@ class MainLoggedMenuFragment : Fragment() {
                     Log.d(TAG, "Login: ${document.data?.getValue("name")}")
                     Log.d(TAG, "DocumentSnapshot data: ${document.data}")
                     view.findViewById<TextView>(R.id.textview_first).setText("Hello " + userLogin)
-
                 }
                 else
                 {

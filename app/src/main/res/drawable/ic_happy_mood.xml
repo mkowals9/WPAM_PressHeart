@@ -6,10 +6,10 @@
         <aapt:attr name="android:fillColor">
             <gradient android:endX="61.5126" android:endY="31.1811"
                 android:startX="0.8495" android:startY="31.1811" android:type="linear">
-                <item android:offset="0" android:color="#FFDF8561"/>
-                <item android:offset="0.4857" android:color="#ED7840"/>
-                <item android:offset="0.8349" android:color="#E72C13"/>
-                <item android:offset="1" android:color="#B3151B"/>
+                <item android:offset="0" android:color="#F06292"/>
+                <item android:offset="0.4857" android:color="#F48FB1"/>
+                <item android:offset="0.8349" android:color="#A4BD31A0"/>
+                <item android:offset="1" android:color="#AD2FCF"/>
             </gradient>
         </aapt:attr>
     </path>

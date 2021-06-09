@@ -77,6 +77,7 @@ class SignUpWindow : Fragment(){
                             )
                             val newId = FirebaseAuth.getInstance().currentUser.uid
                             db.collection("Users_info").document(newId).set(userNewInfo)
+                            intent.putExtra("userName", login)
                             startActivity(intent)
                             (this.activity as MainActivity).finish()
                         } else {

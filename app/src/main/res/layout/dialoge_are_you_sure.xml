@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="80dp"
-    android:background="@android:color/white"
-    android:orientation="vertical" >
+    android:background="@drawable/shapes2"
+    android:id="@+id/are_you_sure_layout"
+    android:orientation="vertical"
+    tools:ignore="InvalidId">
 
     <TextView
         android:id="@+id/txt_dia"
@@ -15,35 +18,44 @@
         android:textColor="@android:color/black"
         android:textSize="15dp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:orientation="horizontal">-->
 
-        <Button
-            android:id="@+id/btn_yes_delete"
-            android:layout_width="100dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:background="@android:color/holo_green_light"
-            android:clickable="true"
-            android:text="Yes"
-            android:textColor="@color/colorAccent2"
-            android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/button_no_delete"
-            android:layout_width="100dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:background="@color/colorPrimaryDark"
-            android:clickable="true"
-            android:text="No"
-            android:textColor="@android:color/white"
-            android:textStyle="bold"/>
-    </LinearLayout>
 
+<!--        <Button-->
+<!--            android:id="@+id/btn_yes_delete_please"-->
+<!--            android:layout_width="100dp"-->
+<!--            android:layout_height="30dp"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="#F0F4C3"-->
+<!--            android:clickable="true"-->
+<!--            android:text="Yes"-->
+<!--            android:textColor="#554F4E"-->
+<!--            android:textStyle="bold" />-->
+
+<!--        <View-->
+<!--            android:layout_width="40sp"-->
+<!--            android:layout_height="20sp"-->
+<!--            android:layout_weight="0.000000000005" />-->
+
+<!--        <Button-->
+<!--            android:id="@+id/button_no_delete"-->
+<!--            android:layout_width="100dp"-->
+<!--            android:layout_height="30dp"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="#DF6060"-->
+<!--            android:clickable="true"-->
+<!--            android:text="No"-->
+<!--            android:textColor="@android:color/white"-->
+<!--            android:textStyle="bold" />-->
+
+
+
+<!--    </LinearLayout>-->
 
 </LinearLayout>

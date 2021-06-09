@@ -8,19 +8,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.wpam.pressheart.MainActivity
 import com.wpam.pressheart.MainLoggedMenuActivity
 import com.wpam.pressheart.R
 import com.wpam.pressheart.dialogs.EmptyValuesDialog
 import kotlinx.android.synthetic.main.main_view_window.*
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
+
 class MainViewWindow : Fragment() {
+
+    private val db = Firebase.firestore
+    private var login = ""
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -33,44 +37,45 @@ class MainViewWindow : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        button_log_in.setOnClickListener{
+        button_log_in.setOnClickListener {
             var email = editTextLogin.text.toString()
             var password = (editTextNumberPasswordSignIn.getText().toString())
-            Log.d(TAG, "email: $email and password: password")
-            if(!email.isEmpty() && !password.isEmpty()){
-            FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this.activity as MainActivity) { task ->
-                    if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Log.d(TAG, "signInWithEmail:success")
-                        val user = FirebaseAuth.getInstance().currentUser
-                        updateUI(user)
-                        val intent = Intent(this.activity as MainActivity, MainLoggedMenuActivity::class.java)
-                        startActivity(intent)
-                        (this.activity as MainActivity).finish()
-                    //findNavController().navigate(R.id.action_MainViewFragment_to_MainLoggedFragment)
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        Log.w(TAG, "signInWithEmail:failure", task.exception)
-                        updateUI(null)
+            if (!email.isEmpty() && !password.isEmpty()) {
+                FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this.activity as MainActivity) { task ->
+                        if (task.isSuccessful) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithEmail:success")
+                            val user = FirebaseAuth.getInstance().currentUser
+                            updateUI(user)
+                            val docRef = db.collection("Users_info").document(user.uid)
+                            docRef.get()
+                                .addOnSuccessListener { document ->
+                                    if (document != null) {
+                                        this.login = document.data?.getValue("name").toString()
+                                    } else {
+                                        this.login = "user"
+                                    }
+                                    val intent = Intent(
+                                        this.activity as MainActivity,
+                                        MainLoggedMenuActivity::class.java
+                                    )
+                                    intent.putExtra("userName", this.login)
+                                    startActivity(intent)
+                                    (this.activity as MainActivity).finish()
+                                }
+                        }
+                        else {
+                            Toast.LENGTH_LONG
+                        }
                     }
-                }
-            }
-            else
-            {
+            } else {
                 EmptyValuesDialog(this.activity as MainActivity).show()
-//                val intent = Intent(this.activity as MainActivity, MainLoggedMenu::class.java)
-//                startActivity(intent)
             }
         }
-
         button_sign_up.setOnClickListener{
             findNavController().navigate(R.id.action_MainViewFragment_to_SignUpFragment)
         }
-//        view.findViewById<Button>(R.id.button_log_in).setOnClickListener {
-//
-//            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-//        }
     }
 
     private fun updateUI(user: FirebaseUser?) {}

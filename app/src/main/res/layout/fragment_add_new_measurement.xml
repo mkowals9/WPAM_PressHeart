@@ -47,7 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="10000"
-        android:background="@color/colorAccent3"
+        android:background="@color/buttonsM"
         android:text="Choose time"
         android:textColor="@color/colorAccent5" />
 
@@ -152,7 +152,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="@android:integer/config_mediumAnimTime"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/colorPrimary"
         android:text="Save your measurement"
         android:textColor="@android:color/white" />
 </LinearLayout>
