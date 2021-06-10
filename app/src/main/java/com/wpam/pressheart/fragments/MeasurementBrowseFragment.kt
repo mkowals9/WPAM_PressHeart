@@ -65,6 +65,7 @@ class MeasurementBrowseFragment : Fragment() {
             .addOnSuccessListener { documents -> for (document in documents)
             {
                 val measurement = document.toObject<SingleMeasurement>()
+                measurement.documentId = document.id
                 measurementsArrayList.add(measurement)
             }
 

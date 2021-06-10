@@ -89,13 +89,10 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
             init{
                 changeButton.setOnClickListener {
                     Log.d(TAG, "elo pomelo w change")
-                    val currentPosition = adapter.getItem((this as MyViewHolder).adapterPosition)
-                    val texttext: String = this.Date.text.toString()
-                    var formatter = SimpleDateFormat("yyyy-MM-dd HH:mm")
-                    var temporaryDate : Date = formatter.parse(texttext)
-                    var dateStampt = Timestamp(temporaryDate)
-                    var oldSystolicBP = this.SystolicBP.text
-                    var oldDiastolicBP = this.DiastolicBP.text
+
+                    val arrayMoods = itemView.context.resources.getStringArray(R.array.moods)
+                    val userId : String = FirebaseAuth.getInstance().currentUser?.uid.toString()
+                    var docRef = db.collection("Measurements").document(userId).collection("Measurements")
                     oldMood = this.Mood.text.toString()
                     val viewDialog = LayoutInflater.from(adapter.parentAdapter.context).inflate(R.layout.dialoge_edit_measurement, null)
                     val dialogWindowChange = AlertDialog.Builder(adapter.context)
@@ -104,15 +101,32 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                         .setPositiveButton("Save"){dialog, which ->
                             run {
                                 saveChanges = true
+                                Log.d(TAG, "saveChanges: ${saveChanges}")
+                                if(saveChanges){
+                                    var currentItem = adapter.getItem((this as MyViewHolder).adapterPosition)
+                                    var doc = docRef.document(adapter.getItem((this as MyViewHolder).adapterPosition).documentId.toString())
+                                    doc.get()
+                                        .addOnSuccessListener { document ->
+
+                                            if(oldMood != document.data?.get("Mood") && oldMood != currentItem.Mood){
+                                                doc.update("Mood", oldMood)
+                                                currentItem.Mood = oldMood
+                                                adapter.notifyItemChanged(adapterPosition)
+                                            }
+                                            Log.d(TAG, "mood from doc: ${document.data?.get("Mood")} " +
+                                                    "date from doc: ${document.data?.get("Date")}")
+
+                                        }
+                                }
                             }
                         }
                         .setNegativeButton("Cancel"){dialog, which ->  dialog.dismiss()}
                         .create()
-                    viewDialog.findViewById<EditText>(R.id.editText_value_SBP_change).setText(oldSystolicBP.toString())
-                    viewDialog.findViewById<EditText>(R.id.editText_value_DBP_change).setText(oldDiastolicBP.toString())
+                    viewDialog.findViewById<EditText>(R.id.editText_value_SBP_change).setText(this.SystolicBP.text.toString())
+                    viewDialog.findViewById<EditText>(R.id.editText_value_DBP_change).setText(this.DiastolicBP.text.toString())
                     viewDialog.findViewById<TimePicker>(R.id.spinner_time).setIs24HourView(true)
 
-                    val arrayMoods = itemView.context.resources.getStringArray(R.array.moods)
+
                     val arrayAdapter = ArrayAdapter(itemView.context, android.R.layout.simple_spinner_dropdown_item, arrayMoods)
                     viewDialog.findViewById<Spinner>(R.id.spinner_moods).adapter = arrayAdapter
                     viewDialog.findViewById<Spinner>(R.id.spinner_moods).onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -152,17 +166,6 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                         newDiasBP = viewDialog.findViewById<EditText>(R.id.editText_value_DBP_change).text.toString()
                     }
 
-                    dialogWindowChange.setOnKeyListener { dialog, keyCode, event ->
-
-                        Log.d(TAG, keyCode.toString())
-
-                            if(saveChanges){
-                                Log.d(TAG, "CHANGES : ${this.newDateChosen} ${this.newHourChosen} ${this.newDiasBP} ${this.newSysBP} ${this.oldMood}")
-                            }
-
-                        return@setOnKeyListener true
-                    }
-
 
                 }
 
@@ -199,24 +202,11 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                                     "yes" -> {
                                         Log.d(TAG, "jestem w yes")
                                         Log.d(TAG, " date ${dateStampt}, sysBP: ${SystolicBP.text.toString()}, mood ${this.Mood.text}")
-                                        var query = docRef.whereEqualTo("Date", dateStampt).
-                                        whereEqualTo("SystolicBP", this.SystolicBP.text.toString().toLong()).
-                                        whereEqualTo("DiastolicBP", this.DiastolicBP.text.toString().toLong()).
-                                        whereEqualTo("Mood", this.Mood.text.toString()).get()
-                                            .addOnSuccessListener {
-                                                documents -> for (document in documents){
-                                                    Log.d(TAG, " bubu doc ${document.id} => ${document.data}")
-                                                    docRef.document(document.id).delete()
-                                                    adapter.measurementsList.remove(currentPosition)
-                                                    adapter.notifyDataSetChanged()
-                                                    adapter.notifyItemRemoved(this.adapterPosition)
-                                                    adapter.notifyItemChanged(this.adapterPosition, adapter.itemCount)
-                                                }
-
-                                            }
-                                            .addOnFailureListener {
-                                                Toast.makeText(itemView.context.applicationContext, "Something went wrong, honey! Try again", Toast.LENGTH_LONG)
-                                            }
+                                        docRef.document(adapter.getItem((this as MyViewHolder).adapterPosition).documentId.toString()).delete()
+                                        adapter.measurementsList.remove(currentPosition)
+                                        adapter.notifyDataSetChanged()
+                                        adapter.notifyItemRemoved(this.adapterPosition)
+                                        adapter.notifyItemChanged(this.adapterPosition, adapter.itemCount)
 
                                     }
                                     "no" -> {
