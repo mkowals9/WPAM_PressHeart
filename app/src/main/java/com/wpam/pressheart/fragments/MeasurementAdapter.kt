@@ -78,54 +78,39 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
 
         private var db = Firebase.firestore
         private var result : String = ""
-        private var newDatelbl : String = ""
         private var newDateChosen : String = ""
         private var newHourChosen : String = ""
         private var oldMood = ""
-        private var newSysBP = ""
-        private var newDiasBP = ""
         private var saveChanges : Boolean = false
 
             init{
                 changeButton.setOnClickListener {
                     Log.d(TAG, "elo pomelo w change")
-
+                    var currentItem = adapter.getItem((this as MyViewHolder).adapterPosition)
                     val arrayMoods = itemView.context.resources.getStringArray(R.array.moods)
                     val userId : String = FirebaseAuth.getInstance().currentUser?.uid.toString()
                     var docRef = db.collection("Measurements").document(userId).collection("Measurements")
                     oldMood = this.Mood.text.toString()
+                    this.newHourChosen = SimpleDateFormat("HH:mm").format(currentItem.Date.toDate()).toString()
+                    this.newDateChosen = SimpleDateFormat("yyyy-MM-dd").format(currentItem.Date.toDate()).toString()
                     val viewDialog = LayoutInflater.from(adapter.parentAdapter.context).inflate(R.layout.dialoge_edit_measurement, null)
-                    val dialogWindowChange = AlertDialog.Builder(adapter.context)
-                        .setView(viewDialog)
-                        .setCancelable(false)
-                        .setPositiveButton("Save"){dialog, which ->
-                            run {
-                                saveChanges = true
-                                Log.d(TAG, "saveChanges: ${saveChanges}")
-                                if(saveChanges){
-                                    var currentItem = adapter.getItem((this as MyViewHolder).adapterPosition)
-                                    var doc = docRef.document(adapter.getItem((this as MyViewHolder).adapterPosition).documentId.toString())
-                                    doc.get()
-                                        .addOnSuccessListener { document ->
 
-                                            if(oldMood != document.data?.get("Mood") && oldMood != currentItem.Mood){
-                                                doc.update("Mood", oldMood)
-                                                currentItem.Mood = oldMood
-                                                adapter.notifyItemChanged(adapterPosition)
-                                            }
-                                            Log.d(TAG, "mood from doc: ${document.data?.get("Mood")} " +
-                                                    "date from doc: ${document.data?.get("Date")}")
-
-                                        }
-                                }
-                            }
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                        viewDialog.findViewById<DatePicker>(R.id.spinner_date).init(Calendar.getInstance().get(Calendar.YEAR),
+                            Calendar.getInstance().get(Calendar.MONTH),
+                            Calendar.getInstance().get(Calendar.DAY_OF_MONTH)){
+                            view,year,month,day ->
+                                var chosen = "${year}-${month}-${day}"
+                                newDateChosen = chosen
                         }
-                        .setNegativeButton("Cancel"){dialog, which ->  dialog.dismiss()}
-                        .create()
-                    viewDialog.findViewById<EditText>(R.id.editText_value_SBP_change).setText(this.SystolicBP.text.toString())
-                    viewDialog.findViewById<EditText>(R.id.editText_value_DBP_change).setText(this.DiastolicBP.text.toString())
-                    viewDialog.findViewById<TimePicker>(R.id.spinner_time).setIs24HourView(true)
 
+                    }
+                    viewDialog.findViewById<TimePicker>(R.id.spinner_time).setOnTimeChangedListener { view, hourOfDay, minute ->
+                        Calendar.getInstance().set(android.icu.util.Calendar.HOUR_OF_DAY, hourOfDay)
+                        Calendar.getInstance().set(android.icu.util.Calendar.MINUTE, minute)
+                        newHourChosen = SimpleDateFormat("HH:mm").format(Calendar.getInstance().time).toString()
+                        Log.d(TAG, "ZMIENIAM GODZINE : ${newHourChosen}")
+                    }
 
                     val arrayAdapter = ArrayAdapter(itemView.context, android.R.layout.simple_spinner_dropdown_item, arrayMoods)
                     viewDialog.findViewById<Spinner>(R.id.spinner_moods).adapter = arrayAdapter
@@ -145,26 +130,62 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
 
                     }
 
+
+                    val dialogWindowChange = AlertDialog.Builder(adapter.context)
+                        .setView(viewDialog)
+                        .setCancelable(false)
+                        .setPositiveButton("Save"){dialog, which ->
+                            run {
+                                saveChanges = true
+                                Log.d(TAG, "saveChanges: ${saveChanges}")
+                                if(saveChanges){
+                                    var currentItem = adapter.getItem((this as MyViewHolder).adapterPosition)
+                                    Log.d(TAG, "pokazuj sie mendo ${newHourChosen} , ${newDateChosen}")
+                                    var doc = docRef.document(adapter.getItem((this as MyViewHolder).adapterPosition).documentId.toString())
+                                    doc.get()
+                                        .addOnSuccessListener { document ->
+                                            if(oldMood != document.data?.get("Mood") && oldMood != currentItem.Mood){
+                                                doc.update("Mood", oldMood)
+                                                currentItem.Mood = oldMood
+                                                adapter.notifyItemChanged(adapterPosition)
+                                            }
+                                            var newSBPvalue = viewDialog.findViewById<EditText>(R.id.editText_value_SBP_change).text.toString()
+                                            if(newSBPvalue != document.data?.get("SystolicBP").toString() && newSBPvalue != currentItem.SystolicBP.toString()){
+                                                doc.update("SystolicBP", newSBPvalue.toLong())
+                                                currentItem.SystolicBP = newSBPvalue.toLong()
+                                                adapter.notifyItemChanged(adapterPosition)
+                                            }
+                                            var newDBPvalue = viewDialog.findViewById<EditText>(R.id.editText_value_DBP_change).text.toString()
+                                            if(newDBPvalue != document.data?.get("DiastolicBP") && newDBPvalue != currentItem.DiastolicBP.toString()){
+                                                doc.update("DiastolicBP", newDBPvalue.toLong())
+                                                currentItem.DiastolicBP = newDBPvalue.toLong()
+                                                adapter.notifyItemChanged(adapterPosition)
+                                            }
+                                            var onlyHour = SimpleDateFormat("HH:mm").format(currentItem.Date.toDate()).toString()
+                                            var onlyDate = SimpleDateFormat("YYYY-MM-dd").format(currentItem.Date.toDate()).toString()
+                                            if(newDateChosen != onlyDate || newHourChosen != onlyHour){
+                                                var timestampToUpdatetext = "${newDateChosen} ${newHourChosen}"
+                                                var formatter = SimpleDateFormat("yyyy-MM-dd HH:mm")
+                                                val temporaryDate : Date = formatter.parse(timestampToUpdatetext)
+                                                val timeStampMeasure = Timestamp(temporaryDate)
+                                                doc.update("Date", timeStampMeasure)
+                                                currentItem.Date = timeStampMeasure
+                                                adapter.notifyItemChanged(adapterPosition)
+                                            }
+                                            adapter.notifyDataSetChanged()
+                                        }
+                                }
+                            }
+                        }
+                        .setNegativeButton("Cancel"){dialog, which ->  dialog.dismiss()}
+                        .create()
+                    viewDialog.findViewById<EditText>(R.id.editText_value_SBP_change).setText(this.SystolicBP.text.toString())
+                    viewDialog.findViewById<EditText>(R.id.editText_value_DBP_change).setText(this.DiastolicBP.text.toString())
+                    viewDialog.findViewById<TimePicker>(R.id.spinner_time).setIs24HourView(true)
+
+
                     dialogWindowChange.show()
 
-                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                        viewDialog.findViewById<DatePicker>(R.id.spinner_date).setOnDateChangedListener { view, year, monthOfYear, dayOfMonth ->
-                            Calendar.getInstance().set(year,monthOfYear,dayOfMonth)
-                            this.newDateChosen = SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().time).toString()
-                        }
-                    }
-                    viewDialog.findViewById<TimePicker>(R.id.spinner_time).setOnTimeChangedListener { view, hourOfDay, minute ->
-                        Calendar.getInstance().set(android.icu.util.Calendar.HOUR_OF_DAY, hourOfDay)
-                        Calendar.getInstance().set(android.icu.util.Calendar.MINUTE, minute)
-                        this.newHourChosen = SimpleDateFormat("HH:mm").format(Calendar.getInstance().time)
-                    }
-
-                    viewDialog.findViewById<EditText>(R.id.editText_value_SBP_change).addTextChangedListener{
-                        newSysBP = viewDialog.findViewById<EditText>(R.id.editText_value_SBP_change).text.toString()
-                    }
-                    viewDialog.findViewById<EditText>(R.id.editText_value_DBP_change).addTextChangedListener {
-                        newDiasBP = viewDialog.findViewById<EditText>(R.id.editText_value_DBP_change).text.toString()
-                    }
 
 
                 }
@@ -207,7 +228,6 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                                         adapter.notifyDataSetChanged()
                                         adapter.notifyItemRemoved(this.adapterPosition)
                                         adapter.notifyItemChanged(this.adapterPosition, adapter.itemCount)
-
                                     }
                                     "no" -> {
                                         Log.d(TAG, "jestem w no")

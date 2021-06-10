@@ -48,12 +48,14 @@ class AddNewMeasurementFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         //datepicker
         dateButton.setOnClickListener {
             val c = Calendar.getInstance()
             val day = c.get(Calendar.DAY_OF_MONTH)
             val month = c.get(Calendar.MONTH)
             val year = c.get(Calendar.YEAR)
+            this.datelbl = SimpleDateFormat("yyyy-MM-dd").format(c.time)
 
             val dpd = DatePickerDialog(
                 this.activity as MeasurementsActivity,
@@ -76,6 +78,7 @@ class AddNewMeasurementFragment : Fragment() {
 
         timeButton.setOnClickListener {
             val c = Calendar.getInstance()
+            timelbl = SimpleDateFormat("HH:mm").format(c.time)
             val timeSetListener = TimePickerDialog.OnTimeSetListener { _, hour, minute ->
                 c.set(Calendar.HOUR_OF_DAY, hour)
                 c.set(Calendar.MINUTE, minute)
