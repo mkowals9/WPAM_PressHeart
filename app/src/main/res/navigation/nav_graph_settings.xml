@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_settings"
+    app:startDestination="@id/Settings">
+
+    <include app:graph="@navigation/nav_graph_logged" />
+
+    <fragment
+        android:id="@+id/Settings"
+        android:name="com.wpam.pressheart.fragments.SettingsFragment"
+        android:label="Settings"
+        tools:layout="@layout/fragment_settings">
+
+
+        <action
+            android:id="@+id/action_Settings_to_MainLogged"
+            app:destination="@+id/nav_graph_logged"/>
+
+    </fragment>
+
+</navigation>

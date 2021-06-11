@@ -17,26 +17,32 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
 
-        <activity android:name=".SplashScreenActivity"
+        <activity android:name=".SettingsActivity"
+            android:label="Settings"
+            android:noHistory="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity
+            android:name=".SplashScreenActivity"
             android:label="@string/app_name"
             android:noHistory="true"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait">
-
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-
-        
         <activity
             android:name=".MedicinesActivity"
             android:label="Medicines"
             android:noHistory="false"
             android:parentActivityName=".MainLoggedMenuActivity"
             android:screenOrientation="portrait" />
+
+
         <activity
             android:name=".MainLoggedMenuActivity"
             android:label="@string/title_activity_main_logged_menu"
@@ -47,9 +53,7 @@
             android:label="Main Activity"
             android:noHistory="true"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".MeasurementsActivity"
             android:label="Measurements"
