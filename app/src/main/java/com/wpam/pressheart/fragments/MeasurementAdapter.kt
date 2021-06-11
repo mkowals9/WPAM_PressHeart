@@ -100,15 +100,47 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                             Calendar.getInstance().get(Calendar.MONTH),
                             Calendar.getInstance().get(Calendar.DAY_OF_MONTH)){
                             view,year,month,day ->
-                                var chosen = "${year}-${month}-${day}"
-                                newDateChosen = chosen
+                            var month_real = month + 1
+                            if(month_real<10)
+                            {
+                                if(day<10){
+                                newDateChosen = "${year}-0${month_real}-0${day}"}
+                                else{
+                                    newDateChosen = "${year}-0${month_real}-${day}"
+                                }
+                            }
+                            else{
+                                if(day<10){
+                                    newDateChosen = "${year}-${month_real}-0${day}"}
+                                else{
+                                    newDateChosen = "${year}-${month_real}-${day}"
+                                }
+                            }
+                                var chosen = ""
+                            Log.d(TAG, "chosen: ${newDateChosen}")
+                            Log.d(TAG, "year: ${year} month: ${month+1} day: ${day}")
                         }
 
                     }
                     viewDialog.findViewById<TimePicker>(R.id.spinner_time).setOnTimeChangedListener { view, hourOfDay, minute ->
-                        Calendar.getInstance().set(android.icu.util.Calendar.HOUR_OF_DAY, hourOfDay)
-                        Calendar.getInstance().set(android.icu.util.Calendar.MINUTE, minute)
-                        newHourChosen = SimpleDateFormat("HH:mm").format(Calendar.getInstance().time).toString()
+
+                        Log.d(TAG, "bum bum time ${hourOfDay}, ${minute}")
+                        if(hourOfDay<10){
+                            if(minute<10){
+                                newHourChosen = "0${hourOfDay}:0${minute}"
+                            }
+                            else{
+                                newHourChosen = "$0{hourOfDay}:${minute}"
+                            }
+                        }
+                        else{
+                            if(minute<10){
+                                newHourChosen = "${hourOfDay}:0${minute}"
+                            }
+                            else{
+                                newHourChosen = "${hourOfDay}:${minute}"
+                            }
+                        }
                         Log.d(TAG, "ZMIENIAM GODZINE : ${newHourChosen}")
                     }
 
@@ -169,6 +201,8 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                                                 val temporaryDate : Date = formatter.parse(timestampToUpdatetext)
                                                 val timeStampMeasure = Timestamp(temporaryDate)
                                                 doc.update("Date", timeStampMeasure)
+                                                Log.d(TAG, timestampToUpdatetext)
+                                                Log.d(TAG, "${currentItem.Date.toDate().toString()}")
                                                 currentItem.Date = timeStampMeasure
                                                 adapter.notifyItemChanged(adapterPosition)
                                             }
