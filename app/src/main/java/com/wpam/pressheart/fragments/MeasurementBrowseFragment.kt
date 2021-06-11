@@ -62,7 +62,7 @@ class MeasurementBrowseFragment : Fragment() {
     private fun getMeasurementData(){
         val userId : String = FirebaseAuth.getInstance().currentUser?.uid.toString()
         val docRef = db.collection("Measurements").document(userId).collection("Measurements").get()
-            .addOnSuccessListener { documents -> for (document in documents)
+            docRef.addOnSuccessListener { documents -> for (document in documents)
             {
                 val measurement = document.toObject<SingleMeasurement>()
                 measurement.documentId = document.id
@@ -72,7 +72,7 @@ class MeasurementBrowseFragment : Fragment() {
                 measurementsRecyclerView.adapter = MeasurementAdapter(measurementsArrayList, this.activity as MeasurementsActivity)
 
             }
-            .addOnFailureListener{ exception -> Log.w(TAG, "Upsi, dupsi")  }
+            .addOnFailureListener{ _ -> Log.w(TAG, "Upsi, dupsi")  }
     }
 
 }

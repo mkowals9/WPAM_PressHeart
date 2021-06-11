@@ -86,7 +86,7 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
             init{
                 changeButton.setOnClickListener {
                     Log.d(TAG, "elo pomelo w change")
-                    var currentItem = adapter.getItem((this as MyViewHolder).adapterPosition)
+                    var currentItem = adapter.getItem(this.adapterPosition)
                     val arrayMoods = itemView.context.resources.getStringArray(R.array.moods)
                     val userId : String = FirebaseAuth.getInstance().currentUser?.uid.toString()
                     var docRef = db.collection("Measurements").document(userId).collection("Measurements")
@@ -99,7 +99,7 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                         viewDialog.findViewById<DatePicker>(R.id.spinner_date).init(Calendar.getInstance().get(Calendar.YEAR),
                             Calendar.getInstance().get(Calendar.MONTH),
                             Calendar.getInstance().get(Calendar.DAY_OF_MONTH)){
-                            view,year,month,day ->
+                                _, year, month, day ->
                             var month_real = month + 1
                             if(month_real<10)
                             {
@@ -116,15 +116,16 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                                     newDateChosen = "${year}-${month_real}-${day}"
                                 }
                             }
-                                var chosen = ""
+
                             Log.d(TAG, "chosen: ${newDateChosen}")
                             Log.d(TAG, "year: ${year} month: ${month+1} day: ${day}")
                         }
 
                     }
-                    viewDialog.findViewById<TimePicker>(R.id.spinner_time).setOnTimeChangedListener { view, hourOfDay, minute ->
+                    viewDialog.findViewById<TimePicker>(R.id.spinner_time).setOnTimeChangedListener { _, hourOfDay, minute ->
 
                         Log.d(TAG, "bum bum time ${hourOfDay}, ${minute}")
+
                         if(hourOfDay<10){
                             if(minute<10){
                                 newHourChosen = "0${hourOfDay}:0${minute}"
@@ -166,35 +167,35 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                     val dialogWindowChange = AlertDialog.Builder(adapter.context)
                         .setView(viewDialog)
                         .setCancelable(false)
-                        .setPositiveButton("Save"){dialog, which ->
+                        .setPositiveButton("Save"){ _, _ ->
                             run {
                                 saveChanges = true
                                 Log.d(TAG, "saveChanges: ${saveChanges}")
                                 if(saveChanges){
-                                    var currentItem = adapter.getItem((this as MyViewHolder).adapterPosition)
+                                    var currentItemSave = adapter.getItem(this.adapterPosition)
                                     Log.d(TAG, "pokazuj sie mendo ${newHourChosen} , ${newDateChosen}")
-                                    var doc = docRef.document(adapter.getItem((this as MyViewHolder).adapterPosition).documentId.toString())
+                                    var doc = docRef.document(adapter.getItem(this.adapterPosition).documentId.toString())
                                     doc.get()
                                         .addOnSuccessListener { document ->
-                                            if(oldMood != document.data?.get("Mood") && oldMood != currentItem.Mood){
+                                            if(oldMood != document.data?.get("Mood") && oldMood != currentItemSave.Mood){
                                                 doc.update("Mood", oldMood)
-                                                currentItem.Mood = oldMood
+                                                currentItemSave.Mood = oldMood
                                                 adapter.notifyItemChanged(adapterPosition)
                                             }
                                             var newSBPvalue = viewDialog.findViewById<EditText>(R.id.editText_value_SBP_change).text.toString()
-                                            if(newSBPvalue != document.data?.get("SystolicBP").toString() && newSBPvalue != currentItem.SystolicBP.toString()){
+                                            if(newSBPvalue != document.data?.get("SystolicBP").toString() && newSBPvalue != currentItemSave.SystolicBP.toString()){
                                                 doc.update("SystolicBP", newSBPvalue.toLong())
                                                 currentItem.SystolicBP = newSBPvalue.toLong()
                                                 adapter.notifyItemChanged(adapterPosition)
                                             }
                                             var newDBPvalue = viewDialog.findViewById<EditText>(R.id.editText_value_DBP_change).text.toString()
-                                            if(newDBPvalue != document.data?.get("DiastolicBP") && newDBPvalue != currentItem.DiastolicBP.toString()){
+                                            if(newDBPvalue != document.data?.get("DiastolicBP") && newDBPvalue != currentItemSave.DiastolicBP.toString()){
                                                 doc.update("DiastolicBP", newDBPvalue.toLong())
                                                 currentItem.DiastolicBP = newDBPvalue.toLong()
                                                 adapter.notifyItemChanged(adapterPosition)
                                             }
-                                            var onlyHour = SimpleDateFormat("HH:mm").format(currentItem.Date.toDate()).toString()
-                                            var onlyDate = SimpleDateFormat("YYYY-MM-dd").format(currentItem.Date.toDate()).toString()
+                                            var onlyHour = SimpleDateFormat("HH:mm").format(currentItemSave.Date.toDate()).toString()
+                                            var onlyDate = SimpleDateFormat("YYYY-MM-dd").format(currentItemSave.Date.toDate()).toString()
                                             if(newDateChosen != onlyDate || newHourChosen != onlyHour){
                                                 var timestampToUpdatetext = "${newDateChosen} ${newHourChosen}"
                                                 var formatter = SimpleDateFormat("yyyy-MM-dd HH:mm")
@@ -202,8 +203,8 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                                                 val timeStampMeasure = Timestamp(temporaryDate)
                                                 doc.update("Date", timeStampMeasure)
                                                 Log.d(TAG, timestampToUpdatetext)
-                                                Log.d(TAG, "${currentItem.Date.toDate().toString()}")
-                                                currentItem.Date = timeStampMeasure
+                                                Log.d(TAG, "${currentItemSave.Date.toDate().toString()}")
+                                                currentItemSave.Date = timeStampMeasure
                                                 adapter.notifyItemChanged(adapterPosition)
                                             }
                                             adapter.notifyDataSetChanged()
@@ -211,7 +212,7 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                                 }
                             }
                         }
-                        .setNegativeButton("Cancel"){dialog, which ->  dialog.dismiss()}
+                        .setNegativeButton("Cancel"){ dialog, _ ->  dialog.dismiss()}
                         .create()
                     viewDialog.findViewById<EditText>(R.id.editText_value_SBP_change).setText(this.SystolicBP.text.toString())
                     viewDialog.findViewById<EditText>(R.id.editText_value_DBP_change).setText(this.DiastolicBP.text.toString())
@@ -226,7 +227,7 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
 
                 deleteButton.setOnClickListener {
                     Log.d(TAG, "elo pomelo w delete")
-                    val currentPosition = adapter.getItem((this as MyViewHolder).adapterPosition)
+                    val currentPosition = adapter.getItem(this.adapterPosition)
                     val userId : String = FirebaseAuth.getInstance().currentUser?.uid.toString()
                     val texttext: String = this.Date.text.toString()
                     var formatter = SimpleDateFormat("yyyy-MM-dd HH:mm")
@@ -238,12 +239,12 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                         val dialogWindow = AlertDialog.Builder(adapter.context)
                         .setView(view)
                         .setCancelable(false)
-                        .setPositiveButton("Yes") { dialog, which ->
+                        .setPositiveButton("Yes") { _, _ ->
                             run {
                                 result = "yes"
                             }
                         }
-                        .setNegativeButton("No") { dialog, which ->
+                        .setNegativeButton("No") { _, _ ->
                             run {
                                 result = "no"
                             }
@@ -257,7 +258,7 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                                     "yes" -> {
                                         Log.d(TAG, "jestem w yes")
                                         Log.d(TAG, " date ${dateStampt}, sysBP: ${SystolicBP.text.toString()}, mood ${this.Mood.text}")
-                                        docRef.document(adapter.getItem((this as MyViewHolder).adapterPosition).documentId.toString()).delete()
+                                        docRef.document(adapter.getItem(this.adapterPosition).documentId.toString()).delete()
                                         adapter.measurementsList.remove(currentPosition)
                                         adapter.notifyDataSetChanged()
                                         adapter.notifyItemRemoved(this.adapterPosition)

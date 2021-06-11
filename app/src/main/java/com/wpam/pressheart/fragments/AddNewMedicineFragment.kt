@@ -83,6 +83,7 @@ class AddNewMedicineFragment : Fragment() {
                 "LeftPills" to amountOfPills,
                 "Description" to desc
             )
+
         }
 
     }

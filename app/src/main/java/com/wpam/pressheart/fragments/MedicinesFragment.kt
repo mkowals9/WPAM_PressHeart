@@ -57,7 +57,7 @@ class MedicinesFragment: Fragment()  {
     private fun getMedicinesData(){
         val userId : String = FirebaseAuth.getInstance().currentUser?.uid.toString()
         val docRef = db.collection("Medicines").document(userId).collection("Medicines").get()
-            .addOnSuccessListener { documents -> for (document in documents)
+            docRef.addOnSuccessListener { documents -> for (document in documents)
             {
                 val medicine = document.toObject<SingleMedicine>()
                 medicinesArrayList.add(medicine)

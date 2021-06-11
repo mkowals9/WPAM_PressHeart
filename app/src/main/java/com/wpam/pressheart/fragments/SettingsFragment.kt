@@ -108,7 +108,7 @@ class SettingsFragment: Fragment() {
                 AlertDialog.Builder(it1)
                     .setView(view)
                     .setCancelable(false)
-                    .setPositiveButton("Yes") { dialog, which ->
+                    .setPositiveButton("Yes") { _, _ ->
                         run {
                             deleteUser = "yes"
                             Log.d(TAG, "Yes yes yes")
@@ -129,7 +129,7 @@ class SettingsFragment: Fragment() {
                             }
                         }
                     }
-                    .setNegativeButton("No") { dialog, which ->
+                    .setNegativeButton("No") { _, _ ->
                         run {
                             deleteUser = "no"
                         }
