@@ -22,6 +22,8 @@ import kotlinx.android.synthetic.main.fragment_main_logged_menu.*
 class MainLoggedMenuFragment : Fragment() {
 
     private val db = Firebase.firestore
+    private lateinit var viewFragmentFragment : View
+    private var currentLogin : String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,7 +31,9 @@ class MainLoggedMenuFragment : Fragment() {
     ): View? {
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main_logged_menu, container, false)
+        var viewFragment = inflater.inflate(R.layout.fragment_main_logged_menu, container, false)
+        viewFragmentFragment = viewFragment
+        return viewFragment
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -96,6 +100,25 @@ class MainLoggedMenuFragment : Fragment() {
             startActivity(intent)
             //findNavController().navigate(R.id.action_MainLoggedMenu_to_MedicinesFragment)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val userId : String = FirebaseAuth.getInstance().currentUser?.uid.toString()
+        val docRef = db.collection("Users_info").document(userId)
+        docRef.get()
+            .addOnSuccessListener { document ->
+                if (document != null){
+
+                    //userLogin= document.data.toString()
+                    currentLogin = document.data?.getValue("name").toString()
+                }
+        if (viewFragmentFragment.findViewById<TextView>(R.id.textview_first).text.toString() != "Hello ${currentLogin}")
+        {
+            viewFragmentFragment.findViewById<TextView>(R.id.textview_first).setText("Hello ${currentLogin}")
+        }
+
+    }
     }
 
     private fun updateUI(user: FirebaseUser?) {}

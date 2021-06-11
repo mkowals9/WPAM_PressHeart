@@ -37,7 +37,7 @@ class SettingsFragment: Fragment() {
     private var newEmail = ""
     private var oldEmail = ""
     private var newPassword= ""
-    private var deleteUser : Boolean = false
+    private var deleteUser : String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -110,12 +110,28 @@ class SettingsFragment: Fragment() {
                     .setCancelable(false)
                     .setPositiveButton("Yes") { dialog, which ->
                         run {
-                            deleteUser = true
+                            deleteUser = "yes"
+                            Log.d(TAG, "Yes yes yes")
+                            Firebase.auth.currentUser!!.delete().addOnCompleteListener { task ->
+                                if (task.isSuccessful) {
+                                    Log.d(TAG, "User account deleted.")
+                                    db.collection("Measurements").document(userId)
+                                    db.collection("Medicines").document(userId)
+                                    refUser.delete()
+                                    updateUI(null)
+                                    val intent = Intent(this.activity as SettingsActivity, MainActivity::class.java)
+                                    startActivity(intent)
+                                    (this.activity as SettingsActivity).finish()
+                                }
+                                else {
+                                    Toast.makeText(this.context, "Something wnet wrong with deleting user", Toast.LENGTH_LONG)
+                                }
+                            }
                         }
                     }
                     .setNegativeButton("No") { dialog, which ->
                         run {
-                            deleteUser = false
+                            deleteUser = "no"
                         }
 
                     }
@@ -123,23 +139,7 @@ class SettingsFragment: Fragment() {
             }
             if (dialogWindow != null) {
                 dialogWindow.show()
-                dialogWindow.setOnDismissListener{
-                    if(deleteUser){
-                        Firebase.auth.currentUser!!.delete().addOnCompleteListener { task ->
-                            if (task.isSuccessful) {
-                                Log.d(TAG, "User account deleted.")
-                                db.collection("Measurements").document(userId)
-                                db.collection("Medicines").document(userId)
-                                refUser.delete()
-                                updateUI(null)
-                                val intent = Intent(this.activity as SettingsActivity, MainActivity::class.java)
-                                startActivity(intent)
-                                (this.activity as SettingsActivity).finish()
 
-                            }
-                        }
-                    }
-                }
             }
 
 
