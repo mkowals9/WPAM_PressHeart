@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.wpam.pressheart.*
@@ -34,6 +35,17 @@ class MainLoggedMenuFragment : Fragment() {
         // Inflate the layout for this fragment
         var viewFragment = inflater.inflate(R.layout.fragment_main_logged_menu, container, false)
         viewFragmentFragment = viewFragment
+        db.collection("Users_info").document(Firebase.auth.uid.toString()).get().addOnSuccessListener {
+            documentSnapshot ->
+            viewFragment.findViewById<TextView>(R.id.textview_first).setText("Hello ${documentSnapshot.data?.get("name").toString()}, nice to see you again ❤")
+            Log.d(TAG, "snapshot: ${documentSnapshot.data?.get("name").toString()}")
+        }
+        currentLogin = viewFragment.findViewById<TextView>(R.id.textview_first).text.toString()
+        val user2 = Firebase.auth.currentUser
+        val profileUpdates = userProfileChangeRequest { displayName = currentLogin.toString() }
+        user2!!.updateProfile(profileUpdates).addOnSuccessListener {
+        Firebase.auth.currentUser?.let{for(profile in it.providerData) Log.d(TAG, "user LOGIN : ${profile.displayName}")}
+        }
         return viewFragment
     }
 
@@ -44,6 +56,7 @@ class MainLoggedMenuFragment : Fragment() {
         user?.let {
             for (profile in it.providerData) {
                 val name = profile.displayName
+                Log.d(TAG, "the fuck name: ${profile.displayName}, ${name}")
                 view.findViewById<TextView>(R.id.textview_first).setText("Hello ${name}, nice to see you again ❤")
             }
         }

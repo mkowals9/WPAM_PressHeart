@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="16dp"
             android:layout_weight="0.005"
             android:paddingEnd="10dp"
             android:text="Date:"
@@ -50,11 +50,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
             android:layout_weight="10000"
             android:background="@color/colorAccent3"
             android:text="Choose date"
             android:textColor="@color/colorAccent5"
+            app:layout_constraintBottom_toTopOf="@+id/timeTextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dateTextView" />
@@ -65,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="16dp"
             android:layout_weight="0.0001"
             android:text="Time:"
             app:layout_constraintBottom_toTopOf="@+id/timeButton"
@@ -94,7 +96,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="4dp"
             android:layout_weight="0.05"
             android:text="Systolic Blood Pressure:"
@@ -176,64 +178,63 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/DbpEditTextNumber" />
 
-        <ImageButton
-            android:id="@+id/happyButton"
-            android:layout_width="wrap_content"
+        <TableLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            android:background="@android:color/transparent"
-            app:layout_constraintBottom_toTopOf="@+id/saveMeasurementButton"
-            app:layout_constraintEnd_toStartOf="@+id/angryButton"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chooseMoodTextView"
-            app:srcCompat="@drawable/ic_happy_mood" />
-
-        <ImageButton
-            android:id="@+id/angryButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            android:background="@android:color/transparent"
-            app:layout_constraintBottom_toTopOf="@+id/saveMeasurementButton"
-            app:layout_constraintEnd_toStartOf="@+id/sadButton"
-            app:layout_constraintStart_toEndOf="@+id/happyButton"
-            app:layout_constraintTop_toBottomOf="@+id/chooseMoodTextView"
-            app:srcCompat="@drawable/ic_angry_mood" />
-
-        <ImageButton
-            android:id="@+id/sadButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            android:background="@android:color/transparent"
-            app:layout_constraintBottom_toTopOf="@+id/saveMeasurementButton"
-            app:layout_constraintEnd_toStartOf="@+id/tiredButton"
-            app:layout_constraintStart_toEndOf="@+id/angryButton"
-            app:layout_constraintTop_toBottomOf="@+id/chooseMoodTextView"
-            app:layout_constraintVertical_bias="0.473"
-            app:srcCompat="@drawable/ic_sad_mood" />
-
-        <ImageButton
-            android:id="@+id/tiredButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="8dp"
-            android:background="@android:color/transparent"
             app:layout_constraintBottom_toTopOf="@+id/saveMeasurementButton"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/sadButton"
-            app:layout_constraintTop_toBottomOf="@+id/chooseMoodTextView"
-            app:layout_constraintVertical_bias="0.473"
-            app:srcCompat="@drawable/ic_tired_mood" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chooseMoodTextView">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+
+                <ImageButton
+                    android:id="@+id/happyButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@android:color/transparent"
+                    app:srcCompat="@drawable/ic_happy_mood" />
+
+                <ImageButton
+                    android:id="@+id/angryButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@android:color/transparent"
+                    app:srcCompat="@drawable/ic_angry_mood" />
+
+                <ImageButton
+                    android:id="@+id/sadButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@android:color/transparent"
+                    app:srcCompat="@drawable/ic_sad_mood" />
+
+                <ImageButton
+                    android:id="@+id/tiredButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@android:color/transparent"
+                    app:srcCompat="@drawable/ic_tired_mood" />
+            </TableRow>
+
+        </TableLayout>
 
         <Button
             android:id="@+id/saveMeasurementButton"
@@ -241,7 +242,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
             android:layout_weight="@android:integer/config_mediumAnimTime"
             android:background="@color/colorPrimary"

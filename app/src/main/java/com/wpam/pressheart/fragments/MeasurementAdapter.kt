@@ -81,6 +81,7 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
         private var newDateChosen : String = ""
         private var newHourChosen : String = ""
         private var oldMood = ""
+        private var changedMood = false
         private var saveChanges : Boolean = false
 
             init{
@@ -150,6 +151,7 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                             position: Int,
                             id: Long
                         ) {
+                            changedMood = true
                             oldMood = arrayMoods[position]
                             Log.d(TAG, "Chosen mood: ${arrayMoods[position]}")
                         }
@@ -172,7 +174,7 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                                     var doc = docRef.document(adapter.getItem(this.adapterPosition).documentId.toString())
                                     doc.get()
                                         .addOnSuccessListener { document ->
-                                            if(oldMood != document.data?.get("Mood") && oldMood != currentItemSave.Mood){
+                                            if(oldMood != document.data?.get("Mood") && oldMood != currentItemSave.Mood && changedMood){
                                                 doc.update("Mood", oldMood)
                                                 currentItemSave.Mood = oldMood
                                                 adapter.notifyItemChanged(adapterPosition)

@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -27,6 +28,7 @@ class MeasurementBrowseFragment : Fragment() {
     private var db = Firebase.firestore
     private lateinit var measurementsRecyclerView: RecyclerView
     private lateinit var measurementsArrayList : ArrayList<SingleMeasurement>
+    private lateinit var viewViewView : View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,11 +43,13 @@ class MeasurementBrowseFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_measurement_browse, container, false)
+        viewViewView = view
         measurementsRecyclerView = view.findViewById(R.id.MeasurementsBrowseList)
         measurementsRecyclerView.layoutManager = LinearLayoutManager (this.activity as MeasurementsActivity)
         measurementsRecyclerView.setHasFixedSize(true)
         measurementsArrayList = arrayListOf<SingleMeasurement>()
         getMeasurementData()
+
         return view
     }
 
@@ -74,5 +78,6 @@ class MeasurementBrowseFragment : Fragment() {
             }
             .addOnFailureListener{ _ -> Log.w(TAG, "Upsi, dupsi")  }
     }
+
 
 }

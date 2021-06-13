@@ -191,6 +191,7 @@
                     android:layout_marginBottom="8dp"
                     android:layout_weight="1"
                     android:background="@color/floatingButtonColor"
+                    android:gravity="center|center_horizontal|center_vertical"
                     android:paddingEnd="20dp"
                     android:text="Change"
                     android:textColor="@android:color/white"

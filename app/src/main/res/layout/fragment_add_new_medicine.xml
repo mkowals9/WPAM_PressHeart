@@ -67,6 +67,7 @@
             android:layout_weight="10"
             android:background="@color/colorAccent3"
             android:text="Add Medicine Photo Taken From Camera"
+            android:textColor="@color/colorAccent5"
             app:layout_constraintBottom_toTopOf="@+id/name_textView2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

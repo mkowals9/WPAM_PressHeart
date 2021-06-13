@@ -3,19 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="16dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginBottom="10dp"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?selectableItemBackground"
-    app:cardBackgroundColor="#99EAABAB"
+    app:cardBackgroundColor="#FBD6DA"
     app:cardCornerRadius="9dp"
     app:cardElevation="8dp">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:layout_marginVertical="6dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="16dp"
         android:background="@android:color/transparent"
         android:orientation="vertical">
 
@@ -24,7 +33,6 @@
             android:id="@+id/view2"
             android:layout_width="match_parent"
             android:layout_height="10dp" />
-
 
 
         <LinearLayout
@@ -37,6 +45,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:text="Date:"
                 android:textColor="@color/colorAccent5"
                 android:textSize="16sp"
@@ -62,6 +71,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:text="Systolic Blood Pressure:"
                 android:textColor="@color/colorAccent5"
                 android:textSize="16sp"
@@ -88,8 +98,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Diastolic Blood Pressure:"
+                android:layout_marginLeft="10dp"
                 android:scrollHorizontally="false"
+                android:text="Diastolic Blood Pressure:"
                 android:textColor="@color/colorAccent5"
                 android:textSize="16sp"
                 android:textStyle="bold|italic" />
@@ -105,7 +116,6 @@
         </LinearLayout>
 
 
-
         <LinearLayout
             android:id="@+id/Mood_label_linerlayout"
             android:layout_width="wrap_content"
@@ -116,6 +126,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:text="Mood:"
                 android:textColor="@color/colorAccent5"
                 android:textSize="16dp"
@@ -150,9 +161,11 @@
                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/shapes"
                 android:text="Change"
-                android:textColor="@color/colorAccent4"
+                android:textColor="#FFFFFF"
                 android:textSize="14sp" />
 
             <View
@@ -163,9 +176,10 @@
                 android:id="@+id/deleteMeasurementButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/shapes"
                 android:text="Delete"
-                android:textColor="@color/colorAccent4" />
+                android:textColor="#FFFFFF" />
 
             <View
                 android:id="@+id/view4"
@@ -173,7 +187,7 @@
                 android:layout_height="10dp" />
 
 
-    </LinearLayout>
+        </LinearLayout>
 
     </LinearLayout>
 

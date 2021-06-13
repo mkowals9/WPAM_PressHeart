@@ -17,8 +17,10 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/MeasurementsBrowseList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="5000"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             tools:listitem="@layout/single_measurement" />
 
 
@@ -29,7 +31,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_gravity="end|bottom"
         android:layout_marginHorizontal="20dp"
@@ -39,5 +40,6 @@
         android:clickable="true"
         app:backgroundTint="@color/floatingButtonColor"
         app:srcCompat="@drawable/ic_add_white_plus"
-        tools:ignore="MissingConstraints,VectorDrawableCompat" />
+        tools:ignore="MissingConstraints,VectorDrawableCompat"
+        android:focusable="true" />
 </RelativeLayout>
