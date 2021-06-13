@@ -23,17 +23,18 @@
         android:layout_marginStart="16dp"
         android:background="@android:color/transparent"
         android:orientation="vertical"
-        android:paddingLeft="10dp"
-        android:paddingRight="30dp">
+        android:paddingStart="10dp"
+        android:paddingEnd="30dp">
 
         <ImageView
             android:id="@+id/imageViewMedicine"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:paddingBottom="10dp"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@tools:sample/avatars"
+            android:contentDescription="TODO" />
 
         <LinearLayout
             android:id="@+id/Name_label_linerlayout"

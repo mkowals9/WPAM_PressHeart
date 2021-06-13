@@ -2,6 +2,7 @@ package com.wpam.pressheart.fragments
 
 import android.app.Activity
 import android.content.ContentValues
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
@@ -9,16 +10,17 @@ import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.provider.MediaStore.Images
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
-import com.wpam.pressheart.MedicinesActivity
 import com.wpam.pressheart.R
 import kotlinx.android.synthetic.main.fragment_add_new_medicine.*
 import java.io.ByteArrayOutputStream
@@ -30,6 +32,9 @@ class AddNewMedicineFragment : Fragment() {
     private val storageFirebase = FirebaseStorage.getInstance().getReference()
     private var imageViewUri = ""
     private var medicineName = ""
+    private var downloadUri = ""
+    private var  desc = ""
+    private var amountOfPills = 0
     private val CAMERA_REQUEST = 1888
     private val GALLERY_REQUEST = 1889
 
@@ -66,22 +71,43 @@ class AddNewMedicineFragment : Fragment() {
         addCompleteMedicineButton.setOnClickListener {
             val userId: String = FirebaseAuth.getInstance().currentUser?.uid.toString()
             this.medicineName = editTextNameMedicine.text.toString()
-            var amountOfPills = editTextNumberleftPills.text.toString().toInt()
-            var desc = editTextDescriptionMedicine.text.toString()
+            if(editTextNumberleftPills.text.toString() != ""){
+            this.amountOfPills = editTextNumberleftPills.text.toString().toInt()
+            }
+            else{
+                Toast.makeText(this.context, "You left empty amount of pills", Toast.LENGTH_SHORT).show()
+            }
+            desc = editTextDescriptionMedicine.text.toString()
+            new_medicine_imageView.isDrawingCacheEnabled = true
+            new_medicine_imageView.buildDrawingCache()
+            val bitmapFireBase = (new_medicine_imageView.drawable as BitmapDrawable).bitmap
+            val baos = ByteArrayOutputStream()
+            bitmapFireBase.compress(Bitmap.CompressFormat.PNG, 100, baos)
+            val data = baos.toByteArray()
+            var uploadTask = storageFirebase.child("${userId}/medicines/${this.medicineName}").putBytes(data)
+            uploadTask.addOnFailureListener {
+                Toast.makeText(this.context,"Cannot upload a photo to Database", Toast.LENGTH_LONG).show()
+            }
+            val urlTask = uploadTask.continueWithTask { task ->
+                if(!task.isSuccessful){task.exception?.let {throw it}}
+                storageFirebase.child("${userId}/medicines/${this.medicineName}").downloadUrl}
+                .addOnCompleteListener { task ->
+                    if(task.isSuccessful){
+                        this.downloadUri = task.result.toString()
+                    }
+                    else
+                    {
+                        Toast.makeText(this.context,"Cannot get photo's uri", Toast.LENGTH_LONG).show()
+                    }
+                }
 
-            val bitmap = (new_medicine_imageView.getDrawable() as BitmapDrawable).bitmap
-
-
-
-//            val path: String = Uri.parse(new_medicine_imageView.getTag().toString())
-//
-//            val pathInStorage = "medicines/" + userId + "/" + path
-//            storageFirebase.child(pathInStorage)
+            Log.d(TAG, " UPLOAD PHOTO ITS URI: ${downloadUri}")
 
             val newMedicineToAdd = hashMapOf(
                 "Name" to medicineName,
                 "LeftPills" to amountOfPills,
-                "Description" to desc
+                "Description" to desc,
+                "ImageUri" to downloadUri
             )
 
         }
@@ -90,7 +116,6 @@ class AddNewMedicineFragment : Fragment() {
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-
         when (requestCode) {
             CAMERA_REQUEST -> {
                 if (resultCode == Activity.RESULT_OK) {
@@ -116,6 +141,8 @@ class AddNewMedicineFragment : Fragment() {
             }
         }
     }
+
+
 
 
 }
