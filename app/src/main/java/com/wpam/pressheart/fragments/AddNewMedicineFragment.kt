@@ -17,6 +17,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -30,9 +31,10 @@ class AddNewMedicineFragment : Fragment() {
 
     private val db = Firebase.firestore
     private val storageFirebase = FirebaseStorage.getInstance().getReference()
+    private var chosenPhoto = false
     private var imageViewUri = ""
     private var medicineName = ""
-    private var downloadUri = ""
+    private var downloadUri : String = ""
     private var  desc = ""
     private var amountOfPills = 0
     private val CAMERA_REQUEST = 1888
@@ -69,21 +71,24 @@ class AddNewMedicineFragment : Fragment() {
         }
 
         addCompleteMedicineButton.setOnClickListener {
+
             val userId: String = FirebaseAuth.getInstance().currentUser?.uid.toString()
             this.medicineName = editTextNameMedicine.text.toString()
             if(editTextNumberleftPills.text.toString() != ""){
             this.amountOfPills = editTextNumberleftPills.text.toString().toInt()
             }
             else{
-                Toast.makeText(this.context, "You left empty amount of pills", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this.context, "You left empty amount of pills, fill it", Toast.LENGTH_SHORT).show()
             }
             desc = editTextDescriptionMedicine.text.toString()
+            if(medicineName != "" && editTextNumberleftPills.text.toString() != "" && desc != "" && chosenPhoto){
             new_medicine_imageView.isDrawingCacheEnabled = true
             new_medicine_imageView.buildDrawingCache()
             val bitmapFireBase = (new_medicine_imageView.drawable as BitmapDrawable).bitmap
             val baos = ByteArrayOutputStream()
             bitmapFireBase.compress(Bitmap.CompressFormat.PNG, 100, baos)
             val data = baos.toByteArray()
+            if(this.medicineName != ""){
             var uploadTask = storageFirebase.child("${userId}/medicines/${this.medicineName}").putBytes(data)
             uploadTask.addOnFailureListener {
                 Toast.makeText(this.context,"Cannot upload a photo to Database", Toast.LENGTH_LONG).show()
@@ -94,24 +99,31 @@ class AddNewMedicineFragment : Fragment() {
                 .addOnCompleteListener { task ->
                     if(task.isSuccessful){
                         this.downloadUri = task.result.toString()
+                        Log.d(TAG, " task res: ${task.result}")
+                        Log.d(TAG, "task res string: ${task.result.toString()}")
+                        var newMedicineToAdd = hashMapOf(
+                            "Name" to medicineName,
+                            "LeftPills" to amountOfPills,
+                            "Description" to desc,
+                            "ImageUri" to downloadUri
+                        )
+                        db.collection("Medicines").document(userId).collection("Medicines").add(newMedicineToAdd)
+                        findNavController().navigate(R.id.action_AddMedicine_to_MainMedicine)
                     }
                     else
                     {
                         Toast.makeText(this.context,"Cannot get photo's uri", Toast.LENGTH_LONG).show()
                     }
                 }
-
-            Log.d(TAG, " UPLOAD PHOTO ITS URI: ${downloadUri}")
-
-            val newMedicineToAdd = hashMapOf(
-                "Name" to medicineName,
-                "LeftPills" to amountOfPills,
-                "Description" to desc,
-                "ImageUri" to downloadUri
-            )
-
+            }
+            else {
+                Toast.makeText(this.context, "Insert medicine's name", Toast.LENGTH_SHORT).show()
+            }
         }
-
+            else {
+                Toast.makeText(this.context, "Fill missing gaps",Toast.LENGTH_SHORT)
+            }
+        }
     }
 
 
@@ -131,12 +143,14 @@ class AddNewMedicineFragment : Fragment() {
 
                     Log.w(ContentValues.TAG, "data extra extra")
                     Log.w(ContentValues.TAG, data.extras!!["data"].toString())
+                    chosenPhoto = true
                 }
             }
             GALLERY_REQUEST -> {
                 if (resultCode == Activity.RESULT_OK) {
                     new_medicine_imageView.setImageURI(data?.data)
                     this.imageViewUri = data?.data.toString()
+                    chosenPhoto = true
                 }
             }
         }

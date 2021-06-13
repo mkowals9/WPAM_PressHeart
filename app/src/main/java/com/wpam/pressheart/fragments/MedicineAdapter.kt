@@ -32,7 +32,7 @@ class MedicineAdapter(private val medicinesList: ArrayList<SingleMedicine>) :
         holder.Name.setText(currentItem.Name.toString())
         holder.LeftPills.setText(currentItem.LeftPills.toString())
         holder.Description.text = currentItem.Description
-        Glide.with(holder.Image).load(currentItem.Image.toString()).into(holder.Image)
+        Glide.with(holder.ImageUri).load(currentItem.ImageUri.toString()).into(holder.ImageUri)
     }
 
     override fun getItemCount(): Int {
@@ -40,7 +40,7 @@ class MedicineAdapter(private val medicinesList: ArrayList<SingleMedicine>) :
     }
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val Image: ImageView = itemView.findViewById(R.id.imageViewMedicine)
+        val ImageUri: ImageView = itemView.findViewById(R.id.imageViewMedicine)
         val Name: TextView = itemView.findViewById(R.id.name_Medicine)
         val LeftPills: TextView = itemView.findViewById(R.id.leftPills_Medicine)
         val Description: TextView = itemView.findViewById(R.id.description_Medicine)
