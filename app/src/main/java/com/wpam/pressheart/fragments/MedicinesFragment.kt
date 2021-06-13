@@ -70,6 +70,7 @@ class MedicinesFragment: Fragment()  {
             {
 
                 val medicine = document.toObject<SingleMedicine>()
+                medicine.documentId = document.id
                 medicinesArrayList.add(medicine)
             }
 

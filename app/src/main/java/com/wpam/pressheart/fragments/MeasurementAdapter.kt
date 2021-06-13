@@ -229,12 +229,7 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                     Log.d(TAG, "elo pomelo w delete")
                     val currentPosition = adapter.getItem(this.adapterPosition)
                     val userId : String = FirebaseAuth.getInstance().currentUser?.uid.toString()
-                    val texttext: String = this.Date.text.toString()
-                    var formatter = SimpleDateFormat("yyyy-MM-dd HH:mm")
-                    val temporaryDate : Date = formatter.parse(texttext)
-                    val dateStampt = Timestamp(temporaryDate)
                     var docRef = db.collection("Measurements").document(userId).collection("Measurements")
-
                         val view = LayoutInflater.from(adapter.parentAdapter.context).inflate(R.layout.dialoge_are_you_sure, null)
                         val dialogWindow = AlertDialog.Builder(adapter.context)
                         .setView(view)
@@ -257,7 +252,6 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                                 when (result) {
                                     "yes" -> {
                                         Log.d(TAG, "jestem w yes")
-                                        Log.d(TAG, " date ${dateStampt}, sysBP: ${SystolicBP.text.toString()}, mood ${this.Mood.text}")
                                         docRef.document(adapter.getItem(this.adapterPosition).documentId.toString()).delete()
                                         adapter.measurementsList.remove(currentPosition)
                                         adapter.notifyDataSetChanged()
