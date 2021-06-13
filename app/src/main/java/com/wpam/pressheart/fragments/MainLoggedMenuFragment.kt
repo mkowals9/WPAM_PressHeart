@@ -40,63 +40,29 @@ class MainLoggedMenuFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        val fromBundle:String = savedInstanceState?.getString("userLogin").toString()
-//        //view.findViewById<TextView>(R.id.textview_first).setText("Hello " + fromBundle)
-
         val user = Firebase.auth.currentUser
         user?.let {
             for (profile in it.providerData) {
                 val name = profile.displayName
-                view.findViewById<TextView>(R.id.textview_first).setText("Hello ${name}, nice to see you again")
+                view.findViewById<TextView>(R.id.textview_first).setText("Hello ${name}, nice to see you again ❤")
             }
         }
 
-        val userId : String = FirebaseAuth.getInstance().currentUser?.uid.toString()
-        Log.d(TAG, "userId: ${userId}")
-        val docRef = db.collection("Users_info").document(userId)
-//        docRef.get()
-//            .addOnSuccessListener { document ->
-//                if (document != null){
-//
-//                    //userLogin= document.data.toString()
-//                    val userLogin = document.data?.getValue("name")
-//                    //Log.d(TAG, "${document.toString()}")
-//                    Log.d(TAG, "Login: ${document.data?.getValue("name")}")
-//                    Log.d(TAG, "DocumentSnapshot data: ${document.data}")
-//                    view.findViewById<TextView>(R.id.textview_first).setText("Hello " + userLogin)
-//                }
-//                else
-//                {
-//                    view.findViewById<TextView>(R.id.textview_first).setText("Hello User")
-//                }
-//            }
-
-        //view.findViewById<Button>(R.id.measurementsButton).setOnClickListener {
-          //  findNavController().navigate(R.id.action_MainLoggedMenu_to_MeasurementsFragment)
-        //}
         measurementsButton.setOnClickListener{
-            //findNavController().navigate(R.id.action_MainLoggedMenu_to_MeasurementsFragment)
             val intent = Intent(
                 this.activity as MainLoggedMenuActivity,
                 MeasurementsActivity::class.java
             )
 
             startActivity(intent)
-            //(this.activity)?.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
 
         logOutButton.setOnClickListener{
-
-//
             FirebaseAuth.getInstance().signOut()
-
-            Log.d("Successful log out", "Successful log out")
             updateUI(null)
-            //findNavController().navigate(R.id.action_MainLoggedMenu_to_MainViewFragment)
             (this.activity as MainLoggedMenuActivity).onBackPressed()
             val intent = Intent(this.activity as MainLoggedMenuActivity, MainActivity::class.java)
             startActivity(intent)
-            //findNavController().navigate(R.id.action_MainLoggedMenu_to_MainViewFragment)
 
         }
 
@@ -106,32 +72,21 @@ class MainLoggedMenuFragment : Fragment() {
                 MedicinesActivity::class.java
             )
             startActivity(intent)
-            //findNavController().navigate(R.id.action_MainLoggedMenu_to_MedicinesFragment)
         }
     }
 
     override fun onResume() {
         super.onResume()
-        val userId : String = FirebaseAuth.getInstance().currentUser?.uid.toString()
-        val docRef = db.collection("Users_info").document(userId)
-        docRef.get()
-            .addOnSuccessListener { document ->
-                if (document != null){
-
-                    //userLogin= document.data.toString()
-                    currentLogin = document.data?.getValue("name").toString()
-                }
-        if (viewFragmentFragment.findViewById<TextView>(R.id.textview_first).text.toString() != "Hello ${currentLogin}")
-        {
-            viewFragmentFragment.findViewById<TextView>(R.id.textview_first).setText("Hello ${currentLogin}")
+        val user = Firebase.auth.currentUser
+        user?.let {
+            for (profile in it.providerData) {
+                val name = profile.displayName
+                viewFragmentFragment.findViewById<TextView>(R.id.textview_first).setText("Hello ${name}, nice to see you again ❤")
+            }
         }
-
-    }
     }
 
     private fun updateUI(user: FirebaseUser?) {}
-
-
 
 }
 

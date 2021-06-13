@@ -94,7 +94,6 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                     this.newHourChosen = SimpleDateFormat("HH:mm").format(currentItem.Date.toDate()).toString()
                     this.newDateChosen = SimpleDateFormat("yyyy-MM-dd").format(currentItem.Date.toDate()).toString()
                     val viewDialog = LayoutInflater.from(adapter.parentAdapter.context).inflate(R.layout.dialoge_edit_measurement, null)
-
                     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                         viewDialog.findViewById<DatePicker>(R.id.spinner_date).init(Calendar.getInstance().get(Calendar.YEAR),
                             Calendar.getInstance().get(Calendar.MONTH),
@@ -167,7 +166,6 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                         .setPositiveButton("Save"){ _, _ ->
                             run {
                                 saveChanges = true
-                                Log.d(TAG, "saveChanges: ${saveChanges}")
                                 if(saveChanges){
                                     var currentItemSave = adapter.getItem(this.adapterPosition)
                                     Log.d(TAG, "pokazuj sie mendo ${newHourChosen} , ${newDateChosen}")

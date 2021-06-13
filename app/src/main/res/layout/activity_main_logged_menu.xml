@@ -18,7 +18,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="#338C1C13"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="Welcome to PressHeart! ❤" />
+            app:title="PressHeart" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

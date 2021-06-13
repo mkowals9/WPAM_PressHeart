@@ -40,28 +40,22 @@ class SettingsFragment: Fragment() {
     private var newPassword= ""
     private var deleteUser : String = ""
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_settings, container, false)
         val userId : String = FirebaseAuth.getInstance().currentUser?.uid.toString()
         refUser.get()
             .addOnSuccessListener { document ->
                 if (document != null){
-
-                    //userLogin= document.data.toString()
                     userLog = document.data?.getValue("name").toString()
                     newUserLog = userLog
                     newEmail = document.data?.getValue("email").toString()
                     oldEmail = newEmail
-                    view.findViewById<EditText>(R.id.editTextPersonLogin).setHint(userLog)
+                    view.findViewById<EditText>(R.id.editTextPersonLogin).hint = userLog
                     view.findViewById<EditText>(R.id.editTextPersonLogin).setText(userLog)
-                    view.findViewById<EditText>(R.id.editTextNewEmail).setHint(newEmail)
+                    view.findViewById<EditText>(R.id.editTextNewEmail).hint = newEmail
                     view.findViewById<EditText>(R.id.editTextNewEmail).setText(newEmail)
                     view.findViewById<EditText>(R.id.editTextPassformConfirm).setText("hehPassword")
                     view.findViewById<EditText>(R.id.editTextNewPasswordUpdate).setText("NewPassword")
@@ -87,21 +81,22 @@ class SettingsFragment: Fragment() {
                 Firebase.auth.currentUser.updateProfile(userProfileChangeRequest{
                     displayName = newUserLog
                 })
-                //view.findViewById<TextView>(R.id.textview_first).setText("Hello ${newUserLog}")
+                Toast.makeText(view.context, "Successfully changed user's login", Toast.LENGTH_SHORT).show()
             }
             if(newEmail != oldEmail){
                 refUser.update("email", newEmail)
                 Firebase.auth.currentUser!!.updateEmail(newEmail)
+                Toast.makeText(view.context, "Successfully changed user's e-mail", Toast.LENGTH_SHORT).show()
             }
             view.findViewById<EditText>(R.id.editTextNewPasswordUpdate).addTextChangedListener {
                 if(view.findViewById<EditText>(R.id.editTextPassformConfirm).text.toString() == view.findViewById<EditText>(R.id.editTextNewPasswordUpdate).text.toString()){
                     Firebase.auth.currentUser!!.updatePassword(view.findViewById<EditText>(R.id.editTextPassformConfirm).text.toString())
+                    Toast.makeText(view.context, "Successfully changes user's password", Toast.LENGTH_SHORT).show()
                 }
                 else{
                     Toast.makeText(this.context, "Something went wrong, check new password", Toast.LENGTH_LONG)
                 }
             }
-
             Toast.makeText(this.context, "Updated user's info", Toast.LENGTH_LONG)
         }
 
@@ -115,7 +110,6 @@ class SettingsFragment: Fragment() {
                     .setPositiveButton("Yes") { _, _ ->
                         run {
                             deleteUser = "yes"
-                            Log.d(TAG, "Yes yes yes")
                             Firebase.auth.currentUser!!.delete().addOnCompleteListener { task ->
                                 if (task.isSuccessful) {
                                     Log.d(TAG, "User account deleted.")
@@ -128,7 +122,7 @@ class SettingsFragment: Fragment() {
                                     (this.activity as SettingsActivity).finish()
                                 }
                                 else {
-                                    Toast.makeText(this.context, "Something wnet wrong with deleting user", Toast.LENGTH_LONG)
+                                    Toast.makeText(this.context, "Something went wrong with deleting user", Toast.LENGTH_LONG)
                                 }
                             }
                         }
@@ -137,16 +131,12 @@ class SettingsFragment: Fragment() {
                         run {
                             deleteUser = "no"
                         }
-
                     }
                     .create()
             }
             if (dialogWindow != null) {
                 dialogWindow.show()
-
             }
-
-
         }
 
 

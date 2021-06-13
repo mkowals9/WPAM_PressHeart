@@ -6,10 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -18,10 +15,7 @@ import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
-import com.wpam.pressheart.AppNameGlideModule
-import com.wpam.pressheart.GlideApp
 import com.wpam.pressheart.R
-import com.wpam.pressheart.lists_content.SingleMeasurement
 import com.wpam.pressheart.lists_content.SingleMedicine
 import java.util.*
 
@@ -71,6 +65,9 @@ class MedicineAdapter(private val medicinesList: ArrayList<SingleMedicine>) :
         private val storageFirebase = FirebaseStorage.getInstance().getReference()
         private var result : String = ""
         private val userId : String = FirebaseAuth.getInstance().currentUser?.uid.toString()
+        private val CAMERA_REQUEST = 1888
+        private val GALLERY_REQUEST = 1889
+        private var saveChanges = false
 
         init {
             itemView.findViewById<Button>(R.id.deleteMeasurementButton).setOnClickListener {
@@ -116,7 +113,48 @@ class MedicineAdapter(private val medicinesList: ArrayList<SingleMedicine>) :
             }
 
             itemView.findViewById<Button>(R.id.changeMeasurementButton).setOnClickListener {
+                var currentItem = adapter.getItem(this.adapterPosition)
+                val userId : String = FirebaseAuth.getInstance().currentUser?.uid.toString()
+                var docRef = db.collection("Medicines").document(userId).collection("Medicines")
+                val viewDialog = LayoutInflater.from(adapter.parentAdapter.context).inflate(R.layout.dialoge_edit_medicine, null)
 
+                val dialogWindowChange = AlertDialog.Builder(adapter.parentAdapter.context)
+                    .setView(viewDialog)
+                    .setCancelable(false)
+                    .setPositiveButton("Save"){ _, _ ->
+                        saveChanges = true
+                        if(saveChanges){
+                            var newName = viewDialog.findViewById<EditText>(R.id.editTextTextMedicineNameChange).text.toString()
+                            if(newName != currentItem.Name){
+                                docRef.document(currentItem.documentId).update("Name", newName)
+                                currentItem.Name = newName
+                                adapter.notifyItemChanged(adapterPosition)
+                            }
+                            var newPills = viewDialog.findViewById<EditText>(R.id.editTextLeftPillsChange).text.toString()
+                            if(newPills != currentItem.LeftPills.toString()){
+                                docRef.document(currentItem.documentId).update("LeftPills", newPills.toLong())
+                                currentItem.LeftPills = newPills.toLong()
+                                adapter.notifyItemChanged(adapterPosition)
+                            }
+                            var newDesc = viewDialog.findViewById<EditText>(R.id.editText_Description).text.toString()
+                            if(newDesc != currentItem.Description.toString())
+                            {
+                                docRef.document(currentItem.documentId).update("Description", newDesc)
+                                currentItem.Description = newDesc
+                                adapter.notifyItemChanged(adapterPosition)
+                            }
+                            Toast.makeText(adapter.parentAdapter.context, "Successfully changed medicine's info", Toast.LENGTH_SHORT).show()
+
+                        }
+                    }
+                    .setNegativeButton("No"){
+                            dialog, _ ->  dialog.dismiss()
+                    }
+                    .create()
+                viewDialog.findViewById<EditText>(R.id.editTextTextMedicineNameChange).setText(currentItem.Name)
+                viewDialog.findViewById<EditText>(R.id.editTextLeftPillsChange).setText(currentItem.LeftPills.toString())
+                viewDialog.findViewById<EditText>(R.id.editText_Description).setText(currentItem.Description.toString())
+                dialogWindowChange.show()
             }
 
             itemView.findViewById<Button>(R.id.TakePillButton).setOnClickListener {
@@ -132,7 +170,6 @@ class MedicineAdapter(private val medicinesList: ArrayList<SingleMedicine>) :
             }
         }
     }
-
 
 
 }
