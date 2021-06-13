@@ -116,7 +116,7 @@ class MedicineAdapter(private val medicinesList: ArrayList<SingleMedicine>) :
             }
 
             itemView.findViewById<Button>(R.id.changeMeasurementButton).setOnClickListener {
-                    
+
             }
 
             itemView.findViewById<Button>(R.id.TakePillButton).setOnClickListener {

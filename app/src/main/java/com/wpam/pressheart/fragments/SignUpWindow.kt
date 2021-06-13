@@ -11,6 +11,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.wpam.pressheart.MainActivity
@@ -64,6 +66,9 @@ class SignUpWindow : Fragment(){
                         if (task.isSuccessful) {
                             // Sign in success, update UI with the signed-in user's information
                             val user = FirebaseAuth.getInstance().currentUser
+                            Firebase.auth.currentUser.updateProfile(userProfileChangeRequest{
+                                displayName = login
+                            })
                             updateUI(user)
                             val intent = Intent(
                                 this.activity as MainActivity,

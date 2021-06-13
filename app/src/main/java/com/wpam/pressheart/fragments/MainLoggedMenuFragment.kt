@@ -13,6 +13,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.wpam.pressheart.*
@@ -39,29 +40,36 @@ class MainLoggedMenuFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val fromBundle:String = savedInstanceState?.getString("userLogin").toString()
+//        val fromBundle:String = savedInstanceState?.getString("userLogin").toString()
+//        //view.findViewById<TextView>(R.id.textview_first).setText("Hello " + fromBundle)
 
-        Log.d("user login bundle", fromBundle)
-        //view.findViewById<TextView>(R.id.textview_first).setText("Hello " + fromBundle)
+        val user = Firebase.auth.currentUser
+        user?.let {
+            for (profile in it.providerData) {
+                val name = profile.displayName
+                view.findViewById<TextView>(R.id.textview_first).setText("Hello ${name}, nice to see you again")
+            }
+        }
+
         val userId : String = FirebaseAuth.getInstance().currentUser?.uid.toString()
         Log.d(TAG, "userId: ${userId}")
         val docRef = db.collection("Users_info").document(userId)
-        docRef.get()
-            .addOnSuccessListener { document ->
-                if (document != null){
-
-                    //userLogin= document.data.toString()
-                    val userLogin = document.data?.getValue("name")
-                    //Log.d(TAG, "${document.toString()}")
-                    Log.d(TAG, "Login: ${document.data?.getValue("name")}")
-                    Log.d(TAG, "DocumentSnapshot data: ${document.data}")
-                    view.findViewById<TextView>(R.id.textview_first).setText("Hello " + userLogin)
-                }
-                else
-                {
-                    view.findViewById<TextView>(R.id.textview_first).setText("Hello User")
-                }
-            }
+//        docRef.get()
+//            .addOnSuccessListener { document ->
+//                if (document != null){
+//
+//                    //userLogin= document.data.toString()
+//                    val userLogin = document.data?.getValue("name")
+//                    //Log.d(TAG, "${document.toString()}")
+//                    Log.d(TAG, "Login: ${document.data?.getValue("name")}")
+//                    Log.d(TAG, "DocumentSnapshot data: ${document.data}")
+//                    view.findViewById<TextView>(R.id.textview_first).setText("Hello " + userLogin)
+//                }
+//                else
+//                {
+//                    view.findViewById<TextView>(R.id.textview_first).setText("Hello User")
+//                }
+//            }
 
         //view.findViewById<Button>(R.id.measurementsButton).setOnClickListener {
           //  findNavController().navigate(R.id.action_MainLoggedMenu_to_MeasurementsFragment)
