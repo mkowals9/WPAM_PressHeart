@@ -56,7 +56,6 @@ class MainLoggedMenuFragment : Fragment() {
         user?.let {
             for (profile in it.providerData) {
                 val name = profile.displayName
-                Log.d(TAG, "the fuck name: ${profile.displayName}, ${name}")
                 view.findViewById<TextView>(R.id.textview_first).setText("Hello ${name}, nice to see you again ❤")
             }
         }

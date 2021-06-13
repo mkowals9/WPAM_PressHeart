@@ -1,16 +1,13 @@
 package com.wpam.pressheart.fragments
 
-import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.content.Intent
-import android.media.audiofx.BassBoost
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.widget.addTextChangedListener
@@ -22,7 +19,6 @@ import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.wpam.pressheart.MainActivity
-import com.wpam.pressheart.MainLoggedMenuActivity
 import com.wpam.pressheart.R
 import com.wpam.pressheart.SettingsActivity
 import kotlinx.android.synthetic.main.fragment_medicines.*
@@ -37,7 +33,6 @@ class SettingsFragment: Fragment() {
     private var userLog = ""
     private var newEmail = ""
     private var oldEmail = ""
-    private var newPassword= ""
     private var deleteUser : String = ""
 
     override fun onCreateView(
@@ -56,7 +51,7 @@ class SettingsFragment: Fragment() {
                     view.findViewById<EditText>(R.id.editTextPersonLogin).setText(userLog)
                     view.findViewById<EditText>(R.id.editTextNewEmail).hint = newEmail
                     view.findViewById<EditText>(R.id.editTextNewEmail).setText(newEmail)
-                    view.findViewById<EditText>(R.id.editTextPassformConfirm).setText("hehPassword")
+                    view.findViewById<EditText>(R.id.editTextPasswordConfirm).setText("hehPassword")
                     view.findViewById<EditText>(R.id.editTextNewPasswordUpdate).setText("NewPassword")
                 }
                 else
@@ -88,8 +83,8 @@ class SettingsFragment: Fragment() {
                 Toast.makeText(view.context, "Successfully changed user's e-mail", Toast.LENGTH_SHORT).show()
             }
             view.findViewById<EditText>(R.id.editTextNewPasswordUpdate).addTextChangedListener {
-                if(view.findViewById<EditText>(R.id.editTextPassformConfirm).text.toString() == view.findViewById<EditText>(R.id.editTextNewPasswordUpdate).text.toString()){
-                    Firebase.auth.currentUser!!.updatePassword(view.findViewById<EditText>(R.id.editTextPassformConfirm).text.toString())
+                if(view.findViewById<EditText>(R.id.editTextPasswordConfirm).text.toString() == view.findViewById<EditText>(R.id.editTextNewPasswordUpdate).text.toString()){
+                    Firebase.auth.currentUser!!.updatePassword(view.findViewById<EditText>(R.id.editTextPasswordConfirm).text.toString())
                     Toast.makeText(view.context, "Successfully changes user's password", Toast.LENGTH_SHORT).show()
                 }
                 else{
@@ -111,7 +106,6 @@ class SettingsFragment: Fragment() {
                             deleteUser = "yes"
                             Firebase.auth.currentUser!!.delete().addOnCompleteListener { task ->
                                 if (task.isSuccessful) {
-                                    Log.d(TAG, "User account deleted.")
                                     db.collection("Measurements").document(userId)
                                     db.collection("Medicines").document(userId)
                                     refUser.delete()

@@ -44,8 +44,7 @@ class MainViewWindow : Fragment() {
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this.activity as MainActivity) { task ->
                         if (task.isSuccessful) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithEmail:success")
+
                             val user = FirebaseAuth.getInstance().currentUser
                             updateUI(user)
                             val docRef = db.collection("Users_info").document(user.uid)

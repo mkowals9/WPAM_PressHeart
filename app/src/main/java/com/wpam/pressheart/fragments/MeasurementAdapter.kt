@@ -86,7 +86,6 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
 
             init{
                 changeButton.setOnClickListener {
-                    Log.d(TAG, "elo pomelo w change")
                     var currentItem = adapter.getItem(this.adapterPosition)
                     val arrayMoods = itemView.context.resources.getStringArray(R.array.moods)
                     val userId : String = FirebaseAuth.getInstance().currentUser?.uid.toString()
@@ -116,9 +115,6 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                                     newDateChosen = "${year}-${month_real}-${day}"
                                 }
                             }
-
-                            Log.d(TAG, "chosen: ${newDateChosen}")
-                            Log.d(TAG, "year: ${year} month: ${month+1} day: ${day}")
                         }
 
                     }
@@ -153,10 +149,9 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                         ) {
                             changedMood = true
                             oldMood = arrayMoods[position]
-                            Log.d(TAG, "Chosen mood: ${arrayMoods[position]}")
+
                         }
                         override fun onNothingSelected(parent: AdapterView<*>?) {
-                            Log.d(TAG, "Nothing chosen in months")
                         }
 
                     }
@@ -170,7 +165,6 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                                 saveChanges = true
                                 if(saveChanges){
                                     var currentItemSave = adapter.getItem(this.adapterPosition)
-                                    Log.d(TAG, "pokazuj sie mendo ${newHourChosen} , ${newDateChosen}")
                                     var doc = docRef.document(adapter.getItem(this.adapterPosition).documentId.toString())
                                     doc.get()
                                         .addOnSuccessListener { document ->
@@ -200,7 +194,6 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                                                 val timeStampMeasure = Timestamp(temporaryDate)
                                                 doc.update("Date", timeStampMeasure)
                                                 Log.d(TAG, timestampToUpdatetext)
-                                                Log.d(TAG, "${currentItemSave.Date.toDate().toString()}")
                                                 currentItemSave.Date = timeStampMeasure
                                                 adapter.notifyItemChanged(adapterPosition)
                                             }
@@ -223,7 +216,6 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                 }
 
                 deleteButton.setOnClickListener {
-                    Log.d(TAG, "elo pomelo w delete")
                     val currentPosition = adapter.getItem(this.adapterPosition)
                     val userId : String = FirebaseAuth.getInstance().currentUser?.uid.toString()
                     var docRef = db.collection("Measurements").document(userId).collection("Measurements")
@@ -248,7 +240,6 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                             if (result == "yes" || result == "no") {
                                 when (result) {
                                     "yes" -> {
-                                        Log.d(TAG, "jestem w yes")
                                         docRef.document(adapter.getItem(this.adapterPosition).documentId.toString()).delete()
                                         adapter.measurementsList.remove(currentPosition)
                                         adapter.notifyDataSetChanged()
@@ -256,7 +247,6 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                                         adapter.notifyItemChanged(this.adapterPosition, adapter.itemCount)
                                     }
                                     "no" -> {
-                                        Log.d(TAG, "jestem w no")
                                     }
                                 }
                             }

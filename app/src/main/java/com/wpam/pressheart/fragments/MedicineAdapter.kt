@@ -42,7 +42,6 @@ class MedicineAdapter(private val medicinesList: ArrayList<SingleMedicine>) :
         holder.Name.setText(currentItem.Name.toString())
         holder.LeftPills.setText(currentItem.LeftPills.toString())
         holder.Description.text = currentItem.Description
-        Log.d(TAG, "MDEDICNE URL : ${currentItem.ImageUri.toString()}")
         Glide.with(holder.itemView).load(currentItem.ImageUri.toString()).into(
             holder.ImageUri)
     }
@@ -71,7 +70,6 @@ class MedicineAdapter(private val medicinesList: ArrayList<SingleMedicine>) :
 
         init {
             itemView.findViewById<Button>(R.id.deleteMeasurementButton).setOnClickListener {
-                Log.d(TAG, "elo delete medycyne")
                 val currentPosition = adapter.getItem(this.adapterPosition)
                 var docRef = db.collection("Medicines").document(userId).collection("Medicines")
                 val view = LayoutInflater.from(adapter.parentAdapter.context).inflate(R.layout.dialoge_are_you_sure, null)
@@ -95,8 +93,6 @@ class MedicineAdapter(private val medicinesList: ArrayList<SingleMedicine>) :
                     if (result == "yes" || result == "no") {
                         when (result) {
                             "yes" -> {
-                                Log.d(TAG, "jestem w yes")
-                                Log.d(TAG, "image uri : ${currentPosition.ImageUri.toString()}")
                                 storageFirebase.storage.getReferenceFromUrl(currentPosition.ImageUri.toString()).delete()
                                 docRef.document(adapter.getItem(this.adapterPosition).documentId.toString()).delete()
                                 adapter.medicinesList.remove(currentPosition)
@@ -105,7 +101,7 @@ class MedicineAdapter(private val medicinesList: ArrayList<SingleMedicine>) :
                                 adapter.notifyItemChanged(this.adapterPosition, adapter.itemCount)
                             }
                             "no" -> {
-                                Log.d(TAG, "jestem w no")
+
                             }
                         }
                     }

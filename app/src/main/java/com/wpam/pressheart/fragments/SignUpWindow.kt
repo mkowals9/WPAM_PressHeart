@@ -65,15 +65,9 @@ class SignUpWindow : Fragment(){
                     .addOnCompleteListener(this.activity as MainActivity) { task ->
                         if (task.isSuccessful) {
                             val user = FirebaseAuth.getInstance().currentUser
-
                             val user2 = Firebase.auth.currentUser
                             val profileUpdates = userProfileChangeRequest { displayName = login.toString() }
-                            user2!!.updateProfile(profileUpdates).addOnSuccessListener {
-                                task ->
-                                Log.d(TAG, "hehe")
-                            }
-                            Log.d(TAG, "user login: ${Firebase.auth.currentUser?.displayName}")
-                            Log.d(TAG, "login: ${login}")
+                            user2!!.updateProfile(profileUpdates)
                             updateUI(user)
                             val intent = Intent(
                                 this.activity as MainActivity,

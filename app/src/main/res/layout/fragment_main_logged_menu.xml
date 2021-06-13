@@ -100,7 +100,7 @@
                 android:paddingTop="20dp"
                 android:paddingRight="0dp"
                 android:paddingBottom="20dp"
-                android:text="Appoinments with your doctor"
+                android:text="Appointments with your doctor"
                 android:textColor="@android:color/white" />
 
             <Button

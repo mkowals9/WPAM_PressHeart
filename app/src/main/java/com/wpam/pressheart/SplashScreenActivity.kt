@@ -21,7 +21,6 @@ class SplashScreenActivity : AppCompatActivity() {
 
         val currentUser = FirebaseAuth.getInstance().currentUser
         if(currentUser != null){
-            Log.d( "User is available","User is available")
 
             val intent = Intent(this@SplashScreenActivity, MainLoggedMenuActivity::class.java)
 
@@ -30,10 +29,8 @@ class SplashScreenActivity : AppCompatActivity() {
                 .addOnSuccessListener {
                         document ->
                     if (document != null){
-
                         val userLogin:String = document.data?.getValue("name").toString()
                         intent.putExtra("userName", userLogin)
-
                     }
                     else
                     {
@@ -45,10 +42,8 @@ class SplashScreenActivity : AppCompatActivity() {
             startActivity(intent)
         }, 2000)
 
-            //setContentView(R.layout.main_logged_window)
         }
         else{
-            Log.d( "User is not available","User is not available")
             val intent = Intent(this@SplashScreenActivity, MainActivity::class.java)
             startActivity(intent)
             finish()

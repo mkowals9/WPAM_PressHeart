@@ -16,20 +16,16 @@ class AreYouSureDialog(context: Context) : Dialog(context) {
 
 
     var mDialogResult: String = ""
-    //internal lateinit var listener: NoticeDialogListener
 
     init {
         setCancelable(false)
-        //listener = NoticeDialogListener {
-          //  override fun onDialogClick
-        //}
+
     }
 
     public fun getResult(): String {
         return mDialogResult
     }
 
-    //EmptyValuesDialog(this.activity as MainActivity).show()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

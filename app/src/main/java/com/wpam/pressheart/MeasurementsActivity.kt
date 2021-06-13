@@ -1,9 +1,14 @@
 package com.wpam.pressheart
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AlertDialog
+import com.wpam.pressheart.dialogs.BloodPressureCategoriesDialog
+import com.wpam.pressheart.dialogs.EmptyValuesDialog
 
 class MeasurementsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,19 +22,22 @@ class MeasurementsActivity : AppCompatActivity() {
 
     }
 
-//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        menuInflater.inflate(R.menu.menu_main, menu)
-//        return true
-//    }
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_mesurements, menu)
+        return true
+    }
 
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        return when (item.itemId) {
-//            R.id.action_settings -> true
-//            else -> super.onOptionsItemSelected(item)
-//        }
-//    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        return when (item.itemId) {
+            R.id.action_BP_categories -> {
+                val viewDialogView = LayoutInflater.from(this.applicationContext).inflate(R.layout.dialoge_edit_measurement, null)
+                BloodPressureCategoriesDialog(this as MeasurementsActivity).show()
+
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
 }

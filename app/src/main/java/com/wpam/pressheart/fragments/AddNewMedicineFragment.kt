@@ -99,8 +99,6 @@ class AddNewMedicineFragment : Fragment() {
                 .addOnCompleteListener { task ->
                     if(task.isSuccessful){
                         this.downloadUri = task.result.toString()
-                        Log.d(TAG, " task res: ${task.result}")
-                        Log.d(TAG, "task res string: ${task.result.toString()}")
                         var newMedicineToAdd = hashMapOf(
                             "Name" to medicineName,
                             "LeftPills" to amountOfPills,
@@ -132,17 +130,7 @@ class AddNewMedicineFragment : Fragment() {
             CAMERA_REQUEST -> {
                 if (resultCode == Activity.RESULT_OK) {
                     val photo = data?.extras!!["data"] as Bitmap?
-                    //this.imageViewUri = data?.extras!!["data"] as String?
                     new_medicine_imageView.setImageBitmap(photo)
-                    //var uriUri = getImageUri(this.activity as MedicinesActivity, data?.extras!!["data"] as Bitmap, this.medicineName)
-                    Log.w(ContentValues.TAG, "data : ")
-                    Log.w(ContentValues.TAG, data.toString())
-
-                    Log.w(ContentValues.TAG, "data extra : ")
-                    Log.w(ContentValues.TAG, data.extras.toString())
-
-                    Log.w(ContentValues.TAG, "data extra extra")
-                    Log.w(ContentValues.TAG, data.extras!!["data"].toString())
                     chosenPhoto = true
                 }
             }

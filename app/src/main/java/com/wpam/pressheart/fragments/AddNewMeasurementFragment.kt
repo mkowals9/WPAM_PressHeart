@@ -48,8 +48,6 @@ class AddNewMeasurementFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        //datepicker
         dateButton.setOnClickListener {
             val c = Calendar.getInstance()
             val day = c.get(Calendar.DAY_OF_MONTH)
@@ -61,7 +59,6 @@ class AddNewMeasurementFragment : Fragment() {
                 this.activity as MeasurementsActivity,
                 DatePickerDialog.OnDateSetListener { _, chosenYear, monthOfYear, dayOfMonth ->
 
-                    // Display Selected date in textbox
                     c.set(chosenYear, monthOfYear, dayOfMonth)
                     this.datelbl = SimpleDateFormat("yyyy-MM-dd").format(c.time)
 
@@ -132,7 +129,6 @@ class AddNewMeasurementFragment : Fragment() {
 
             val newId = FirebaseAuth.getInstance().currentUser.uid
             db.collection("Measurements").document(newId).collection("Measurements").add(newMeasurement)
-            Log.d(TAG, "DONE ADDDING")
                 findNavController().navigate(R.id.action_AddMeasurement_to_MainMeasurement)
             }
             else
@@ -157,12 +153,10 @@ class AddNewMeasurementFragment : Fragment() {
     }
 
     private fun everythingIsFine() : Boolean {
-        if (datelbl != "" &&
-            timelbl != "" &&
-            this.mood != "" &&
-            SbpEditTextNumber.getText().toString() != "" &&
-            DbpEditTextNumber.getText().toString() != ""  )
-        { return true }
-        else {return false}
+        return datelbl != "" &&
+                timelbl != "" &&
+                this.mood != "" &&
+                SbpEditTextNumber.getText().toString() != "" &&
+                DbpEditTextNumber.getText().toString() != ""
     }
 }
