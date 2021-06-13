@@ -45,7 +45,6 @@ class SettingsFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_settings, container, false)
-        val userId : String = FirebaseAuth.getInstance().currentUser?.uid.toString()
         refUser.get()
             .addOnSuccessListener { document ->
                 if (document != null){
