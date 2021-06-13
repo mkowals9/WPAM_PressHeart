@@ -7,138 +7,188 @@
     android:orientation="vertical"
     tools:context=".fragments.SignUpWindow">
 
-    <TextView
-        android:id="@+id/createProfileTextSignUp"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="100000000000000.5"
-        android:gravity="start|center"
-        android:text="Create new profile"
-        android:textAlignment="center"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="36sp"
-        tools:ignore="HardcodedText" />
+        android:layout_height="match_parent"
+        android:layout_weight="100000000000000.5">
 
-    <TextView
-        android:id="@+id/nameTextSignUp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.1"
-        android:text="@string/login" />
+        <TextView
+            android:id="@+id/createProfileTextSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="62dp"
+            android:layout_marginBottom="16dp"
+            android:layout_weight="100000000000000.5"
+            android:gravity="start|center"
+            android:text="Create new profile"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="36sp"
+            app:layout_constraintBottom_toTopOf="@+id/nameTextSignUp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText" />
 
-    <EditText
-        android:id="@+id/editNameSignUp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.2"
-        android:ems="10"
-        android:hint="@string/login"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName"
-        android:textColor="@color/colorPrimary"
-        android:textColorHint="@color/colorPrimary" />
+        <TextView
+            android:id="@+id/nameTextSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="1dp"
+            android:layout_weight="0.1"
+            android:text="@string/login"
+            app:layout_constraintBottom_toTopOf="@+id/editNameSignUp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/createProfileTextSignUp" />
 
-    <TextView
-        android:id="@+id/emailTextSignUp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.1"
-        android:text="@string/e_mail" />
+        <EditText
+            android:id="@+id/editNameSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="0.2"
+            android:ems="10"
+            android:hint="@string/login"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:textColor="@color/colorPrimary"
+            android:textColorHint="@color/colorPrimary"
+            app:layout_constraintBottom_toTopOf="@+id/emailTextSignUp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nameTextSignUp" />
 
-    <EditText
-        android:id="@+id/editTextTextEmailAddress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.2"
-        android:ems="10"
-        android:hint="@string/e_mail"
-        android:importantForAutofill="no"
-        android:inputType="textEmailAddress"
-        android:textColor="@color/colorPrimary"
-        android:textColorHint="@color/colorPrimary" />
+        <TextView
+            android:id="@+id/emailTextSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="0.1"
+            android:text="@string/e_mail"
+            app:layout_constraintBottom_toTopOf="@+id/editTextTextEmailAddress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editNameSignUp" />
 
-    <TextView
-        android:id="@+id/passwordTextSignUp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.1"
-        android:text="Password (at least 6 letters)" />
+        <EditText
+            android:id="@+id/editTextTextEmailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="0.2"
+            android:ems="10"
+            android:hint="@string/e_mail"
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/colorPrimary"
+            android:textColorHint="@color/colorPrimary"
+            app:layout_constraintBottom_toTopOf="@+id/passwordTextSignUp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/emailTextSignUp" />
 
-    <EditText
-        android:id="@+id/editPasswordSignUp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.2"
-        android:ems="10"
-        android:hint="@string/password"
-        android:importantForAutofill="no"
-        android:inputType="textPassword"
-        android:textColor="@color/colorPrimary"
-        android:textColorHint="@color/colorPrimary" />
+        <TextView
+            android:id="@+id/passwordTextSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="1dp"
+            android:layout_weight="0.1"
+            android:text="Password (at least 6 letters)"
+            app:layout_constraintBottom_toTopOf="@+id/editPasswordSignUp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
 
-    <TextView
-        android:id="@+id/genderTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.1"
-        android:text="Gender:" />
+        <EditText
+            android:id="@+id/editPasswordSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="0.2"
+            android:ems="10"
+            android:hint="@string/password"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:textColor="@color/colorPrimary"
+            android:textColorHint="@color/colorPrimary"
+            app:layout_constraintBottom_toTopOf="@+id/genderTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/passwordTextSignUp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.0005"
-        android:orientation="horizontal">
-
-        <View
-            android:layout_width="40sp"
-            android:layout_height="20sp"
-            android:layout_weight="0.000000000005" />
+        <TextView
+            android:id="@+id/genderTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="0.1"
+            android:text="Gender:"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editPasswordSignUp" />
 
         <ImageButton
             android:id="@+id/femaleImageButton"
             android:layout_width="75dp"
             android:layout_height="100dp"
             android:layout_gravity="center"
+            android:layout_marginStart="62dp"
+            android:layout_marginTop="8dp"
             android:layout_weight="0.11192"
             android:background="@android:color/transparent"
             android:scaleType="fitStart"
+            app:layout_constraintBottom_toTopOf="@+id/sign_up_buttonSignUp"
+            app:layout_constraintEnd_toStartOf="@+id/maleImageButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/genderTextView"
             app:srcCompat="@drawable/ic_female_sign" />
-
-        <View
-            android:layout_width="20sp"
-            android:layout_height="20sp"
-            android:layout_weight="0.000000000005" />
 
         <ImageButton
             android:id="@+id/maleImageButton"
             android:layout_width="75dp"
             android:layout_height="100dp"
             android:layout_gravity="center"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="62dp"
             android:layout_weight="0.11192"
             android:background="@android:color/transparent"
             android:scaleType="fitStart"
+            app:layout_constraintBottom_toTopOf="@+id/sign_up_buttonSignUp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/femaleImageButton"
+            app:layout_constraintTop_toBottomOf="@+id/genderTextView"
             app:srcCompat="@drawable/ic_male_sign" />
 
-        <View
-            android:layout_width="40sp"
-            android:layout_height="20sp"
-            android:layout_weight="0.000000000005" />
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="20sp"
-        android:layout_height="20sp"
-        android:layout_weight="0.000000000005" />
-
-    <Button
-        android:id="@+id/sign_up_buttonSignUp"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.0005"
-        android:background="@color/buttonsM"
-        android:text="@string/sign_up"
-        android:textCursorDrawable="@color/colorPrimaryDark" />
+        <Button
+            android:id="@+id/sign_up_buttonSignUp"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="42dp"
+            android:layout_marginEnd="42dp"
+            android:layout_weight="0.0005"
+            android:background="@color/buttonsM"
+            android:text="@string/sign_up"
+            android:textCursorDrawable="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/genderTextView" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

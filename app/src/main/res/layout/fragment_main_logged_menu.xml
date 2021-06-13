@@ -6,77 +6,101 @@
     android:layout_height="match_parent"
     tools:context=".fragments.MainLoggedMenuFragment">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/textview_first"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_weight="120"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.19" />
 
-        <TextView
-            android:id="@+id/textview_first"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="120"
-            android:gravity="center"
-            android:textAlignment="center"
-            android:textSize="36sp" />
+    <Button
+        android:id="@+id/measurementsButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="108dp"
+        android:layout_marginEnd="32dp"
+        android:layout_weight="1"
+        android:background="#CCBF4342"
+        android:drawableTop="@drawable/ic_analytics_white_48dp"
+        android:paddingLeft="20dp"
+        android:paddingTop="40dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="40dp"
+        android:text="Measurements"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toStartOf="@+id/medicinesButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_first" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="150"
-            android:gravity="center"
-            android:orientation="horizontal">
+    <Button
+        android:id="@+id/medicinesButton"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="108dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/gradient_1"
+        android:drawableTop="@drawable/ic_medical_services_white_48dp"
+        android:paddingLeft="40dp"
+        android:paddingTop="40dp"
+        android:paddingRight="40dp"
+        android:paddingBottom="40dp"
+        android:text="Medicines"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:topLeftRadius="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.427"
+        app:layout_constraintStart_toEndOf="@+id/measurementsButton"
+        app:layout_constraintTop_toBottomOf="@+id/textview_first" />
 
-            <Button
-                android:id="@+id/medicinesButton"
-                style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="0.3"
-                android:background="@drawable/gradient_1"
-                android:topLeftRadius = "18dp"
-                android:textStyle="bold"
-                android:text="Medicines"
-                android:textColor="@android:color/white" />
+    <Button
+        android:id="@+id/doctorButton"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:background="#CC8C1C13"
+        android:drawableTop="@drawable/ic_event_note_white_48dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="30dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="30dp"
+        android:text="Appoinments with your doctor"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/logOutButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/measurementsButton"
+        app:layout_constraintVertical_bias="0.233" />
 
-            <Button
-                android:id="@+id/doctorButton"
-                style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="0.5"
-                android:background="@color/colorPrimaryDark"
-                android:text="Appoinments with your doctor"
-                android:textColor="@android:color/white" />
+    <Button
+        android:id="@+id/logOutButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_weight="0.19"
+        android:background="#CC735751"
+        android:drawableTop="@drawable/ic_logout_white_48dp"
+        android:paddingTop="40dp"
+        android:paddingBottom="40dp"
+        android:text="Log out"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/doctorButton"
+        app:layout_constraintTop_toBottomOf="@+id/medicinesButton"
+        app:layout_constraintVertical_bias="0.231" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="150"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/logOutButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.19"
-                android:background="@color/colorAccent2"
-                android:text="Log out"
-                android:textColor="@android:color/white" />
-
-            <Button
-                android:id="@+id/measurementsButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@color/colorPrimary"
-                android:text="Measurements"
-                android:textColor="@android:color/white" />
-        </LinearLayout>
-
-
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

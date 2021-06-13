@@ -114,6 +114,7 @@ class AddNewMeasurementFragment : Fragment() {
         }
 
         saveMeasurementButton.setOnClickListener {
+            if(everythingIsFine()){
             val together = datelbl +" "+  timelbl
             var formatter = SimpleDateFormat("yyyy-MM-dd HH:mm")
             val temporaryDate : Date = formatter.parse(together)
@@ -136,9 +137,32 @@ class AddNewMeasurementFragment : Fragment() {
             }
             else
             {
-                Toast.makeText((this.activity as MeasurementsActivity), "Wrong values.",
+                Toast.makeText((this.activity as MeasurementsActivity), "Wrong values in Systolic or Diastolic Blood Pressure.",
                     Toast.LENGTH_LONG).show()
             }
+            }
+            else{
+                if(datelbl == "") { Toast.makeText((this.activity as MeasurementsActivity), "Choose measurement's date",
+                    Toast.LENGTH_LONG).show() }
+                if (timelbl == "") {Toast.makeText((this.activity as MeasurementsActivity), "Choose measurement's time",
+                    Toast.LENGTH_LONG).show()}
+                if(mood == "") {Toast.makeText((this.activity as MeasurementsActivity), "Choose your mood",
+                    Toast.LENGTH_LONG).show()}
+                if(SbpEditTextNumber.getText().toString() == "") {Toast.makeText((this.activity as MeasurementsActivity), "Insert Systolic Blood Pressure",
+                    Toast.LENGTH_LONG).show()}
+                if(DbpEditTextNumber.getText().toString() == "") {Toast.makeText((this.activity as MeasurementsActivity), "Insert Diastolic Blood Presssure",
+                    Toast.LENGTH_LONG).show()}
+            }
         }
+    }
+
+    private fun everythingIsFine() : Boolean {
+        if (datelbl != "" &&
+            timelbl != "" &&
+            this.mood != "" &&
+            SbpEditTextNumber.getText().toString() != "" &&
+            DbpEditTextNumber.getText().toString() != ""  )
+        { return true }
+        else {return false}
     }
 }

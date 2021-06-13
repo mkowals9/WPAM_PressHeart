@@ -14,14 +14,17 @@
 
 
     <LinearLayout
+        android:id="@+id/medicine_whole_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center
-"       android:id="@+id/medicine_whole_layout"
+"
         android:layout_marginVertical="6dp"
         android:layout_marginStart="16dp"
         android:background="@android:color/transparent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="30dp">
 
         <ImageView
             android:id="@+id/imageViewMedicine"
@@ -29,6 +32,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_weight="1"
+            android:paddingBottom="10dp"
             tools:srcCompat="@tools:sample/avatars" />
 
         <LinearLayout
@@ -102,6 +106,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:paddingBottom="5dp"
                 android:text="Take 2 times dailyone after break"
                 android:textColor="@color/colorAccent"
                 android:textSize="16sp" />
@@ -119,7 +124,7 @@
                 android:id="@+id/TakePillButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/colorAccent"
+                android:background="#D1A08E"
                 android:text="Take 1 Pill"
                 android:textColor="@android:color/white" />
 
@@ -132,7 +137,7 @@
                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/colorAccent"
+                android:background="@color/floatingButtonColor"
                 android:text="Change"
                 android:textColor="@android:color/white"
                 android:textSize="14sp" />
@@ -145,7 +150,7 @@
                 android:id="@+id/deleteMeasurementButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/colorAccent"
+                android:background="@color/colorPrimary"
                 android:text="Delete"
                 android:textColor="@android:color/white" />
 
