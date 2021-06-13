@@ -124,8 +124,6 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                     }
                     viewDialog.findViewById<TimePicker>(R.id.spinner_time).setOnTimeChangedListener { _, hourOfDay, minute ->
 
-                        Log.d(TAG, "bum bum time ${hourOfDay}, ${minute}")
-
                         if(hourOfDay<10){
                             if(minute<10){
                                 newHourChosen = "0${hourOfDay}:0${minute}"
@@ -142,7 +140,6 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                                 newHourChosen = "${hourOfDay}:${minute}"
                             }
                         }
-                        Log.d(TAG, "ZMIENIAM GODZINE : ${newHourChosen}")
                     }
 
                     val arrayAdapter = ArrayAdapter(itemView.context, android.R.layout.simple_spinner_dropdown_item, arrayMoods)
@@ -266,6 +263,8 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                         }
 
                     }
+
+
                 }
             }
         }

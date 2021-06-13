@@ -9,10 +9,12 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
@@ -111,6 +113,22 @@ class MedicineAdapter(private val medicinesList: ArrayList<SingleMedicine>) :
                         }
                     }
                 }
+            }
+
+            itemView.findViewById<Button>(R.id.changeMeasurementButton).setOnClickListener {
+                    
+            }
+
+            itemView.findViewById<Button>(R.id.TakePillButton).setOnClickListener {
+                val currentPos = adapter.getItem(this.adapterPosition)
+                db.collection("Medicines").document(userId).collection("Medicines").document(currentPos.documentId).update("LeftPills", FieldValue.increment(-1))
+                currentPos.LeftPills = (currentPos.LeftPills - 1).toLong()
+                if(currentPos.LeftPills < 10){
+                    Toast.makeText(adapter.parentAdapter.context, "You should buy more pills!", Toast.LENGTH_SHORT)
+                }
+                adapter.notifyDataSetChanged()
+                adapter.notifyItemChanged(this.adapterPosition)
+
             }
         }
     }
