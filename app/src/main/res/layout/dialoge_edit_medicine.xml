@@ -16,74 +16,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="42dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:text="Change medicine's info"
         android:textAlignment="center"
         android:textColor="@color/ic_launcher_background"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/button_insert_new_photo_camera"
+        app:layout_constraintBottom_toTopOf="@+id/editTextTextMedicineNameChange"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView_change_Med"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="141dp"
-        android:layout_marginEnd="142dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonGalleryChangeMed"
-        tools:srcCompat="@tools:sample/avatars" />
-
-    <Button
-        android:id="@+id/button_insert_new_photo_camera"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
-        android:background="@color/floatingButtonColor"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:text="New photo from camera"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/buttonGalleryChangeMed"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_change_medicine" />
-
-    <Button
-        android:id="@+id/buttonGalleryChangeMed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:background="@color/colorAccent2"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:text="New Photo From Gallery"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextMedicineNameChange"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_insert_new_photo_camera" />
 
     <EditText
         android:id="@+id/editTextTextMedicineNameChange"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
         android:ems="10"
         android:hint="New Medicine Name"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
         android:text="New Medicine Name"
         android:textColor="@color/colorPrimary"
         app:layout_constraintBottom_toTopOf="@+id/editTextLeftPillsChange"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonGalleryChangeMed"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_change_medicine" />
 
     <EditText
         android:id="@+id/editTextLeftPillsChange"
@@ -92,14 +50,14 @@
         android:layout_marginBottom="16dp"
         android:ems="10"
         android:hint="New Value of Pills' amount"
+        android:importantForAutofill="no"
         android:inputType="number"
         android:text="Left amount of pills"
         android:textColor="@color/colorPrimaryDark"
         app:layout_constraintBottom_toTopOf="@+id/editText_Description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextMedicineNameChange"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextMedicineNameChange" />
 
     <EditText
         android:id="@+id/editText_Description"

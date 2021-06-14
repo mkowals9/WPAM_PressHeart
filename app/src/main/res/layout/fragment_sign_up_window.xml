@@ -17,7 +17,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="62dp"
             android:layout_marginBottom="16dp"
-            android:layout_weight="100000000000000.5"
             android:gravity="start|center"
             android:text="Create new profile"
             android:textAlignment="center"
