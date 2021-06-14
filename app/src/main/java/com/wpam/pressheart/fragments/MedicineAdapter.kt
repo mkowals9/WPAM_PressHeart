@@ -93,8 +93,8 @@ class MedicineAdapter(private val medicinesList: ArrayList<SingleMedicine>) :
                     if (result == "yes" || result == "no") {
                         when (result) {
                             "yes" -> {
-                                storageFirebase.storage.getReferenceFromUrl(currentPosition.ImageUri.toString()).delete()
-                                docRef.document(adapter.getItem(this.adapterPosition).documentId).delete()
+                                storageFirebase.storage.getReferenceFromUrl(currentPosition.ImageUri.toString()).delete().addOnSuccessListener { Log.d(TAG, "DONE DELETE FIREBASE") }
+                                docRef.document(adapter.getItem(this.adapterPosition).documentId.toString()).delete().addOnSuccessListener { Log.d(TAG, "DONE DELETE DOC") }
                                 adapter.medicinesList.remove(currentPosition)
                                 adapter.notifyDataSetChanged()
                                 adapter.notifyItemRemoved(this.adapterPosition)

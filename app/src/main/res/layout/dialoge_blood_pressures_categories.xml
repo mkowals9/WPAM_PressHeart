@@ -1,410 +1,416 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<ScrollView
+
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="0dp"
-    android:layout_marginLeft="0dp"
-    android:layout_marginTop="0dp"
-    android:layout_marginEnd="0dp"
-    android:layout_marginRight="0dp"
-    android:layout_marginBottom="0dp"
-    android:background="@drawable/shapes2">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/bp_text"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:gravity="center_horizontal"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:text="@string/blood_pressure_categories_by_american_heat_assosiation"
-        app:layout_constraintBottom_toTopOf="@+id/tableLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.6"
-        app:layout_constraintStart_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.23000002" />
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="0dp"
+        android:background="@drawable/shapes2">
 
-    <TextView
-        android:id="@+id/textView27"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:text="If one of your measurements suits the last (Hypertensive Crisis) category, consult your doctor immediately, ALARM NUMBERS FOR POLAND: 112, 999 "
-        android:textAlignment="center"
-        android:textColor="@color/colorAccent4"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/ok_btn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
-
-    <TableLayout
-        android:id="@+id/tableLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:padding="0dp"
-        android:paddingStart="15dp"
-        android:paddingLeft="15dp"
-        android:paddingTop="15dp"
-        android:paddingEnd="15dp"
-        android:paddingRight="15dp"
-        android:paddingBottom="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView27"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bp_text">
-
-        <TableRow
-            android:id="@+id/columns_names"
+        <TextView
+            android:id="@+id/bp_text"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center_horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/blood_pressure_categories_by_american_heat_assosiation"
+            app:layout_constraintBottom_toTopOf="@+id/tableLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.6"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.23000002" />
 
-            <TextView
-                android:id="@+id/textView_category"
+        <TextView
+            android:id="@+id/textView27"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="If one of your measurements suits the last (Hypertensive Crisis) category, consult your doctor immediately, ALARM NUMBERS FOR POLAND: 112, 999 "
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent4"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/ok_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
+
+        <TableLayout
+            android:id="@+id/tableLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="0dp"
+            android:paddingStart="15dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="15dp"
+            android:paddingEnd="15dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="15dp"
+            app:layout_constraintBottom_toTopOf="@+id/textView27"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bp_text">
+
+            <TableRow
+                android:id="@+id/columns_names"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textView_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/shapes3"
+                    android:ellipsize="none"
+                    android:gravity="center"
+                    android:maxLines="200"
+                    android:paddingTop="0dp"
+                    android:paddingEnd="20dp"
+                    android:paddingBottom="16.5dp"
+                    android:scrollHorizontally="false"
+                    android:text="Blood Pressure Category"
+                    android:textAlignment="center"
+                    android:textColor="#FFFFFF"
+                    tools:ignore="RtlSymmetry" />
+
+                <TextView
+                    android:id="@+id/SystolicHgText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/shapes3"
+                    android:ellipsize="none"
+                    android:gravity="center"
+                    android:maxLines="200"
+                    android:paddingBottom="0dp"
+                    android:scrollHorizontally="false"
+                    android:text="Systolic mm Hg (upper number)"
+                    android:textColor="#FFFFFF" />
+
+                <TextView
+                    android:id="@+id/DiastolicHgText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/shapes3"
+                    android:ellipsize="none"
+                    android:gravity="center"
+                    android:maxLines="100"
+                    android:scrollHorizontally="false"
+                    android:shadowColor="#493939"
+                    android:text="Diastolic mm Hg (lower number)"
+                    android:textAlignment="center"
+                    android:textColor="#FFFFFF" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/normal_row"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="0dp"
-                android:layout_marginBottom="0dp"
-                android:layout_weight="1"
-                android:background="@drawable/shapes3"
-                android:ellipsize="none"
-                android:gravity="center"
-                android:maxLines="200"
-                android:paddingTop="0dp"
-                android:paddingEnd="20dp"
-                android:paddingBottom="16.5dp"
-                android:scrollHorizontally="false"
-                android:text="Blood Pressure Category"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                tools:ignore="RtlSymmetry" />
+                android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/SystolicHgText"
+                <TextView
+                    android:id="@+id/normalTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_weight="1"
+                    android:background="#9CCC65"
+                    android:ellipsize="none"
+                    android:gravity="center"
+                    android:maxLines="200"
+                    android:text="Normal"
+                    android:textColor="#234A25" />
+
+                <TextView
+                    android:id="@+id/textView_systolic_Normal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_weight="1"
+                    android:background="#9CCC65"
+                    android:ellipsize="none"
+                    android:gravity="center"
+                    android:maxLines="200"
+                    android:text="Less than 120"
+                    android:textColor="#234A25" />
+
+                <TextView
+                    android:id="@+id/textView_diastolic_Normal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_weight="1"
+                    android:background="#9CCC65"
+                    android:ellipsize="none"
+                    android:gravity="center"
+                    android:maxLines="200"
+                    android:text="Less than 80"
+                    android:textColor="#234A25" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/elevatedrow"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="0dp"
-                android:layout_weight="1"
-                android:background="@drawable/shapes3"
-                android:ellipsize="none"
-                android:gravity="center"
-                android:maxLines="200"
-                android:paddingBottom="0dp"
-                android:scrollHorizontally="false"
-                android:text="Systolic mm Hg (upper number)"
-                android:textColor="#FFFFFF" />
+                android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/DiastolicHgText"
+                <TextView
+                    android:id="@+id/elevatedTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_weight="1"
+                    android:background="#FFEE58"
+                    android:ellipsize="none"
+                    android:gravity="center"
+                    android:maxLines="200"
+                    android:text="Elevated"
+                    android:textColor="@color/colorAccent5" />
+
+                <TextView
+                    android:id="@+id/elevated_systolic"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_weight="1"
+                    android:background="#FFEE58"
+                    android:ellipsize="none"
+                    android:gravity="center"
+                    android:maxLines="200"
+                    android:text="120-129"
+                    android:textColor="@color/colorAccent5" />
+
+                <TextView
+                    android:id="@+id/elevated_diastolic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_weight="1"
+                    android:background="#FFEE58"
+                    android:ellipsize="none"
+                    android:gravity="center"
+                    android:maxLines="200"
+                    android:text="Less than 80"
+                    android:textColor="@color/colorAccent5" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/highstage1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="0dp"
-                android:layout_weight="1"
-                android:background="@drawable/shapes3"
-                android:ellipsize="none"
-                android:gravity="center"
-                android:maxLines="100"
-                android:scrollHorizontally="false"
-                android:shadowColor="#493939"
-                android:text="Diastolic mm Hg (lower number)"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF" />
-        </TableRow>
+                android:layout_height="match_parent">
 
-        <TableRow
-            android:id="@+id/normal_row"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/highstag1_cat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_weight="1"
+                    android:background="#FFA726"
+                    android:ellipsize="none"
+                    android:gravity="center"
+                    android:maxLines="200"
+                    android:text="High Blood Pressure (Hypertension) Stage 1"
+                    android:textColor="#322624" />
 
-            <TextView
-                android:id="@+id/normalTextView"
+                <TextView
+                    android:id="@+id/textView_systolic_Stage1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_weight="1"
+                    android:background="#FFA726"
+                    android:ellipsize="none"
+                    android:gravity="center|center_horizontal|center_vertical"
+                    android:maxLines="200"
+                    android:paddingBottom="16dp"
+                    android:text="130-139"
+                    android:textAlignment="center"
+                    android:textColor="#322624" />
+
+                <TextView
+                    android:id="@+id/textView_diastolic_stage1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_weight="1"
+                    android:background="#FFA726"
+                    android:ellipsize="none"
+                    android:gravity="center"
+                    android:maxLines="200"
+                    android:paddingBottom="16dp"
+                    android:text="90-89"
+                    android:textColor="#322624" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/highstage2"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="0dp"
-                android:layout_weight="1"
-                android:background="#9CCC65"
-                android:ellipsize="none"
-                android:gravity="center"
-                android:maxLines="200"
-                android:text="Normal"
-                android:textColor="#234A25" />
+                android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/textView_systolic_Normal"
+                <TextView
+                    android:id="@+id/textView_cat_stage2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_weight="1"
+                    android:background="#EF5350"
+                    android:ellipsize="none"
+                    android:gravity="center"
+                    android:maxLines="200"
+                    android:paddingBottom="1dp"
+                    android:text="High Blood Pressure (Hypertension) Stage 2"
+                    android:textColor="#FFFFFF" />
+
+                <TextView
+                    android:id="@+id/textView_Systolic_stage2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_weight="1"
+                    android:background="#EF5350"
+                    android:ellipsize="none"
+                    android:gravity="center"
+                    android:maxLines="200"
+                    android:paddingBottom="17dp"
+                    android:text="140 or higher"
+                    android:textColor="#FFFFFF" />
+
+                <TextView
+                    android:id="@+id/textView_diastolic_stage2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_weight="1"
+                    android:background="#EF5350"
+                    android:ellipsize="none"
+                    android:gravity="center"
+                    android:maxLines="200"
+                    android:paddingBottom="17dp"
+                    android:text="90 or higher"
+                    android:textColor="#FFFFFF" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/crisisrow"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="0dp"
-                android:layout_weight="1"
-                android:background="#9CCC65"
-                android:ellipsize="none"
-                android:gravity="center"
-                android:maxLines="200"
-                android:text="Less than 120"
-                android:textColor="#234A25" />
+                android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/textView_diastolic_Normal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="0dp"
-                android:layout_weight="1"
-                android:background="#9CCC65"
-                android:ellipsize="none"
-                android:gravity="center"
-                android:maxLines="200"
-                android:text="Less than 80"
-                android:textColor="#234A25" />
-        </TableRow>
+                <TextView
+                    android:id="@+id/textView_crisis_Cat"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_weight="1"
+                    android:background="#681D1C"
+                    android:ellipsize="none"
+                    android:gravity="center"
+                    android:maxLines="200"
+                    android:paddingBottom="16dp"
+                    android:text="Hypertensive Crisis"
+                    android:textColor="#FFFFFF" />
 
-        <TableRow
-            android:id="@+id/elevatedrow"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/textView_sys_crisis"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_weight="1"
+                    android:background="#681D1C"
+                    android:ellipsize="none"
+                    android:gravity="center"
+                    android:maxLines="200"
+                    android:text="Higher than 140"
+                    android:textColor="#FFFFFF" />
 
-            <TextView
-                android:id="@+id/elevatedTextView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="0dp"
-                android:layout_weight="1"
-                android:background="#FFEE58"
-                android:ellipsize="none"
-                android:gravity="center"
-                android:maxLines="200"
-                android:text="Elevated"
-                android:textColor="@color/colorAccent5" />
+                <TextView
+                    android:id="@+id/textView_Diastolic_crisis"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_weight="1"
+                    android:background="#681D1C"
+                    android:ellipsize="none"
+                    android:gravity="center"
+                    android:maxLines="200"
+                    android:paddingEnd="5dp"
+                    android:paddingBottom="0dp"
+                    android:text="Higher than 120"
+                    android:textColor="#FFFFFF"
+                    tools:ignore="RtlSymmetry" />
+            </TableRow>
 
-            <TextView
-                android:id="@+id/elevated_systolic"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="0dp"
-                android:layout_weight="1"
-                android:background="#FFEE58"
-                android:ellipsize="none"
-                android:gravity="center"
-                android:maxLines="200"
-                android:text="120-129"
-                android:textColor="@color/colorAccent5" />
+        </TableLayout>
 
-            <TextView
-                android:id="@+id/elevated_diastolic"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="0dp"
-                android:layout_weight="1"
-                android:background="#FFEE58"
-                android:ellipsize="none"
-                android:gravity="center"
-                android:maxLines="200"
-                android:text="Less than 80"
-                android:textColor="@color/colorAccent5" />
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/highstage1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/highstag1_cat"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="0dp"
-                android:layout_weight="1"
-                android:background="#FFA726"
-                android:ellipsize="none"
-                android:gravity="center"
-                android:maxLines="200"
-                android:text="High Blood Pressure (Hypertension) Stage 1"
-                android:textColor="#322624" />
-
-            <TextView
-                android:id="@+id/textView_systolic_Stage1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="0dp"
-                android:layout_weight="1"
-                android:background="#FFA726"
-                android:ellipsize="none"
-                android:gravity="center|center_horizontal|center_vertical"
-                android:maxLines="200"
-                android:paddingBottom="16dp"
-                android:text="130-139"
-                android:textAlignment="center"
-                android:textColor="#322624" />
-
-            <TextView
-                android:id="@+id/textView_diastolic_stage1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="0dp"
-                android:layout_weight="1"
-                android:background="#FFA726"
-                android:ellipsize="none"
-                android:gravity="center"
-                android:maxLines="200"
-                android:paddingBottom="16dp"
-                android:text="90-89"
-                android:textColor="#322624" />
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/highstage2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/textView_cat_stage2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="0dp"
-                android:layout_weight="1"
-                android:background="#EF5350"
-                android:ellipsize="none"
-                android:gravity="center"
-                android:maxLines="200"
-                android:paddingBottom="1dp"
-                android:text="High Blood Pressure (Hypertension) Stage 2"
-                android:textColor="#FFFFFF" />
-
-            <TextView
-                android:id="@+id/textView_Systolic_stage2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="0dp"
-                android:layout_weight="1"
-                android:background="#EF5350"
-                android:ellipsize="none"
-                android:gravity="center"
-                android:maxLines="200"
-                android:paddingBottom="17dp"
-                android:text="140 or higher"
-                android:textColor="#FFFFFF" />
-
-            <TextView
-                android:id="@+id/textView_diastolic_stage2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="0dp"
-                android:layout_weight="1"
-                android:background="#EF5350"
-                android:ellipsize="none"
-                android:gravity="center"
-                android:maxLines="200"
-                android:paddingBottom="17dp"
-                android:text="90 or higher"
-                android:textColor="#FFFFFF" />
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/crisisrow"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/textView_crisis_Cat"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="0dp"
-                android:layout_weight="1"
-                android:background="#681D1C"
-                android:ellipsize="none"
-                android:gravity="center"
-                android:maxLines="200"
-                android:paddingBottom="16dp"
-                android:text="Hypertensive Crisis"
-                android:textColor="#FFFFFF" />
-
-            <TextView
-                android:id="@+id/textView_sys_crisis"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="0dp"
-                android:layout_weight="1"
-                android:background="#681D1C"
-                android:ellipsize="none"
-                android:gravity="center"
-                android:maxLines="200"
-                android:text="Higher than 140"
-                android:textColor="#FFFFFF" />
-
-            <TextView
-                android:id="@+id/textView_Diastolic_crisis"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="0dp"
-                android:layout_weight="1"
-                android:background="#681D1C"
-                android:ellipsize="none"
-                android:gravity="center"
-                android:maxLines="200"
-                android:paddingEnd="5dp"
-                android:paddingBottom="0dp"
-                android:text="Higher than 120"
-                android:textColor="#FFFFFF"
-                tools:ignore="RtlSymmetry" />
-        </TableRow>
-
-    </TableLayout>
-
-    <Button
-        android:id="@+id/ok_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="#C8B3B3"
-        android:text="OK"
-        android:textColor="@color/colorAccent5"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView27" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/ok_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="#C8B3B3"
+            android:text="OK"
+            android:textColor="@color/colorAccent5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView27" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
