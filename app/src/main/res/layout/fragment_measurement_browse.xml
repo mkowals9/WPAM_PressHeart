@@ -27,7 +27,7 @@
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingAddingMedicineButton"
+        android:id="@+id/floatingAddingMesButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -41,5 +41,6 @@
         app:backgroundTint="@color/floatingButtonColor"
         app:srcCompat="@drawable/ic_add_white_plus"
         tools:ignore="MissingConstraints,VectorDrawableCompat"
-        android:focusable="true" />
+        android:focusable="true"
+        android:contentDescription="plus" />
 </RelativeLayout>

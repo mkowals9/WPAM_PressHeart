@@ -1,9 +1,7 @@
 package com.wpam.pressheart.fragments
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -39,7 +37,7 @@ class MainViewWindow : Fragment() {
 
         button_log_in.setOnClickListener {
             var email = editTextLogin.text.toString()
-            var password = (editTextNumberPasswordSignIn.getText().toString())
+            var password = (editTextPasswordSignIn.getText().toString())
             if (!email.isEmpty() && !password.isEmpty()) {
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this.activity as MainActivity) { task ->

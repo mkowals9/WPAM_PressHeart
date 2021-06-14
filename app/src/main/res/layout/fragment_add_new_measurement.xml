@@ -10,8 +10,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="100000000">
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/textView2"
@@ -35,13 +34,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="8dp"
             android:layout_weight="0.005"
             android:paddingEnd="10dp"
+            android:paddingStart="10dp"
             android:text="Date:"
             app:layout_constraintBottom_toTopOf="@+id/dateButton"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/dateButton"
+            app:layout_constraintStart_toStartOf="@+id/textView2"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
         <Button
@@ -50,7 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="32dp"
             android:layout_weight="10000"
             android:background="@color/colorAccent3"
@@ -66,14 +66,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:paddingLeft="10dp"
             android:layout_weight="0.0001"
             android:text="Time:"
             app:layout_constraintBottom_toTopOf="@+id/timeButton"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dateButton" />
+            app:layout_constraintEnd_toEndOf="@+id/timeButton"
+            app:layout_constraintStart_toStartOf="@+id/dateButton"
+            app:layout_constraintTop_toBottomOf="@+id/dateButton"
+            tools:ignore="RtlSymmetry" />
 
         <Button
             android:id="@+id/timeButton"
@@ -87,8 +89,8 @@
             android:text="Choose time"
             android:textColor="@color/colorAccent5"
             app:layout_constraintBottom_toTopOf="@+id/SbpTextView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/SbpTextView"
+            app:layout_constraintStart_toStartOf="@+id/timeTextView"
             app:layout_constraintTop_toBottomOf="@+id/timeTextView" />
 
         <TextView
@@ -99,21 +101,23 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="4dp"
             android:layout_weight="0.05"
+            android:paddingLeft="10dp"
             android:text="Systolic Blood Pressure:"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/SbpEditTextNumber"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/timeButton" />
+            app:layout_constraintTop_toBottomOf="@+id/timeButton"
+            tools:ignore="RtlSymmetry" />
 
         <EditText
             android:id="@+id/SbpEditTextNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="8dp"
             android:layout_weight="0.05"
             android:ems="10"
             android:hint="Higher number from the measurement"
@@ -133,23 +137,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="12dp"
             android:layout_weight="0.05"
+            android:paddingLeft="10dp"
             android:text="Diastolic Blood Pressure:"
             android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/DbpEditTextNumber"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/SbpEditTextNumber" />
+            app:layout_constraintTop_toBottomOf="@+id/SbpEditTextNumber"
+            tools:ignore="RtlSymmetry" />
 
         <EditText
             android:id="@+id/DbpEditTextNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="2dp"
             android:layout_weight="0.05"
             android:ems="10"
             android:hint="Lower number from the measurement"
@@ -158,28 +164,31 @@
             android:textColor="@color/colorAccent4"
             android:textColorHint="@color/colorAccent4"
             app:layout_constraintBottom_toTopOf="@+id/chooseMoodTextView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/chooseMoodTextView"
+            app:layout_constraintStart_toStartOf="@+id/DbpTextView"
             app:layout_constraintTop_toBottomOf="@+id/DbpTextView"
-            app:layout_constraintVertical_bias="0.13" />
+            app:layout_constraintVertical_bias="0.13"
+            tools:ignore="NotSibling" />
 
         <TextView
             android:id="@+id/chooseMoodTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:layout_weight="0.000001"
             android:gravity="center"
             android:text="Choose your mood:"
             android:textAlignment="center"
             android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/mood_table"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/DbpEditTextNumber" />
+            app:layout_constraintTop_toBottomOf="@+id/DbpEditTextNumber"
+            tools:ignore="UnknownId" />
 
         <TableLayout
             android:layout_width="0dp"
+            android:id="@+id/mood_table"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@+id/saveMeasurementButton"
             app:layout_constraintEnd_toEndOf="parent"
@@ -189,8 +198,10 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp">
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
+                android:gravity="center_horizontal"
+                tools:ignore="UselessParent">
 
                 <ImageButton
                     android:id="@+id/happyButton"
@@ -201,7 +212,8 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="8dp"
                     android:background="@android:color/transparent"
-                    app:srcCompat="@drawable/ic_happy_mood" />
+                    app:srcCompat="@drawable/ic_happy_mood"
+                    android:contentDescription="happy face" />
 
                 <ImageButton
                     android:id="@+id/angryButton"
@@ -211,7 +223,8 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="8dp"
                     android:background="@android:color/transparent"
-                    app:srcCompat="@drawable/ic_angry_mood" />
+                    app:srcCompat="@drawable/ic_angry_mood"
+                    android:contentDescription="angry face" />
 
                 <ImageButton
                     android:id="@+id/sadButton"
@@ -221,7 +234,8 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="8dp"
                     android:background="@android:color/transparent"
-                    app:srcCompat="@drawable/ic_sad_mood" />
+                    app:srcCompat="@drawable/ic_sad_mood"
+                    android:contentDescription="sad face" />
 
                 <ImageButton
                     android:id="@+id/tiredButton"
@@ -231,7 +245,8 @@
                     android:layout_marginEnd="32dp"
                     android:layout_marginBottom="8dp"
                     android:background="@android:color/transparent"
-                    app:srcCompat="@drawable/ic_tired_mood" />
+                    app:srcCompat="@drawable/ic_tired_mood"
+                    android:contentDescription="tired face" />
             </TableRow>
 
         </TableLayout>
@@ -242,8 +257,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="2dp"
             android:layout_marginEnd="24dp"
+            android:layout_marginBottom="32dp"
             android:layout_weight="@android:integer/config_mediumAnimTime"
             android:background="@color/colorPrimary"
             android:text="Save your measurement"
@@ -252,7 +268,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chooseMoodTextView"
+            app:layout_constraintTop_toBottomOf="@+id/mood_table"
             app:layout_constraintVertical_bias="0.717" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

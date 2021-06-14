@@ -34,7 +34,9 @@
         app:layout_constraintBottom_toTopOf="@+id/textViewEmailSettings"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewLoginSettings" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewLoginSettings"
+        android:importantForAutofill="no"
+        tools:ignore="LabelFor" />
 
     <TextView
         android:id="@+id/textViewEmailSettings"
@@ -53,12 +55,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="textEmailAddress"
         android:text="E-mail"
         app:layout_constraintBottom_toTopOf="@+id/textViewNewPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewEmailSettings" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewEmailSettings"
+        android:importantForAutofill="no"
+        tools:ignore="LabelFor" />
 
     <TextView
         android:id="@+id/textViewNewPassword"
@@ -81,7 +85,8 @@
         app:layout_constraintBottom_toTopOf="@+id/textViewPasswordAgain"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewNewPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewNewPassword"
+        android:importantForAutofill="no" />
 
     <TextView
         android:id="@+id/textViewPasswordAgain"
@@ -108,7 +113,8 @@
         app:layout_constraintBottom_toTopOf="@id/buttonUpdate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewPasswordAgain" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewPasswordAgain"
+        android:importantForAutofill="no" />
 
     <Button
         android:id="@+id/buttonUpdate"
@@ -116,7 +122,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="162dp"
         android:layout_marginEnd="162dp"
-        android:background="@drawable/shapes"
+        android:background="@color/buttonsM"
         android:text="Update"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@id/buttonDeleteUser"

@@ -58,14 +58,14 @@ class AddNewMedicineFragment : Fragment() {
 
         add_new_photo_camera_Button.setOnClickListener {
 
-            var cameraIntent: Intent = Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
+            val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             startActivityForResult(cameraIntent, CAMERA_REQUEST)
         }
 
         add_new_photo_gallery_Button.setOnClickListener {
             val pickPhoto = Intent(
                 Intent.ACTION_PICK,
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                Images.Media.EXTERNAL_CONTENT_URI
             )
             startActivityForResult(pickPhoto, GALLERY_REQUEST)
         }
@@ -89,37 +89,37 @@ class AddNewMedicineFragment : Fragment() {
             bitmapFireBase.compress(Bitmap.CompressFormat.PNG, 100, baos)
             val data = baos.toByteArray()
             if(this.medicineName != ""){
-            var uploadTask = storageFirebase.child("${userId}/medicines/${this.medicineName}").putBytes(data)
+            val uploadTask = storageFirebase.child("${userId}/medicines/${this.medicineName}").putBytes(data)
             uploadTask.addOnFailureListener {
                 Toast.makeText(this.context,"Cannot upload a photo to Database", Toast.LENGTH_LONG).show()
             }
-            val urlTask = uploadTask.continueWithTask { task ->
-                if(!task.isSuccessful){task.exception?.let {throw it}}
-                storageFirebase.child("${userId}/medicines/${this.medicineName}").downloadUrl}
-                .addOnCompleteListener { task ->
-                    if(task.isSuccessful){
-                        this.downloadUri = task.result.toString()
-                        var newMedicineToAdd = hashMapOf(
-                            "Name" to medicineName,
-                            "LeftPills" to amountOfPills,
-                            "Description" to desc,
-                            "ImageUri" to downloadUri
-                        )
-                        db.collection("Medicines").document(userId).collection("Medicines").add(newMedicineToAdd)
-                        findNavController().navigate(R.id.action_AddMedicine_to_MainMedicine)
+                uploadTask.continueWithTask { task ->
+                    if(!task.isSuccessful){task.exception?.let {throw it}}
+                    storageFirebase.child("${userId}/medicines/${this.medicineName}").downloadUrl}
+                    .addOnCompleteListener { task ->
+                        if(task.isSuccessful){
+                            this.downloadUri = task.result.toString()
+                            val newMedicineToAdd = hashMapOf(
+                                "Name" to medicineName,
+                                "LeftPills" to amountOfPills,
+                                "Description" to desc,
+                                "ImageUri" to downloadUri
+                            )
+                            db.collection("Medicines").document(userId).collection("Medicines").add(newMedicineToAdd)
+                            findNavController().navigate(R.id.action_AddMedicine_to_MainMedicine)
+                        }
+                        else
+                        {
+                            Toast.makeText(this.context,"Cannot get photo's uri", Toast.LENGTH_LONG).show()
+                        }
                     }
-                    else
-                    {
-                        Toast.makeText(this.context,"Cannot get photo's uri", Toast.LENGTH_LONG).show()
-                    }
-                }
             }
             else {
                 Toast.makeText(this.context, "Insert medicine's name", Toast.LENGTH_SHORT).show()
             }
         }
             else {
-                Toast.makeText(this.context, "Fill missing gaps",Toast.LENGTH_SHORT)
+                Toast.makeText(this.context, "Fill missing gaps",Toast.LENGTH_SHORT).show()
             }
         }
     }

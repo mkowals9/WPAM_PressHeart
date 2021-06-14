@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="5dp"
-    android:layout_marginLeft="5dp"
-    android:layout_marginTop="5dp"
-    android:layout_marginEnd="5dp"
-    android:layout_marginRight="5dp"
-    android:layout_marginBottom="5dp"
+    android:layout_marginStart="0dp"
+    android:layout_marginLeft="0dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginEnd="0dp"
+    android:layout_marginRight="0dp"
+    android:layout_marginBottom="0dp"
     android:background="@drawable/shapes2">
 
     <TextView
@@ -18,7 +18,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="32dp"
-        android:text="Blood Pressure Categories by American Heat Assosiation"
+        android:gravity="center_horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="@string/blood_pressure_categories_by_american_heat_assosiation"
         app:layout_constraintBottom_toTopOf="@+id/tableLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.6"
@@ -33,6 +36,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="16dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:text="If one of your measurements suits the last (Hypertensive Crisis) category, consult your doctor immediately, ALARM NUMBERS FOR POLAND: 112, 999 "
         android:textAlignment="center"
         android:textColor="@color/colorAccent4"
@@ -65,10 +70,9 @@
 
             <TextView
                 android:id="@+id/textView_category"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_marginStart="0dp"
-                android:layout_marginLeft="0dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="0dp"
                 android:layout_marginBottom="0dp"
@@ -82,14 +86,15 @@
                 android:paddingBottom="16.5dp"
                 android:scrollHorizontally="false"
                 android:text="Blood Pressure Category"
-                android:textColor="#FFFFFF" />
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                tools:ignore="RtlSymmetry" />
 
             <TextView
                 android:id="@+id/SystolicHgText"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="0dp"
-                android:layout_marginLeft="0dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="0dp"
                 android:layout_weight="1"
@@ -104,10 +109,9 @@
 
             <TextView
                 android:id="@+id/DiastolicHgText"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="0dp"
-                android:layout_marginLeft="0dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="0dp"
                 android:layout_weight="1"
@@ -129,9 +133,9 @@
 
             <TextView
                 android:id="@+id/normalTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="0dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="0dp"
                 android:layout_weight="1"
@@ -144,9 +148,9 @@
 
             <TextView
                 android:id="@+id/textView_systolic_Normal"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="0dp"
+                android:layout_marginStart="0dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="0dp"
                 android:layout_weight="1"
@@ -159,9 +163,9 @@
 
             <TextView
                 android:id="@+id/textView_diastolic_Normal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="0dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="0dp"
                 android:layout_weight="1"
@@ -180,9 +184,9 @@
 
             <TextView
                 android:id="@+id/elevatedTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="0dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="0dp"
                 android:layout_weight="1"
@@ -195,9 +199,9 @@
 
             <TextView
                 android:id="@+id/elevated_systolic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="0dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="0dp"
                 android:layout_weight="1"
@@ -210,9 +214,9 @@
 
             <TextView
                 android:id="@+id/elevated_diastolic"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="0dp"
+                android:layout_marginStart="0dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="0dp"
                 android:layout_weight="1"
@@ -231,9 +235,9 @@
 
             <TextView
                 android:id="@+id/highstag1_cat"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="0dp"
+                android:layout_marginStart="0dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="0dp"
                 android:layout_weight="1"
@@ -246,15 +250,15 @@
 
             <TextView
                 android:id="@+id/textView_systolic_Stage1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="0dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="0dp"
                 android:layout_weight="1"
                 android:background="#FFA726"
                 android:ellipsize="none"
-                android:gravity="center"
+                android:gravity="center|center_horizontal|center_vertical"
                 android:maxLines="200"
                 android:paddingBottom="16dp"
                 android:text="130-139"
@@ -263,9 +267,9 @@
 
             <TextView
                 android:id="@+id/textView_diastolic_stage1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="0dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="0dp"
                 android:layout_weight="1"
@@ -285,9 +289,9 @@
 
             <TextView
                 android:id="@+id/textView_cat_stage2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="0dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="0dp"
                 android:layout_weight="1"
@@ -301,9 +305,9 @@
 
             <TextView
                 android:id="@+id/textView_Systolic_stage2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="0dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="0dp"
                 android:layout_weight="1"
@@ -317,9 +321,9 @@
 
             <TextView
                 android:id="@+id/textView_diastolic_stage2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="0dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="0dp"
                 android:layout_weight="1"
@@ -339,9 +343,9 @@
 
             <TextView
                 android:id="@+id/textView_crisis_Cat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="0dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="0dp"
                 android:layout_weight="1"
@@ -355,9 +359,9 @@
 
             <TextView
                 android:id="@+id/textView_sys_crisis"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="0dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="0dp"
                 android:layout_weight="1"
@@ -370,9 +374,9 @@
 
             <TextView
                 android:id="@+id/textView_Diastolic_crisis"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="0dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="0dp"
                 android:layout_weight="1"
@@ -380,10 +384,11 @@
                 android:ellipsize="none"
                 android:gravity="center"
                 android:maxLines="200"
-                android:paddingRight="5dp"
+                android:paddingEnd="5dp"
                 android:paddingBottom="0dp"
                 android:text="Higher than 120"
-                android:textColor="#FFFFFF" />
+                android:textColor="#FFFFFF"
+                tools:ignore="RtlSymmetry" />
         </TableRow>
 
     </TableLayout>

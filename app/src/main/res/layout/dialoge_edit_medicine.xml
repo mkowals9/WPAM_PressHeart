@@ -18,8 +18,9 @@
         android:layout_marginTop="42dp"
         android:layout_marginBottom="16dp"
         android:text="Change medicine's info"
+        android:textAlignment="center"
         android:textColor="@color/ic_launcher_background"
-        android:textSize="24dp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/button_insert_new_photo_camera"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,11 +41,11 @@
         android:id="@+id/button_insert_new_photo_camera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="161dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="162dp"
         android:layout_marginBottom="16dp"
         android:background="@color/floatingButtonColor"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
         android:text="New photo from camera"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/buttonGalleryChangeMed"
@@ -58,6 +59,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:background="@color/colorAccent2"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
         android:text="New Photo From Gallery"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/editTextTextMedicineNameChange"
@@ -79,7 +82,8 @@
         app:layout_constraintBottom_toTopOf="@+id/editTextLeftPillsChange"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonGalleryChangeMed" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonGalleryChangeMed"
+        android:importantForAutofill="no" />
 
     <EditText
         android:id="@+id/editTextLeftPillsChange"
@@ -94,7 +98,8 @@
         app:layout_constraintBottom_toTopOf="@+id/editText_Description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextMedicineNameChange" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextMedicineNameChange"
+        android:importantForAutofill="no" />
 
     <EditText
         android:id="@+id/editText_Description"

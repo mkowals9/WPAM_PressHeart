@@ -13,7 +13,7 @@
         android:layout_margin="10dp"
         android:text="You can't left any empty value"
         android:textColor="@color/colorAccent2"
-        android:textSize="15dp"
+        android:textSize="15sp"
         android:textStyle="bold" />
 
     <Button
@@ -21,11 +21,12 @@
         android:layout_width="100dp"
         android:layout_height="30dp"
         android:layout_gravity="center"
-        android:background="@color/ic_launcher_new_background"
+        android:background="@color/ic_launcher_background"
         android:clickable="true"
         android:text="Ok"
         android:textColor="@android:color/white"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:focusable="true" />
 
 
 </LinearLayout>

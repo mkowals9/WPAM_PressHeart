@@ -25,7 +25,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_weight="0.05"
         android:text="Insert your e-mail and password"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/editTextLogin"
@@ -45,13 +44,13 @@
         android:importantForAutofill="no"
         android:inputType="textPersonName"
         android:textColor="@color/colorPrimaryDark"
-        app:layout_constraintBottom_toTopOf="@+id/editTextNumberPasswordSignIn"
+        app:layout_constraintBottom_toTopOf="@+id/editTextPasswordSignIn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
-        android:id="@+id/editTextNumberPasswordSignIn"
+        android:id="@+id/editTextPasswordSignIn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
@@ -84,7 +83,7 @@
         app:layout_constraintBottom_toTopOf="@+id/button_sign_up"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumberPasswordSignIn" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextPasswordSignIn" />
 
     <Button
         android:id="@+id/button_sign_up"

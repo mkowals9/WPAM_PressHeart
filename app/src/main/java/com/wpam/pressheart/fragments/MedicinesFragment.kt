@@ -56,7 +56,7 @@ class MedicinesFragment: Fragment()  {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        AddNewMedicineButton.setOnClickListener {
+        floatingAddMedicineButton.setOnClickListener {
             findNavController().navigate(R.id.action_MedicinesMain_to_AddMedicine)
         }
 

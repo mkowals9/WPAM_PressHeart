@@ -18,6 +18,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="e_mail">E-mail</string>
     <string name="title_activity_main_logged_menu">Main Logged Menu</string>
+    <string name="blood_pressure_categories_by_american_heat_assosiation">Blood Pressure Categories by American Heat Assosiation</string>
 
     <string-array name="moods">
         <item>happy</item>

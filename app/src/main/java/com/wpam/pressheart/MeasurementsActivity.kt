@@ -31,8 +31,8 @@ class MeasurementsActivity : AppCompatActivity() {
 
         return when (item.itemId) {
             R.id.action_BP_categories -> {
-                val viewDialogView = LayoutInflater.from(this.applicationContext).inflate(R.layout.dialoge_edit_measurement, null)
-                BloodPressureCategoriesDialog(this as MeasurementsActivity).show()
+                LayoutInflater.from(this.applicationContext).inflate(R.layout.dialoge_edit_measurement, null)
+                BloodPressureCategoriesDialog(this).show()
 
                 return true
             }

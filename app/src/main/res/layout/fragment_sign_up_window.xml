@@ -9,8 +9,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="100000000000000.5">
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/createProfileTextSignUp"
@@ -155,7 +154,8 @@
             app:layout_constraintEnd_toStartOf="@+id/maleImageButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/genderTextView"
-            app:srcCompat="@drawable/ic_female_sign" />
+            app:srcCompat="@drawable/ic_female_sign"
+            android:contentDescription="female sign" />
 
         <ImageButton
             android:id="@+id/maleImageButton"
@@ -172,7 +172,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/femaleImageButton"
             app:layout_constraintTop_toBottomOf="@+id/genderTextView"
-            app:srcCompat="@drawable/ic_male_sign" />
+            app:srcCompat="@drawable/ic_male_sign"
+            android:contentDescription="male sign" />
 
         <Button
             android:id="@+id/sign_up_buttonSignUp"
