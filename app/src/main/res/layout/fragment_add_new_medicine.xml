@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,14 +10,14 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/add_new_medicine_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="8dp"
             android:layout_weight="6780"
             android:gravity="center"
             android:text="ADD NEW MEDICINE"
@@ -27,51 +27,53 @@
             app:layout_constraintBottom_toTopOf="@+id/new_medicine_imageView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.050000012" />
 
         <ImageView
             android:id="@+id/new_medicine_imageView"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginTop="80dp"
-            android:layout_weight="8000"
+            android:layout_height="150dp"
+            android:layout_marginTop="16dp"
             app:layout_constraintBottom_toTopOf="@+id/add_new_photo_gallery_Button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.74"
-            tools:src="@tools:sample/avatars" />
+            app:layout_constraintTop_toBottomOf="@+id/add_new_medicine_text"
+            tools:src="@tools:sample/avatars"
+            android:contentDescription="Medicine" />
 
         <Button
             android:id="@+id/add_new_photo_gallery_Button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
             android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            android:layout_weight="1780"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:background="#DC9485"
-            android:text="Add Medicine Photo From Gallery"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="Photo From Gallery"
             android:textColor="#451E1E"
-            app:layout_constraintBottom_toTopOf="@+id/add_new_photo_camera_Button"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/name_textView2"
+            app:layout_constraintEnd_toStartOf="@+id/add_new_photo_camera_Button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/new_medicine_imageView" />
 
         <Button
             android:id="@+id/add_new_photo_camera_Button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="32dp"
-            android:layout_weight="10"
             android:background="@color/colorAccent3"
-            android:text="Add Medicine Photo Taken From Camera"
+            android:text="Take A Photo"
             android:textColor="@color/colorAccent5"
             app:layout_constraintBottom_toTopOf="@+id/name_textView2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/add_new_photo_gallery_Button" />
+            app:layout_constraintStart_toEndOf="@+id/add_new_photo_gallery_Button"
+            app:layout_constraintTop_toBottomOf="@+id/new_medicine_imageView" />
 
         <TextView
             android:id="@+id/name_textView2"
@@ -109,7 +111,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="4dp"
             android:layout_marginBottom="1dp"
             android:layout_weight="500"
             android:text="Amount of pills:"
@@ -132,7 +134,8 @@
             app:layout_constraintBottom_toTopOf="@+id/description_textView2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/leftpills_textView2" />
+            app:layout_constraintTop_toBottomOf="@+id/leftpills_textView2"
+            android:importantForAutofill="no" />
 
         <TextView
             android:id="@+id/description_textView2"
@@ -159,6 +162,7 @@
             android:importantForAutofill="no"
             android:inputType="textMultiLine"
             android:maxLength="200"
+            android:maxLines="6"
             app:layout_constraintBottom_toTopOf="@+id/addCompleteMedicineButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -183,4 +187,4 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</RelativeLayout>
+</ScrollView>

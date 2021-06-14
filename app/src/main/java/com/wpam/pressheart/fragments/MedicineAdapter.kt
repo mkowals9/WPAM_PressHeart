@@ -71,7 +71,7 @@ class MedicineAdapter(private val medicinesList: ArrayList<SingleMedicine>) :
         init {
             itemView.findViewById<Button>(R.id.deleteMeasurementButton).setOnClickListener {
                 val currentPosition = adapter.getItem(this.adapterPosition)
-                var docRef = db.collection("Medicines").document(userId).collection("Medicines")
+                val docRef = db.collection("Medicines").document(userId).collection("Medicines")
                 val view = LayoutInflater.from(adapter.parentAdapter.context).inflate(R.layout.dialoge_are_you_sure, null)
                 val dialogWindow = AlertDialog.Builder(adapter.parentAdapter.context)
                     .setView(view)
@@ -94,7 +94,7 @@ class MedicineAdapter(private val medicinesList: ArrayList<SingleMedicine>) :
                         when (result) {
                             "yes" -> {
                                 storageFirebase.storage.getReferenceFromUrl(currentPosition.ImageUri.toString()).delete()
-                                docRef.document(adapter.getItem(this.adapterPosition).documentId.toString()).delete()
+                                docRef.document(adapter.getItem(this.adapterPosition).documentId).delete()
                                 adapter.medicinesList.remove(currentPosition)
                                 adapter.notifyDataSetChanged()
                                 adapter.notifyItemRemoved(this.adapterPosition)
@@ -109,9 +109,9 @@ class MedicineAdapter(private val medicinesList: ArrayList<SingleMedicine>) :
             }
 
             itemView.findViewById<Button>(R.id.changeMeasurementButton).setOnClickListener {
-                var currentItem = adapter.getItem(this.adapterPosition)
+                val currentItem = adapter.getItem(this.adapterPosition)
                 val userId : String = FirebaseAuth.getInstance().currentUser?.uid.toString()
-                var docRef = db.collection("Medicines").document(userId).collection("Medicines")
+                val docRef = db.collection("Medicines").document(userId).collection("Medicines")
                 val viewDialog = LayoutInflater.from(adapter.parentAdapter.context).inflate(R.layout.dialoge_edit_medicine, null)
 
                 val dialogWindowChange = AlertDialog.Builder(adapter.parentAdapter.context)
@@ -120,19 +120,19 @@ class MedicineAdapter(private val medicinesList: ArrayList<SingleMedicine>) :
                     .setPositiveButton("Save"){ _, _ ->
                         saveChanges = true
                         if(saveChanges){
-                            var newName = viewDialog.findViewById<EditText>(R.id.editTextTextMedicineNameChange).text.toString()
+                            val newName = viewDialog.findViewById<EditText>(R.id.editTextTextMedicineNameChange).text.toString()
                             if(newName != currentItem.Name){
                                 docRef.document(currentItem.documentId).update("Name", newName)
                                 currentItem.Name = newName
                                 adapter.notifyItemChanged(adapterPosition)
                             }
-                            var newPills = viewDialog.findViewById<EditText>(R.id.editTextLeftPillsChange).text.toString()
+                            val newPills = viewDialog.findViewById<EditText>(R.id.editTextLeftPillsChange).text.toString()
                             if(newPills != currentItem.LeftPills.toString()){
                                 docRef.document(currentItem.documentId).update("LeftPills", newPills.toLong())
                                 currentItem.LeftPills = newPills.toLong()
                                 adapter.notifyItemChanged(adapterPosition)
                             }
-                            var newDesc = viewDialog.findViewById<EditText>(R.id.editText_Description).text.toString()
+                            val newDesc = viewDialog.findViewById<EditText>(R.id.editText_Description).text.toString()
                             if(newDesc != currentItem.Description.toString())
                             {
                                 docRef.document(currentItem.documentId).update("Description", newDesc)
@@ -155,13 +155,24 @@ class MedicineAdapter(private val medicinesList: ArrayList<SingleMedicine>) :
 
             itemView.findViewById<Button>(R.id.TakePillButton).setOnClickListener {
                 val currentPos = adapter.getItem(this.adapterPosition)
-                db.collection("Medicines").document(userId).collection("Medicines").document(currentPos.documentId).update("LeftPills", FieldValue.increment(-1))
-                currentPos.LeftPills = (currentPos.LeftPills - 1).toLong()
-                if(currentPos.LeftPills < 10){
-                    Toast.makeText(adapter.parentAdapter.context, "You should buy more pills!", Toast.LENGTH_SHORT)
+                if(currentPos.LeftPills > 0) {
+                    db.collection("Medicines").document(userId).collection("Medicines")
+                        .document(currentPos.documentId)
+                        .update("LeftPills", FieldValue.increment(-1))
+                    currentPos.LeftPills = (currentPos.LeftPills - 1)
+                    if (currentPos.LeftPills < 10) {
+                        Toast.makeText(
+                            itemView.context,
+                            "You should buy more pills!",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    adapter.notifyDataSetChanged()
+                    adapter.notifyItemChanged(this.adapterPosition)
                 }
-                adapter.notifyDataSetChanged()
-                adapter.notifyItemChanged(this.adapterPosition)
+                else{
+                    Toast.makeText(itemView.context, "You ran out of pills", Toast.LENGTH_SHORT).show()
+                }
 
             }
         }

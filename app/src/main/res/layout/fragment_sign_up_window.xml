@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,7 +9,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/createProfileTextSignUp"
@@ -149,13 +149,13 @@
             android:layout_marginTop="8dp"
             android:layout_weight="0.11192"
             android:background="@android:color/transparent"
+            android:contentDescription="female sign"
             android:scaleType="fitStart"
             app:layout_constraintBottom_toTopOf="@+id/sign_up_buttonSignUp"
             app:layout_constraintEnd_toStartOf="@+id/maleImageButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/genderTextView"
-            app:srcCompat="@drawable/ic_female_sign"
-            android:contentDescription="female sign" />
+            app:srcCompat="@drawable/ic_female_sign" />
 
         <ImageButton
             android:id="@+id/maleImageButton"
@@ -167,13 +167,13 @@
             android:layout_marginEnd="62dp"
             android:layout_weight="0.11192"
             android:background="@android:color/transparent"
+            android:contentDescription="male sign"
             android:scaleType="fitStart"
             app:layout_constraintBottom_toTopOf="@+id/sign_up_buttonSignUp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/femaleImageButton"
             app:layout_constraintTop_toBottomOf="@+id/genderTextView"
-            app:srcCompat="@drawable/ic_male_sign"
-            android:contentDescription="male sign" />
+            app:srcCompat="@drawable/ic_male_sign" />
 
         <Button
             android:id="@+id/sign_up_buttonSignUp"
@@ -192,4 +192,4 @@
             app:layout_constraintTop_toBottomOf="@+id/genderTextView" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</LinearLayout>
+</ScrollView>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,7 +10,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/textView2"
@@ -36,8 +36,8 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
             android:layout_weight="0.005"
-            android:paddingEnd="10dp"
             android:paddingStart="10dp"
+            android:paddingEnd="10dp"
             android:text="Date:"
             app:layout_constraintBottom_toTopOf="@+id/dateButton"
             app:layout_constraintEnd_toEndOf="@+id/dateButton"
@@ -68,8 +68,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:paddingLeft="10dp"
             android:layout_weight="0.0001"
+            android:paddingStart="10dp"
             android:text="Time:"
             app:layout_constraintBottom_toTopOf="@+id/timeButton"
             app:layout_constraintEnd_toEndOf="@+id/timeButton"
@@ -101,7 +101,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="4dp"
             android:layout_weight="0.05"
-            android:paddingLeft="10dp"
+            android:paddingStart="10dp"
             android:text="Systolic Blood Pressure:"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/SbpEditTextNumber"
@@ -138,7 +138,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_weight="0.05"
-            android:paddingLeft="10dp"
+            android:paddingStart="10dp"
             android:text="Diastolic Blood Pressure:"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/DbpEditTextNumber"
@@ -187,8 +187,8 @@
             tools:ignore="UnknownId" />
 
         <TableLayout
-            android:layout_width="0dp"
             android:id="@+id/mood_table"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@+id/saveMeasurementButton"
             app:layout_constraintEnd_toEndOf="parent"
@@ -212,8 +212,8 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="8dp"
                     android:background="@android:color/transparent"
-                    app:srcCompat="@drawable/ic_happy_mood"
-                    android:contentDescription="happy face" />
+                    android:contentDescription="happy face"
+                    app:srcCompat="@drawable/ic_happy_mood" />
 
                 <ImageButton
                     android:id="@+id/angryButton"
@@ -223,8 +223,8 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="8dp"
                     android:background="@android:color/transparent"
-                    app:srcCompat="@drawable/ic_angry_mood"
-                    android:contentDescription="angry face" />
+                    android:contentDescription="angry face"
+                    app:srcCompat="@drawable/ic_angry_mood" />
 
                 <ImageButton
                     android:id="@+id/sadButton"
@@ -234,8 +234,8 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="8dp"
                     android:background="@android:color/transparent"
-                    app:srcCompat="@drawable/ic_sad_mood"
-                    android:contentDescription="sad face" />
+                    android:contentDescription="sad face"
+                    app:srcCompat="@drawable/ic_sad_mood" />
 
                 <ImageButton
                     android:id="@+id/tiredButton"
@@ -245,8 +245,8 @@
                     android:layout_marginEnd="32dp"
                     android:layout_marginBottom="8dp"
                     android:background="@android:color/transparent"
-                    app:srcCompat="@drawable/ic_tired_mood"
-                    android:contentDescription="tired face" />
+                    android:contentDescription="tired face"
+                    app:srcCompat="@drawable/ic_tired_mood" />
             </TableRow>
 
         </TableLayout>
@@ -273,4 +273,4 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</LinearLayout>
+</ScrollView>

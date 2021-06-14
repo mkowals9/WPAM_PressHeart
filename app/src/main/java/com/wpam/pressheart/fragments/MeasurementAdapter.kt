@@ -47,6 +47,7 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
 
 
 
+    @SuppressLint("SimpleDateFormat")
     @ExperimentalTime
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = measurementsList[position]
@@ -66,7 +67,7 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
     }
 
     @ExperimentalTime
-    @SuppressLint("ResourceType")
+    @SuppressLint("ResourceType", "CutPasteId")
     @RequiresApi(Build.VERSION_CODES.N)
     class MyViewHolder(itemView: View, adapter : MeasurementAdapter) : RecyclerView.ViewHolder(itemView) {
         val Date : TextView = itemView.findViewById(R.id.date_Measurement_Browse)
@@ -82,6 +83,7 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
         private var newHourChosen : String = ""
         private var oldMood = ""
         private var changedMood = false
+        private var posSpinner = -1
         private var saveChanges : Boolean = false
 
             init{
@@ -99,7 +101,7 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                             Calendar.getInstance().get(Calendar.MONTH),
                             Calendar.getInstance().get(Calendar.DAY_OF_MONTH)){
                                 _, year, month, day ->
-                            var month_real = month + 1
+                            val month_real = month + 1
                             if(month_real<10)
                             {
                                 if(day<10){
@@ -148,10 +150,13 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                             id: Long
                         ) {
                             changedMood = true
+                            arrayAdapter.setNotifyOnChange(true)
+                            posSpinner = position
                             oldMood = arrayMoods[position]
 
                         }
                         override fun onNothingSelected(parent: AdapterView<*>?) {
+                            changedMood = false
                         }
 
                     }
@@ -164,32 +169,34 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                             run {
                                 saveChanges = true
                                 if(saveChanges){
-                                    var currentItemSave = adapter.getItem(this.adapterPosition)
-                                    var doc = docRef.document(adapter.getItem(this.adapterPosition).documentId.toString())
+                                    val currentItemSave = adapter.getItem(this.adapterPosition)
+                                    val doc = docRef.document(adapter.getItem(this.adapterPosition).documentId)
                                     doc.get()
                                         .addOnSuccessListener { document ->
-                                            if(oldMood != document.data?.get("Mood") && oldMood != currentItemSave.Mood && changedMood){
+                                            if(posSpinner!= -1 && oldMood != document.data?.get("Mood") && oldMood != currentItemSave.Mood && changedMood){
                                                 doc.update("Mood", oldMood)
                                                 currentItemSave.Mood = oldMood
+                                                changedMood = false
+                                                posSpinner = -1
                                                 adapter.notifyItemChanged(adapterPosition)
                                             }
-                                            var newSBPvalue = viewDialog.findViewById<EditText>(R.id.editText_value_SBP_change).text.toString()
+                                            val newSBPvalue = viewDialog.findViewById<EditText>(R.id.editText_value_SBP_change).text.toString()
                                             if(newSBPvalue != document.data?.get("SystolicBP").toString() && newSBPvalue != currentItemSave.SystolicBP.toString()){
                                                 doc.update("SystolicBP", newSBPvalue.toLong())
                                                 currentItem.SystolicBP = newSBPvalue.toLong()
                                                 adapter.notifyItemChanged(adapterPosition)
                                             }
-                                            var newDBPvalue = viewDialog.findViewById<EditText>(R.id.editText_value_DBP_change).text.toString()
+                                            val newDBPvalue = viewDialog.findViewById<EditText>(R.id.editText_value_DBP_change).text.toString()
                                             if(newDBPvalue != document.data?.get("DiastolicBP") && newDBPvalue != currentItemSave.DiastolicBP.toString()){
                                                 doc.update("DiastolicBP", newDBPvalue.toLong())
                                                 currentItem.DiastolicBP = newDBPvalue.toLong()
                                                 adapter.notifyItemChanged(adapterPosition)
                                             }
-                                            var onlyHour = SimpleDateFormat("HH:mm").format(currentItemSave.Date.toDate()).toString()
-                                            var onlyDate = SimpleDateFormat("YYYY-MM-dd").format(currentItemSave.Date.toDate()).toString()
+                                            val onlyHour = SimpleDateFormat("HH:mm").format(currentItemSave.Date.toDate()).toString()
+                                            val onlyDate = SimpleDateFormat("YYYY-MM-dd").format(currentItemSave.Date.toDate()).toString()
                                             if(newDateChosen != onlyDate || newHourChosen != onlyHour){
-                                                var timestampToUpdatetext = "${newDateChosen} ${newHourChosen}"
-                                                var formatter = SimpleDateFormat("yyyy-MM-dd HH:mm")
+                                                val timestampToUpdatetext = "${newDateChosen} ${newHourChosen}"
+                                                val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm")
                                                 val temporaryDate : Date = formatter.parse(timestampToUpdatetext)
                                                 val timeStampMeasure = Timestamp(temporaryDate)
                                                 doc.update("Date", timeStampMeasure)
@@ -218,7 +225,7 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                 deleteButton.setOnClickListener {
                     val currentPosition = adapter.getItem(this.adapterPosition)
                     val userId : String = FirebaseAuth.getInstance().currentUser?.uid.toString()
-                    var docRef = db.collection("Measurements").document(userId).collection("Measurements")
+                    val docRef = db.collection("Measurements").document(userId).collection("Measurements")
                         val view = LayoutInflater.from(adapter.parentAdapter.context).inflate(R.layout.dialoge_are_you_sure, null)
                         val dialogWindow = AlertDialog.Builder(adapter.context)
                         .setView(view)
@@ -253,7 +260,6 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                         }
 
                     }
-
 
                 }
             }
