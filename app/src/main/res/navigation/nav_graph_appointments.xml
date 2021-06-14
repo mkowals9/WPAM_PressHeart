@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_appointments"
+    app:startDestination="@id/AppointmentsAct">
+
+    <include app:graph="@navigation/nav_graph_logged" />
+
+    <fragment
+        android:id="@+id/AppointmentsAct"
+        android:name="com.wpam.pressheart.fragments.AppointmentsFragment"
+        android:label="Appointments"
+        tools:layout="@layout/fragment_appointments_main">
+
+
+        <action
+            android:id="@+id/action_AppointmentsMain_to_MainLogged"
+            app:destination="@+id/nav_graph_logged"/>
+    </fragment>
+
+
+</navigation>

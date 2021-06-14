@@ -175,6 +175,22 @@ class MedicineAdapter(private val medicinesList: ArrayList<SingleMedicine>) :
                 }
 
             }
+
+            itemView.findViewById<ImageView>(R.id.imageViewMedicine_single).setOnClickListener {
+                val currentItem = adapter.getItem(this.adapterPosition)
+                val view = LayoutInflater.from(adapter.parentAdapter.context).inflate(R.layout.dialoge_bigger_photo, null)
+                Glide.with(view).load(currentItem.ImageUri.toString()).into(
+                    view.findViewById(R.id.imageViewBiggerPhoto))
+                val dialogWindow = AlertDialog.Builder(adapter.parentAdapter.context)
+                    .setView(view)
+                    .setCancelable(false)
+                    .setPositiveButton("Close") {
+                        dialog, _ ->  dialog.dismiss()
+                    }
+
+                    .create()
+                dialogWindow.show()
+            }
         }
     }
 

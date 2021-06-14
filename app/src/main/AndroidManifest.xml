@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.wpam.pressheart" >
+    package="com.wpam.pressheart">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -18,7 +18,14 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-
+        <activity
+            android:name=".AppointmentsActivity"
+            android:label="Appointments"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:noHistory="true"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".MainLoggedMenuActivity"
+            ></activity>
         <activity
             android:name=".SettingsActivity"
             android:label="Settings"
@@ -30,7 +37,7 @@
             android:label="@string/app_name"
             android:noHistory="true"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

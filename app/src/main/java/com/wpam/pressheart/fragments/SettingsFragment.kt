@@ -78,19 +78,20 @@ class SettingsFragment: Fragment() {
                 Toast.makeText(view.context, "Successfully changed user's login", Toast.LENGTH_SHORT).show()
             }
             if(newEmail != oldEmail){
-                refUser.update("email", newEmail)
-                Firebase.auth.currentUser!!.updateEmail(newEmail)
+                refUser.update("email", newEmail).addOnSuccessListener { Log.d(TAG, "Done in data") }
+                Firebase.auth.currentUser!!.updateEmail(newEmail).addOnSuccessListener { Log.d(TAG, "done in sfire") }
                 Toast.makeText(view.context, "Successfully changed user's e-mail", Toast.LENGTH_SHORT).show()
             }
-            view.findViewById<EditText>(R.id.editTextNewPasswordUpdate).addTextChangedListener {
                 if(view.findViewById<EditText>(R.id.editTextPasswordConfirm).text.toString() == view.findViewById<EditText>(R.id.editTextNewPasswordUpdate).text.toString()){
-                    Firebase.auth.currentUser!!.updatePassword(view.findViewById<EditText>(R.id.editTextPasswordConfirm).text.toString())
+                    Log.d(TAG, "jestem tuuu")
+                    val neewPas = view.findViewById<EditText>(R.id.editTextPasswordConfirm).text.toString()
+                    Firebase.auth.currentUser!!.updatePassword(neewPas).addOnSuccessListener { Log.d(TAG, "CHANGED THIS BITCH") }
                     Toast.makeText(view.context, "Successfully changes user's password", Toast.LENGTH_SHORT).show()
                 }
                 else{
                     Toast.makeText(this.context, "Something went wrong, check new password", Toast.LENGTH_LONG)
                 }
-            }
+
             Toast.makeText(this.context, "Updated user's info", Toast.LENGTH_LONG)
         }
 
@@ -104,11 +105,12 @@ class SettingsFragment: Fragment() {
                     .setPositiveButton("Yes") { _, _ ->
                         run {
                             deleteUser = "yes"
+                            val userid = Firebase.auth.currentUser.uid
+                            db.collection("Measurements").document(userid)
+                            db.collection("Medicines").document(userid)
+                            refUser.delete()
                             Firebase.auth.currentUser!!.delete().addOnCompleteListener { task ->
                                 if (task.isSuccessful) {
-                                    db.collection("Measurements").document(userId)
-                                    db.collection("Medicines").document(userId)
-                                    refUser.delete()
                                     updateUI(null)
                                     val intent = Intent(this.activity as SettingsActivity, MainActivity::class.java)
                                     startActivity(intent)

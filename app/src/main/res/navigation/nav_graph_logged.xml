@@ -5,7 +5,7 @@
     android:id="@+id/nav_graph2"
     app:startDestination="@id/MainLoggedMenu">
 
-    <include app:graph="@navigation/nav_graph" />
+    <include app:graph="@navigation/nav_graph_main" />
 
     <fragment
         android:id="@+id/MainLoggedMenu"
@@ -16,7 +16,7 @@
 
         <action
             android:id="@+id/action_MainLoggedMenu_to_MainViewFragment"
-            app:destination="@+id/nav_graph"/>
+            app:destination="@+id/nav_graph_main"/>
     </fragment>
 
 

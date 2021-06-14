@@ -26,6 +26,7 @@
         <item>angry</item>
         <item>sad</item>
     </string-array>
+    <string name="title_activity_appointments">AppointmentsActivity</string>
 
 
 </resources>

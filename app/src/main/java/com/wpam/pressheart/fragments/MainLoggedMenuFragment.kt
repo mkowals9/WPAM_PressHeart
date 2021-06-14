@@ -78,6 +78,14 @@ class MainLoggedMenuFragment : Fragment() {
 
         }
 
+        doctorButton.setOnClickListener {
+            val intent = Intent(
+                this.activity as MainLoggedMenuActivity,
+                AppointmentsActivity::class.java
+            )
+            startActivity(intent)
+        }
+
         medicinesButton.setOnClickListener{
             val intent = Intent(
                 this.activity as MainLoggedMenuActivity,
