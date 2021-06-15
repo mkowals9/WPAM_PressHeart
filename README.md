@@ -13,3 +13,5 @@ The app has been created in Kotlin programming language by using Android Studio.
 Before download make sure that the device you use:
   1. Has API >= 18 (target API version is 30)
   2. Has a good Internet connection
+
+To install app, firstly you must open the project in Android Studio, then choose 'Build/Build Bundle(s) / APK(s)/Build APK(s)'. The generated apk should be in chosen directory.
