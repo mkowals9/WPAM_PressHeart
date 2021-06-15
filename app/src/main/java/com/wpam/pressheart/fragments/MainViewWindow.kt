@@ -38,7 +38,7 @@ class MainViewWindow : Fragment() {
         button_log_in.setOnClickListener {
             var email = editTextLogin.text.toString()
             var password = (editTextPasswordSignIn.getText().toString())
-            if (!email.isEmpty() && !password.isEmpty()) {
+            if (!email.isEmpty() && !password.isEmpty() && SignUpWindow.isValidString(email)) {
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this.activity as MainActivity) { task ->
                         if (task.isSuccessful) {
@@ -65,8 +65,17 @@ class MainViewWindow : Fragment() {
                             Toast.makeText(this.context, "Can't log in", Toast.LENGTH_SHORT).show()
                         }
                     }
+                    .addOnFailureListener {
+                        Toast.makeText(this.context, "Can't log in, check your credentials", Toast.LENGTH_LONG).show()
+                    }
             } else {
-                EmptyValuesDialog(this.activity as MainActivity).show()
+                if(!SignUpWindow.isValidString(email)){
+                    editTextLogin.error = "Bad e-mail format"
+                }
+                if(email.isEmpty()) {editTextLogin.error = "Insert your e-mail"}
+                if(editTextPasswordSignIn.text.isEmpty()){  editTextPasswordSignIn.error = "Insert your password"}
+                else{
+                EmptyValuesDialog(this.activity as MainActivity).show()}
             }
         }
         button_sign_up.setOnClickListener{

@@ -27,15 +27,7 @@ class SignUpWindow : Fragment(){
 
     private val db = Firebase.firestore
     private var gender = ""
-    val EMAIL_ADDRESS_PATTERN = Pattern.compile(
-        "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
-                "\\@" +
-                "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
-                "(" +
-                "\\." +
-                "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
-                ")+"
-    )
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -103,7 +95,7 @@ class SignUpWindow : Fragment(){
                             if(passwordFromEdit.length<6){
                                 editPasswordSignUp.error = "Insert longer password"
                             }
-                            
+
                             else {
                                 editTextTextEmailAddress.error = "There's an user created with such e-mail, choose another"
                             }
@@ -137,9 +129,19 @@ class SignUpWindow : Fragment(){
 
     private fun updateUI(user: FirebaseUser?) {}
 
-    private fun isValidString(str: String): Boolean{
+    companion object {
+        val EMAIL_ADDRESS_PATTERN = Pattern.compile(
+            "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
+                    "\\@" +
+                    "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
+                    "(" +
+                    "\\." +
+                    "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
+                    ")+"
+        )
+    fun isValidString(str: String): Boolean{
         return EMAIL_ADDRESS_PATTERN.matcher(str).matches()
-    }
+    }}
 
 }
 
