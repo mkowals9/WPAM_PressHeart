@@ -34,7 +34,7 @@
         android:layout_marginBottom="16dp"
         android:ems="10"
         android:hint="New Medicine Name"
-        android:maxLength="20"
+        android:maxLength="40"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
         android:text="New Medicine Name"

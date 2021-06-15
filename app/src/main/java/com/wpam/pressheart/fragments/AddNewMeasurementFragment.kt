@@ -22,6 +22,7 @@ import com.google.firebase.ktx.Firebase
 import com.wpam.pressheart.MeasurementsActivity
 import com.wpam.pressheart.R
 import kotlinx.android.synthetic.main.fragment_add_new_measurement.*
+import java.lang.Exception
 import java.text.SimpleDateFormat
 
 import java.util.*
@@ -33,6 +34,7 @@ class AddNewMeasurementFragment : Fragment() {
     private var datelbl = ""
     private var timelbl = ""
     private var mood = ""
+    private lateinit var temporaryDate : Date
     private val db = Firebase.firestore
 
     override fun onCreateView(
@@ -57,7 +59,7 @@ class AddNewMeasurementFragment : Fragment() {
 
             val dpd = DatePickerDialog(
                 this.activity as MeasurementsActivity,
-                DatePickerDialog.OnDateSetListener { _, chosenYear, monthOfYear, dayOfMonth ->
+                { _, chosenYear, monthOfYear, dayOfMonth ->
 
                     c.set(chosenYear, monthOfYear, dayOfMonth)
                     this.datelbl = SimpleDateFormat("yyyy-MM-dd").format(c.time)
@@ -113,11 +115,17 @@ class AddNewMeasurementFragment : Fragment() {
         saveMeasurementButton.setOnClickListener {
             if(everythingIsFine()){
             val together = datelbl +" "+  timelbl
-            var formatter = SimpleDateFormat("yyyy-MM-dd HH:mm")
-            val temporaryDate : Date = formatter.parse(together)
-            val timeStampMeasure = Timestamp(temporaryDate)
-            val SbpPressure = SbpEditTextNumber.getText().toString().toInt()
-            val DbpPressure = DbpEditTextNumber.getText().toString().toInt()
+            val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm")
+                temporaryDate = Date(2021,6,16)
+                try{
+                temporaryDate = formatter.parse(together)
+                }
+                catch(e: Exception){
+                    Log.d(TAG, e.toString())
+                }
+                val timeStampMeasure = Timestamp(temporaryDate)
+                val SbpPressure = SbpEditTextNumber.getText().toString().toInt()
+                val DbpPressure = DbpEditTextNumber.getText().toString().toInt()
             if(SbpPressure<300 && DbpPressure<SbpPressure && DbpPressure<300){
             val newMeasurement = hashMapOf(
                 "DiastolicBP" to DbpPressure,
@@ -134,13 +142,14 @@ class AddNewMeasurementFragment : Fragment() {
             {
                 Toast.makeText((this.activity as MeasurementsActivity), "Wrong values in Systolic or Diastolic Blood Pressure.",
                     Toast.LENGTH_LONG).show()
+                if(SbpPressure> 300 || SbpPressure<DbpPressure){ SbpEditTextNumber.error = "Wrong value" }
+                if(DbpPressure>300 || DbpPressure>SbpPressure) {DbpEditTextNumber.error = "Wrong value"}
             }
             }
             else{
-                if(datelbl == "") { Toast.makeText((this.activity as MeasurementsActivity), "Choose measurement's date",
-                    Toast.LENGTH_LONG).show() }
-                if (timelbl == "") {Toast.makeText((this.activity as MeasurementsActivity), "Choose measurement's time",
-                    Toast.LENGTH_LONG).show()}
+                if(datelbl == "") { dateButton.error = "Choose measurement's date"
+                    }
+                if (timelbl == "") {timeButton.error = "Choose measurement's time"}
                 if(mood == "") {Toast.makeText((this.activity as MeasurementsActivity), "Choose your mood",
                     Toast.LENGTH_LONG).show()}
                 if(SbpEditTextNumber.getText().toString() == "") { SbpEditTextNumber.error = "Fill the gap"}

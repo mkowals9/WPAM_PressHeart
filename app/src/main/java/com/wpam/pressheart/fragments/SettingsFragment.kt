@@ -56,7 +56,7 @@ class SettingsFragment: Fragment() {
                 }
                 else
                 {
-                    Toast.makeText(this.context, "Something went wrong while fetching user's info", Toast.LENGTH_LONG)
+                    Toast.makeText(this.context, "Something went wrong while fetching user's info", Toast.LENGTH_LONG).show()
                 }
             }
 
@@ -74,25 +74,33 @@ class SettingsFragment: Fragment() {
                 refUser.update("name", newUserLog)
                 Firebase.auth.currentUser.updateProfile(userProfileChangeRequest{
                     displayName = newUserLog
-                })
-                Toast.makeText(view.context, "Successfully changed user's login", Toast.LENGTH_SHORT).show()
+                }).addOnSuccessListener {  Toast.makeText(view.context, "Successfully changed user's login", Toast.LENGTH_SHORT).show() }
+
             }
             if(newEmail != oldEmail){
+                if(SignUpWindow.isValidString(newEmail)){
                 refUser.update("email", newEmail).addOnSuccessListener { Log.d(TAG, "Done in data") }
-                Firebase.auth.currentUser!!.updateEmail(newEmail).addOnSuccessListener { Log.d(TAG, "done in sfire") }
-                Toast.makeText(view.context, "Successfully changed user's e-mail", Toast.LENGTH_SHORT).show()
+                Firebase.auth.currentUser!!.updateEmail(newEmail).addOnSuccessListener { }
+                    Toast.makeText(view.context, "Successfully changed user's e-mail", Toast.LENGTH_SHORT).show()
+                }
+                else{
+                    view.findViewById<EditText>(R.id.editTextNewEmail).error = "Bad e-mail format"
+                }
             }
                 if(view.findViewById<EditText>(R.id.editTextPasswordConfirm).text.toString() == view.findViewById<EditText>(R.id.editTextNewPasswordUpdate).text.toString()){
                     Log.d(TAG, "jestem tuuu")
                     val neewPas = view.findViewById<EditText>(R.id.editTextPasswordConfirm).text.toString()
-                    Firebase.auth.currentUser!!.updatePassword(neewPas).addOnSuccessListener { Log.d(TAG, "CHANGED THIS BITCH") }
-                    Toast.makeText(view.context, "Successfully changes user's password", Toast.LENGTH_SHORT).show()
+                    if(neewPas.length >= 6){
+                    Firebase.auth.currentUser!!.updatePassword(neewPas).addOnSuccessListener { Log.d(TAG, "CHANGED THIS") }
+                    Toast.makeText(view.context, "Successfully changes user's password", Toast.LENGTH_SHORT).show()}
+                    else{ view.findViewById<EditText>(R.id.editTextPasswordConfirm).error = "Insert longer password (min. 6 letters)"
+                    view.findViewById<EditText>(R.id.editTextNewPasswordUpdate).error = "Insert longer password (min. 6 letters)"}
                 }
                 else{
-                    Toast.makeText(this.context, "Something went wrong, check new password", Toast.LENGTH_LONG)
+                    Toast.makeText(this.context, "Something went wrong, check new password", Toast.LENGTH_LONG).show()
                 }
 
-            Toast.makeText(this.context, "Updated user's info", Toast.LENGTH_LONG)
+            Toast.makeText(this.context, "Updated user's info", Toast.LENGTH_LONG).show()
         }
 
         buttonDeleteUser.setOnClickListener {
@@ -117,7 +125,7 @@ class SettingsFragment: Fragment() {
                                     (this.activity as SettingsActivity).finish()
                                 }
                                 else {
-                                    Toast.makeText(this.context, "Something went wrong with deleting user", Toast.LENGTH_LONG)
+                                    Toast.makeText(this.context, "Something went wrong with deleting user", Toast.LENGTH_LONG).show()
                                 }
                             }
                         }

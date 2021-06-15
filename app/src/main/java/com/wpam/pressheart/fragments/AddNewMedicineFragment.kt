@@ -120,10 +120,12 @@ class AddNewMedicineFragment : Fragment() {
             }
         }
             else {
-                editTextDescriptionMedicine.error = "Fill the gap"
-                editTextNameMedicine.error = "Fill the gap"
-                editTextNumberleftPills.error = "Fill the gap"
+                if(medicineName == "") {editTextNameMedicine.error = "Fill the gap" }
+                if(desc == "") {editTextDescriptionMedicine.error = "Fill the gap" }
+                if(editTextNumberleftPills.text.toString() == "") { editTextNumberleftPills.error = "Fill the gap"}
+                else{
                 Toast.makeText(this.context, "Fill missing gaps",Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }

@@ -31,9 +31,13 @@ class MainLoggedMenuFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        if(Firebase.auth.currentUser == null){
+            val intent = Intent(this.activity as MainLoggedMenuActivity, MainActivity::class.java)
+            startActivity(intent)
+            (this.activity as MainLoggedMenuActivity).finish()
+        }
         // Inflate the layout for this fragment
-        var viewFragment = inflater.inflate(R.layout.fragment_main_logged_menu, container, false)
+        val viewFragment = inflater.inflate(R.layout.fragment_main_logged_menu, container, false)
         viewFragmentFragment = viewFragment
         db.collection("Users_info").document(Firebase.auth.uid.toString()).get().addOnSuccessListener {
             documentSnapshot ->

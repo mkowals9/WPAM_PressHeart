@@ -16,6 +16,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.wpam.pressheart.R
@@ -50,10 +51,10 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = measurementsList[position]
         var datedate = SimpleDateFormat("yyyy-MM-dd HH:mm").format(currentItem.Date.toDate())
-        holder.Date.setText(datedate.toString())
-        holder.DiastolicBP.setText(currentItem.DiastolicBP.toString())
+        holder.Date.text = datedate.toString()
+        holder.DiastolicBP.text = currentItem.DiastolicBP.toString()
         holder.Mood.text = currentItem.Mood
-        holder.SystolicBP.setText(currentItem.SystolicBP.toString())
+        holder.SystolicBP.text = currentItem.SystolicBP.toString()
     }
 
     override fun getItemCount(): Int {
@@ -184,16 +185,22 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                                                 adapter.notifyItemChanged(adapterPosition)
                                             }
                                             val newSBPvalue = viewDialog.findViewById<EditText>(R.id.editText_value_SBP_change).text.toString()
+                                            val newDBPvalue = viewDialog.findViewById<EditText>(R.id.editText_value_DBP_change).text.toString()
                                             if(newSBPvalue != document.data?.get("SystolicBP").toString() && newSBPvalue != currentItemSave.SystolicBP.toString()){
+                                                if(newSBPvalue.toInt()<300 && newSBPvalue>newDBPvalue ){
                                                 doc.update("SystolicBP", newSBPvalue.toLong())
                                                 currentItem.SystolicBP = newSBPvalue.toLong()
-                                                adapter.notifyItemChanged(adapterPosition)
+                                                adapter.notifyItemChanged(adapterPosition)}
+                                                else{
+                                                    viewDialog.findViewById<EditText>(R.id.editText_value_SBP_change).error = "Wrong value"
+                                                }
                                             }
-                                            val newDBPvalue = viewDialog.findViewById<EditText>(R.id.editText_value_DBP_change).text.toString()
                                             if(newDBPvalue != document.data?.get("DiastolicBP") && newDBPvalue != currentItemSave.DiastolicBP.toString()){
+                                                if(newDBPvalue.toInt()<300 && newSBPvalue>newDBPvalue){
                                                 doc.update("DiastolicBP", newDBPvalue.toLong())
                                                 currentItem.DiastolicBP = newDBPvalue.toLong()
-                                                adapter.notifyItemChanged(adapterPosition)
+                                                adapter.notifyItemChanged(adapterPosition)}
+                                                else { viewDialog.findViewById<EditText>(R.id.editText_value_DBP_change).error = "Wrong value"}
                                             }
                                             val onlyHour = SimpleDateFormat("HH:mm").format(currentItemSave.Date.toDate()).toString()
                                             val onlyDate = SimpleDateFormat("YYYY-MM-dd").format(currentItemSave.Date.toDate()).toString()

@@ -8,6 +8,7 @@ import android.os.Handler
 import android.util.Log
 import androidx.core.os.HandlerCompat.postDelayed
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -20,7 +21,8 @@ class SplashScreenActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash_screen)
 
         val currentUser = FirebaseAuth.getInstance().currentUser
-        if(currentUser != null){
+        val currentUser2 = Firebase.auth.currentUser
+        if(currentUser != null && currentUser2 != null){
 
             val intent = Intent(this@SplashScreenActivity, MainLoggedMenuActivity::class.java)
 
