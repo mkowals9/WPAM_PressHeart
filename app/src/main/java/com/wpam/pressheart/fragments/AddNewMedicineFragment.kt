@@ -78,7 +78,7 @@ class AddNewMedicineFragment : Fragment() {
             this.amountOfPills = editTextNumberleftPills.text.toString().toInt()
             }
             else{
-                Toast.makeText(this.context, "You left empty amount of pills, fill it", Toast.LENGTH_SHORT).show()
+                amountOfPills = 0
             }
             desc = editTextDescriptionMedicine.text.toString()
             if(medicineName != "" && editTextNumberleftPills.text.toString() != "" && desc != "" && chosenPhoto){
@@ -88,7 +88,7 @@ class AddNewMedicineFragment : Fragment() {
             val baos = ByteArrayOutputStream()
             bitmapFireBase.compress(Bitmap.CompressFormat.PNG, 100, baos)
             val data = baos.toByteArray()
-            if(this.medicineName != ""){
+            if(this.medicineName != "" && this.amountOfPills>0){
             val uploadTask = storageFirebase.child("${userId}/medicines/${this.medicineName}").putBytes(data)
             uploadTask.addOnFailureListener {
                 Toast.makeText(this.context,"Cannot upload a photo to Database", Toast.LENGTH_LONG).show()
@@ -115,10 +115,14 @@ class AddNewMedicineFragment : Fragment() {
                     }
             }
             else {
-                Toast.makeText(this.context, "Insert medicine's name", Toast.LENGTH_SHORT).show()
+                if(medicineName == ""){ editTextNameMedicine.error = "Insert medicine's name"}
+                if(amountOfPills<0) { editTextNumberleftPills.error = "Fill this gap with positive number"}
             }
         }
             else {
+                editTextDescriptionMedicine.error = "Fill the gap"
+                editTextNameMedicine.error = "Fill the gap"
+                editTextNumberleftPills.error = "Fill the gap"
                 Toast.makeText(this.context, "Fill missing gaps",Toast.LENGTH_SHORT).show()
             }
         }

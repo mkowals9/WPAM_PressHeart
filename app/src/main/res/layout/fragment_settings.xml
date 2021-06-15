@@ -37,6 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:ems="10"
+        android:maxLength="20"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
         android:text="Login"

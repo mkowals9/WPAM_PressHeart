@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
@@ -21,12 +20,22 @@ import com.wpam.pressheart.MainLoggedMenuActivity
 import com.wpam.pressheart.R
 import com.wpam.pressheart.dialogs.EmptyValuesDialog
 import kotlinx.android.synthetic.main.fragment_sign_up_window.*
+import java.util.regex.Pattern
 
 
 class SignUpWindow : Fragment(){
 
     private val db = Firebase.firestore
     private var gender = ""
+    val EMAIL_ADDRESS_PATTERN = Pattern.compile(
+        "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
+                "\\@" +
+                "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
+                "(" +
+                "\\." +
+                "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
+                ")+"
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,7 +65,7 @@ class SignUpWindow : Fragment(){
             var email = editTextTextEmailAddress.text.toString()
             var passwordFromEdit = editPasswordSignUp.getText().toString()
 
-            if(!email.isEmpty() && !passwordFromEdit.isEmpty() && !this.gender.isEmpty() && !login.isEmpty())
+            if(!email.isEmpty() && !passwordFromEdit.isEmpty() && !this.gender.isEmpty() && !login.isEmpty() && isValidString(email))
             {
                 FirebaseAuth.getInstance().createUserWithEmailAndPassword(
                     email,
@@ -64,6 +73,7 @@ class SignUpWindow : Fragment(){
                 )
                     .addOnCompleteListener(this.activity as MainActivity) { task ->
                         if (task.isSuccessful) {
+                            if(task.result?.additionalUserInfo?.isNewUser == true){
                             val user = FirebaseAuth.getInstance().currentUser
                             val user2 = Firebase.auth.currentUser
                             val profileUpdates = userProfileChangeRequest { displayName = login.toString() }
@@ -88,29 +98,37 @@ class SignUpWindow : Fragment(){
                             EmptyValuesDialog(this.activity as MainActivity).show()
                             updateUI(null)
                         }
+                        }
+                        else{
+                            if(passwordFromEdit.length<6){
+                                editPasswordSignUp.error = "Insert longer password"
+                            }
+                            
+                            else {
+                                editTextTextEmailAddress.error = "There's an user created with such e-mail, choose another"
+                            }
+                                }
                     }
 
             }
             else {
-                if (email.isEmpty() && passwordFromEdit.isEmpty()){
-                    Toast.makeText((this.activity as MainActivity), "E-mail and password can't be empty.",
-                        Toast.LENGTH_LONG).show()
-                }
                 if(email.isEmpty()){
-                    Toast.makeText((this.activity as MainActivity), "E-mail is empty. Fill the gap.",
-                        Toast.LENGTH_SHORT).show()
+                    editTextTextEmailAddress.error = "Fill the gap"
                 }
                 if(passwordFromEdit.isEmpty()){
-                    Toast.makeText((this.activity as MainActivity), "Password is empty. Fill the gap.",
-                        Toast.LENGTH_SHORT).show()
+                    editPasswordSignUp.error = "Fill the gap"
                 }
                 if(login.isEmpty()){
-                    Toast.makeText((this.activity as MainActivity), "Login is empty. Fill the gap.",
-                        Toast.LENGTH_SHORT).show()
+                    editNameSignUp.error = "Fill the gap"
+                }
+                if(!isValidString(email)){
+                    editTextTextEmailAddress.error = "Wrong e-mail format"
                 }
                 if(this.gender.isEmpty()){
-                    Toast.makeText((this.activity as MainActivity), "Choose your gender.",
-                        Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        (this.activity as MainActivity), "Choose your gender.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
@@ -118,5 +136,10 @@ class SignUpWindow : Fragment(){
     }
 
     private fun updateUI(user: FirebaseUser?) {}
+
+    private fun isValidString(str: String): Boolean{
+        return EMAIL_ADDRESS_PATTERN.matcher(str).matches()
+    }
+
 }
 

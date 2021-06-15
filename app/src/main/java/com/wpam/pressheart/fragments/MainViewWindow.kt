@@ -42,7 +42,6 @@ class MainViewWindow : Fragment() {
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this.activity as MainActivity) { task ->
                         if (task.isSuccessful) {
-
                             val user = FirebaseAuth.getInstance().currentUser
                             updateUI(user)
                             val docRef = db.collection("Users_info").document(user.uid)
@@ -63,7 +62,7 @@ class MainViewWindow : Fragment() {
                                 }
                         }
                         else {
-                            Toast.LENGTH_LONG
+                            Toast.makeText(this.context, "Can't log in", Toast.LENGTH_SHORT).show()
                         }
                     }
             } else {

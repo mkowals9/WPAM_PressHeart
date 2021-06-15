@@ -128,9 +128,13 @@ class MedicineAdapter(private val medicinesList: ArrayList<SingleMedicine>) :
                             }
                             val newPills = viewDialog.findViewById<EditText>(R.id.editTextLeftPillsChange).text.toString()
                             if(newPills != currentItem.LeftPills.toString()){
+                                if(newPills.toInt() > 0){
                                 docRef.document(currentItem.documentId).update("LeftPills", newPills.toLong())
                                 currentItem.LeftPills = newPills.toLong()
-                                adapter.notifyItemChanged(adapterPosition)
+                                adapter.notifyItemChanged(adapterPosition)}
+                                else{
+                                    viewDialog.findViewById<EditText>(R.id.editTextLeftPillsChange).error = "Insert positive number"
+                                }
                             }
                             val newDesc = viewDialog.findViewById<EditText>(R.id.editText_Description).text.toString()
                             if(newDesc != currentItem.Description.toString())

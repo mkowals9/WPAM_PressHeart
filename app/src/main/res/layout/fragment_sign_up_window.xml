@@ -52,6 +52,7 @@
             android:layout_weight="0.2"
             android:ems="10"
             android:hint="@string/login"
+            android:maxLength="20"
             android:importantForAutofill="no"
             android:inputType="textPersonName"
             android:textColor="@color/colorPrimary"

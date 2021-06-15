@@ -21,6 +21,7 @@ import com.google.firebase.ktx.Firebase
 import com.wpam.pressheart.R
 import com.wpam.pressheart.lists_content.SingleMeasurement
 import kotlinx.android.synthetic.main.fragment_add_new_measurement.view.*
+import java.lang.Exception
 import java.security.Key
 import java.text.SimpleDateFormat
 import java.util.*
@@ -41,11 +42,8 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
             R.layout.single_measurement,
             parent, false
         )
-
         return MyViewHolder(itemView, this)
     }
-
-
 
     @SuppressLint("SimpleDateFormat")
     @ExperimentalTime
@@ -93,8 +91,14 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                     val userId : String = FirebaseAuth.getInstance().currentUser?.uid.toString()
                     var docRef = db.collection("Measurements").document(userId).collection("Measurements")
                     oldMood = this.Mood.text.toString()
+                    try{
                     this.newHourChosen = SimpleDateFormat("HH:mm").format(currentItem.Date.toDate()).toString()
-                    this.newDateChosen = SimpleDateFormat("yyyy-MM-dd").format(currentItem.Date.toDate()).toString()
+                    this.newDateChosen = SimpleDateFormat("yyyy-MM-dd").format(currentItem.Date.toDate()).toString()}
+                    catch (e: Exception){
+                        Log.d(TAG, "Failure in parsing")
+                        this.newHourChosen = "19:00"
+                        this.newDateChosen = "2021-06-16"
+                    }
                     val viewDialog = LayoutInflater.from(adapter.parentAdapter.context).inflate(R.layout.dialoge_edit_measurement, null)
                     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                         viewDialog.findViewById<DatePicker>(R.id.spinner_date).init(Calendar.getInstance().get(Calendar.YEAR),
@@ -161,7 +165,6 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
 
                     }
 
-
                     val dialogWindowChange = AlertDialog.Builder(adapter.context)
                         .setView(viewDialog)
                         .setCancelable(false)
@@ -215,10 +218,7 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                     viewDialog.findViewById<EditText>(R.id.editText_value_DBP_change).setText(this.DiastolicBP.text.toString())
                     viewDialog.findViewById<TimePicker>(R.id.spinner_time).setIs24HourView(true)
 
-
                     dialogWindowChange.show()
-
-
 
                 }
 
@@ -226,8 +226,8 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                     val currentPosition = adapter.getItem(this.adapterPosition)
                     val userId : String = FirebaseAuth.getInstance().currentUser?.uid.toString()
                     val docRef = db.collection("Measurements").document(userId).collection("Measurements")
-                        val view = LayoutInflater.from(adapter.parentAdapter.context).inflate(R.layout.dialoge_are_you_sure, null)
-                        val dialogWindow = AlertDialog.Builder(adapter.context)
+                    val view = LayoutInflater.from(adapter.parentAdapter.context).inflate(R.layout.dialoge_are_you_sure, null)
+                    val dialogWindow = AlertDialog.Builder(adapter.context)
                         .setView(view)
                         .setCancelable(false)
                         .setPositiveButton("Yes") { _, _ ->
@@ -242,10 +242,10 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
 
                         }
                         .create()
-                        dialogWindow.show()
-                        dialogWindow.setOnDismissListener{
-                            if (result == "yes" || result == "no") {
-                                when (result) {
+                    dialogWindow.show()
+                    dialogWindow.setOnDismissListener{
+                        if (result == "yes" || result == "no") {
+                            when (result) {
                                     "yes" -> {
                                         docRef.document(adapter.getItem(this.adapterPosition).documentId.toString()).delete()
                                         adapter.measurementsList.remove(currentPosition)

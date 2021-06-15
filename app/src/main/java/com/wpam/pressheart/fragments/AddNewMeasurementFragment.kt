@@ -118,7 +118,6 @@ class AddNewMeasurementFragment : Fragment() {
             val timeStampMeasure = Timestamp(temporaryDate)
             val SbpPressure = SbpEditTextNumber.getText().toString().toInt()
             val DbpPressure = DbpEditTextNumber.getText().toString().toInt()
-
             if(SbpPressure<300 && DbpPressure<SbpPressure && DbpPressure<300){
             val newMeasurement = hashMapOf(
                 "DiastolicBP" to DbpPressure,
@@ -144,10 +143,8 @@ class AddNewMeasurementFragment : Fragment() {
                     Toast.LENGTH_LONG).show()}
                 if(mood == "") {Toast.makeText((this.activity as MeasurementsActivity), "Choose your mood",
                     Toast.LENGTH_LONG).show()}
-                if(SbpEditTextNumber.getText().toString() == "") {Toast.makeText((this.activity as MeasurementsActivity), "Insert Systolic Blood Pressure",
-                    Toast.LENGTH_LONG).show()}
-                if(DbpEditTextNumber.getText().toString() == "") {Toast.makeText((this.activity as MeasurementsActivity), "Insert Diastolic Blood Presssure",
-                    Toast.LENGTH_LONG).show()}
+                if(SbpEditTextNumber.getText().toString() == "") { SbpEditTextNumber.error = "Fill the gap"}
+                if(DbpEditTextNumber.getText().toString() == "") { DbpEditTextNumber.error = "Fill the gap"}
             }
         }
     }
