@@ -21,6 +21,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.wpam.pressheart.R
 import com.wpam.pressheart.lists_content.SingleMeasurement
+import kotlinx.android.synthetic.main.fragment_add_new_measurement.*
 import kotlinx.android.synthetic.main.fragment_add_new_measurement.view.*
 import java.lang.Exception
 import java.security.Key
@@ -186,7 +187,8 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                                             }
                                             val newSBPvalue = viewDialog.findViewById<EditText>(R.id.editText_value_SBP_change).text.toString()
                                             val newDBPvalue = viewDialog.findViewById<EditText>(R.id.editText_value_DBP_change).text.toString()
-                                            if(newSBPvalue != document.data?.get("SystolicBP").toString() && newSBPvalue != currentItemSave.SystolicBP.toString()){
+                                            if(newSBPvalue != document.data?.get("SystolicBP").toString() && newSBPvalue != currentItemSave.SystolicBP.toString() &&
+                                                    newDBPvalue.matches(Regex("[0-9]+")) && newSBPvalue.matches(Regex("[0-9]+"))){
                                                 if(newSBPvalue.toInt()<300 && newSBPvalue>newDBPvalue ){
                                                 doc.update("SystolicBP", newSBPvalue.toLong())
                                                 currentItem.SystolicBP = newSBPvalue.toLong()
@@ -195,12 +197,23 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                                                     viewDialog.findViewById<EditText>(R.id.editText_value_SBP_change).error = "Wrong value"
                                                 }
                                             }
-                                            if(newDBPvalue != document.data?.get("DiastolicBP") && newDBPvalue != currentItemSave.DiastolicBP.toString()){
+                                            else{
+                                                if(!newSBPvalue.matches(Regex("[0-9]+"))) { viewDialog.findViewById<EditText>(R.id.editText_value_SBP_change).error = "Only number"}
+                                                if(!newDBPvalue.matches(Regex("[0-9]+"))) { viewDialog.findViewById<EditText>(R.id.editText_value_DBP_change).error = "Only number"}
+                                            }
+                                            if(newDBPvalue != document.data?.get("DiastolicBP") &&
+                                                newDBPvalue != currentItemSave.DiastolicBP.toString() &&
+                                                newDBPvalue.matches(Regex("[0-9]+")) &&
+                                                newSBPvalue.matches(Regex("[0-9]+"))){
                                                 if(newDBPvalue.toInt()<300 && newSBPvalue>newDBPvalue){
                                                 doc.update("DiastolicBP", newDBPvalue.toLong())
                                                 currentItem.DiastolicBP = newDBPvalue.toLong()
                                                 adapter.notifyItemChanged(adapterPosition)}
                                                 else { viewDialog.findViewById<EditText>(R.id.editText_value_DBP_change).error = "Wrong value"}
+                                            }
+                                            else {
+                                                if(!newSBPvalue.matches(Regex("[0-9]+"))) { viewDialog.findViewById<EditText>(R.id.editText_value_SBP_change).error = "Only number"}
+                                                if(!newDBPvalue.matches(Regex("[0-9]+"))) { viewDialog.findViewById<EditText>(R.id.editText_value_DBP_change).error = "Only number"}
                                             }
                                             val onlyHour = SimpleDateFormat("HH:mm").format(currentItemSave.Date.toDate()).toString()
                                             val onlyDate = SimpleDateFormat("YYYY-MM-dd").format(currentItemSave.Date.toDate()).toString()

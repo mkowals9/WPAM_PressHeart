@@ -128,12 +128,14 @@ class MedicineAdapter(private val medicinesList: ArrayList<SingleMedicine>) :
                             }
                             val newPills = viewDialog.findViewById<EditText>(R.id.editTextLeftPillsChange).text.toString()
                             if(newPills != currentItem.LeftPills.toString()){
-                                if(newPills.toInt() > 0){
+                                if(newPills.toInt() > 0 && newPills.matches(kotlin.text.Regex("[0-9]+"))){
                                 docRef.document(currentItem.documentId).update("LeftPills", newPills.toLong())
                                 currentItem.LeftPills = newPills.toLong()
                                 adapter.notifyItemChanged(adapterPosition)}
                                 else{
-                                    viewDialog.findViewById<EditText>(R.id.editTextLeftPillsChange).error = "Insert positive number"
+                                    if(newPills.toInt() < 0 ) { viewDialog.findViewById<EditText>(R.id.editTextLeftPillsChange).error = "Insert positive number" }
+                                    if(!newPills.matches(Regex("[0-9]+"))) {viewDialog.findViewById<EditText>(R.id.editTextLeftPillsChange).error = "Insert number"}
+
                                 }
                             }
                             val newDesc = viewDialog.findViewById<EditText>(R.id.editText_Description).text.toString()

@@ -1,17 +1,12 @@
 package com.wpam.pressheart.fragments
 
 import android.app.Activity
-import android.content.ContentValues
-import android.content.ContentValues.TAG
-import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
-import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.provider.MediaStore.Images
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -74,10 +69,11 @@ class AddNewMedicineFragment : Fragment() {
 
             val userId: String = FirebaseAuth.getInstance().currentUser?.uid.toString()
             this.medicineName = editTextNameMedicine.text.toString()
-            if(editTextNumberleftPills.text.toString() != ""){
+            if(editTextNumberleftPills.text.toString() != "" && editTextNumberleftPills.text.toString().matches(Regex("[0-9]+"))){
             this.amountOfPills = editTextNumberleftPills.text.toString().toInt()
             }
             else{
+                editTextNumberleftPills.error = "Wrong value"
                 amountOfPills = 0
             }
             desc = editTextDescriptionMedicine.text.toString()
@@ -89,9 +85,11 @@ class AddNewMedicineFragment : Fragment() {
             bitmapFireBase.compress(Bitmap.CompressFormat.PNG, 100, baos)
             val data = baos.toByteArray()
             if(this.medicineName != "" && this.amountOfPills>0){
-            val uploadTask = storageFirebase.child("${userId}/medicines/${this.medicineName}").putBytes(data)
+            val uploadTask = storageFirebase.child("${userId}/medicines/${this.medicineName}").putBytes(
+                data
+            )
             uploadTask.addOnFailureListener {
-                Toast.makeText(this.context,"Cannot upload a photo to Database", Toast.LENGTH_LONG).show()
+                Toast.makeText(this.context, "Cannot upload a photo to Database", Toast.LENGTH_LONG).show()
             }
                 uploadTask.continueWithTask { task ->
                     if(!task.isSuccessful){task.exception?.let {throw it}}
@@ -105,12 +103,18 @@ class AddNewMedicineFragment : Fragment() {
                                 "Description" to desc,
                                 "ImageUri" to downloadUri
                             )
-                            db.collection("Medicines").document(userId).collection("Medicines").add(newMedicineToAdd)
+                            db.collection("Medicines").document(userId).collection("Medicines").add(
+                                newMedicineToAdd
+                            )
                             findNavController().navigate(R.id.action_AddMedicine_to_MainMedicine)
                         }
                         else
                         {
-                            Toast.makeText(this.context,"Cannot get photo's uri", Toast.LENGTH_LONG).show()
+                            Toast.makeText(
+                                this.context,
+                                "Cannot get photo's uri",
+                                Toast.LENGTH_LONG
+                            ).show()
                         }
                     }
             }
@@ -124,7 +128,7 @@ class AddNewMedicineFragment : Fragment() {
                 if(desc == "") {editTextDescriptionMedicine.error = "Fill the gap" }
                 if(editTextNumberleftPills.text.toString() == "") { editTextNumberleftPills.error = "Fill the gap"}
                 else{
-                Toast.makeText(this.context, "Fill missing gaps",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this.context, "Fill missing gaps", Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -149,6 +153,8 @@ class AddNewMedicineFragment : Fragment() {
             }
         }
     }
+
+
 
 
 

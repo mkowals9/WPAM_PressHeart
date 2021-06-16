@@ -11,6 +11,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
@@ -124,6 +125,8 @@ class AddNewMeasurementFragment : Fragment() {
                     Log.d(TAG, e.toString())
                 }
                 val timeStampMeasure = Timestamp(temporaryDate)
+                if(SbpEditTextNumber.text.toString().matches(Regex("[0-9]+")) &&
+                        DbpEditTextNumber.text.toString().matches(Regex("[0-9]+"))){
                 val SbpPressure = SbpEditTextNumber.getText().toString().toInt()
                 val DbpPressure = DbpEditTextNumber.getText().toString().toInt()
             if(SbpPressure<300 && DbpPressure<SbpPressure && DbpPressure<300){
@@ -145,6 +148,11 @@ class AddNewMeasurementFragment : Fragment() {
                 if(SbpPressure> 300 || SbpPressure<DbpPressure){ SbpEditTextNumber.error = "Wrong value" }
                 if(DbpPressure>300 || DbpPressure>SbpPressure) {DbpEditTextNumber.error = "Wrong value"}
             }
+            }
+                else{
+                    if(!SbpEditTextNumber.text.toString().matches(Regex("[0-9]+"))) { SbpEditTextNumber.error = "Only number"}
+                    if (!DbpEditTextNumber.text.toString().matches(Regex("[0-9]+"))) {DbpEditTextNumber.error = "Only number"}
+                }
             }
             else{
                 if(datelbl == "") { dateButton.error = "Choose measurement's date"
