@@ -12,26 +12,23 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
-import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.wpam.pressheart.R
 import com.wpam.pressheart.lists_content.SingleMeasurement
-import kotlinx.android.synthetic.main.fragment_add_new_measurement.*
-import kotlinx.android.synthetic.main.fragment_add_new_measurement.view.*
-import java.lang.Exception
-import java.security.Key
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.concurrent.TimeUnit
-import kotlin.time.*
+import kotlin.time.ExperimentalTime
+
 
 @ExperimentalTime
-class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasurement>, val context : Context) :
+class MeasurementAdapter(
+    private val measurementsList: ArrayList<SingleMeasurement>,
+    val context: Context
+) :
     RecyclerView.Adapter<MeasurementAdapter.MyViewHolder>(){
 
     private lateinit var parentAdapter  : ViewGroup
@@ -62,14 +59,16 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
         return measurementsList.size
     }
 
-    fun getItem (pos : Int): SingleMeasurement {
+    fun getItem(pos: Int): SingleMeasurement {
         return measurementsList[pos]
     }
 
     @ExperimentalTime
     @SuppressLint("ResourceType", "CutPasteId")
     @RequiresApi(Build.VERSION_CODES.N)
-    class MyViewHolder(itemView: View, adapter : MeasurementAdapter) : RecyclerView.ViewHolder(itemView) {
+    class MyViewHolder(itemView: View, adapter: MeasurementAdapter) : RecyclerView.ViewHolder(
+        itemView
+    ) {
         val Date : TextView = itemView.findViewById(R.id.date_Measurement_Browse)
         val DiastolicBP : TextView = itemView.findViewById(R.id.diastolicBP_Measurement_Browse)
         val Mood : TextView = itemView.findViewById(R.id.mood_Measurement_Browse)
@@ -101,12 +100,18 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                         this.newHourChosen = "19:00"
                         this.newDateChosen = "2021-06-16"
                     }
-                    val viewDialog = LayoutInflater.from(adapter.parentAdapter.context).inflate(R.layout.dialoge_edit_measurement, null)
+                    val viewDialog = LayoutInflater.from(adapter.parentAdapter.context).inflate(
+                        R.layout.dialoge_edit_measurement,
+                        null
+                    )
                     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                        viewDialog.findViewById<DatePicker>(R.id.spinner_date).init(Calendar.getInstance().get(Calendar.YEAR),
+                        viewDialog.findViewById<DatePicker>(R.id.spinner_date).init(
+                            Calendar.getInstance().get(
+                                Calendar.YEAR
+                            ),
                             Calendar.getInstance().get(Calendar.MONTH),
-                            Calendar.getInstance().get(Calendar.DAY_OF_MONTH)){
-                                _, year, month, day ->
+                            Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+                        ){ _, year, month, day ->
                             val month_real = month + 1
                             if(month_real<10)
                             {
@@ -146,7 +151,11 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                         }
                     }
 
-                    val arrayAdapter = ArrayAdapter(itemView.context, android.R.layout.simple_spinner_dropdown_item, arrayMoods)
+                    val arrayAdapter = ArrayAdapter(
+                        itemView.context,
+                        android.R.layout.simple_spinner_dropdown_item,
+                        arrayMoods
+                    )
                     viewDialog.findViewById<Spinner>(R.id.spinner_moods).adapter = arrayAdapter
                     viewDialog.findViewById<Spinner>(R.id.spinner_moods).onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
                         override fun onItemSelected(
@@ -166,6 +175,8 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                         }
 
                     }
+                    viewDialog.findViewById<Spinner>(R.id.spinner_moods).setSelection(arrayMoods.indexOf(currentItem.Mood))
+                    selectSpinnerItemByValue(viewDialog.findViewById(R.id.spinner_moods))
 
                     val dialogWindowChange = AlertDialog.Builder(adapter.context)
                         .setView(viewDialog)
@@ -185,12 +196,15 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                                                 posSpinner = -1
                                                 adapter.notifyItemChanged(adapterPosition)
                                             }
-                                            val newSBPvalue = viewDialog.findViewById<EditText>(R.id.editText_value_SBP_change).text.toString()
-                                            val newDBPvalue = viewDialog.findViewById<EditText>(R.id.editText_value_DBP_change).text.toString()
-                                            if(newSBPvalue != document.data?.get("SystolicBP").toString() && newSBPvalue != currentItemSave.SystolicBP.toString() &&
-                                                    newDBPvalue.matches(Regex("[0-9]+")) && newSBPvalue.matches(Regex("[0-9]+"))){
-                                                if(newSBPvalue.toInt()<300 && newSBPvalue>newDBPvalue ){
+                                            val newSBPvalue = viewDialog.findViewById<EditText>(R.id.editText_value_SBP_change).getText().toString()
+                                            val newDBPvalue = viewDialog.findViewById<EditText>(R.id.editText_value_DBP_change).getText().toString()
+                                            Log.d(TAG, "warunek SBP: ${newSBPvalue != document.data?.get("SystolicBP").toString() && newSBPvalue != currentItemSave.SystolicBP.toString()}")
+                                            if(newSBPvalue != document.data?.get("SystolicBP").toString() && newSBPvalue != currentItemSave.SystolicBP.toString()){
+                                                Log.d(TAG, "halo halo")
+                                                Log.d(TAG, "warunke 2 SBP: ${newSBPvalue.toLong()<300 && newSBPvalue.toLong()>newDBPvalue.toLong() }")
+                                                if(newSBPvalue.toLong()<300 && newSBPvalue.toLong()>newDBPvalue.toLong() ){
                                                 doc.update("SystolicBP", newSBPvalue.toLong())
+                                                    Log.d(TAG, "jestem yu SBP")
                                                 currentItem.SystolicBP = newSBPvalue.toLong()
                                                 adapter.notifyItemChanged(adapterPosition)}
                                                 else{
@@ -198,29 +212,42 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                                                 }
                                             }
                                             else{
-                                                if(!newSBPvalue.matches(Regex("[0-9]+"))) { viewDialog.findViewById<EditText>(R.id.editText_value_SBP_change).error = "Only number"}
-                                                if(!newDBPvalue.matches(Regex("[0-9]+"))) { viewDialog.findViewById<EditText>(R.id.editText_value_DBP_change).error = "Only number"}
+//                                                if(!newSBPvalue.matches(Regex("[0-9]+"))) { viewDialog.findViewById<EditText>(
+//                                                    R.id.editText_value_SBP_change
+//                                                ).error = "Only number"}
+//                                                if(!newDBPvalue.matches(Regex("[0-9]+"))) { viewDialog.findViewById<EditText>(
+//                                                    R.id.editText_value_DBP_change
+//                                                ).error = "Only number"}
                                             }
                                             if(newDBPvalue != document.data?.get("DiastolicBP") &&
-                                                newDBPvalue != currentItemSave.DiastolicBP.toString() &&
-                                                newDBPvalue.matches(Regex("[0-9]+")) &&
-                                                newSBPvalue.matches(Regex("[0-9]+"))){
-                                                if(newDBPvalue.toInt()<300 && newSBPvalue>newDBPvalue){
+                                                newDBPvalue != currentItemSave.DiastolicBP.toString()){
+                                                if(newDBPvalue.toLong()<300 && newSBPvalue.toLong()>newDBPvalue.toLong()){
+                                                    Log.d(TAG, "jestem yu DBP")
                                                 doc.update("DiastolicBP", newDBPvalue.toLong())
                                                 currentItem.DiastolicBP = newDBPvalue.toLong()
                                                 adapter.notifyItemChanged(adapterPosition)}
                                                 else { viewDialog.findViewById<EditText>(R.id.editText_value_DBP_change).error = "Wrong value"}
                                             }
                                             else {
-                                                if(!newSBPvalue.matches(Regex("[0-9]+"))) { viewDialog.findViewById<EditText>(R.id.editText_value_SBP_change).error = "Only number"}
-                                                if(!newDBPvalue.matches(Regex("[0-9]+"))) { viewDialog.findViewById<EditText>(R.id.editText_value_DBP_change).error = "Only number"}
+                                                if(!newSBPvalue.matches(Regex("[0-9]+"))) { viewDialog.findViewById<EditText>(
+                                                    R.id.editText_value_SBP_change
+                                                ).error = "Only number"}
+                                                if(!newDBPvalue.matches(Regex("[0-9]+"))) { viewDialog.findViewById<EditText>(
+                                                    R.id.editText_value_DBP_change
+                                                ).error = "Only number"}
                                             }
-                                            val onlyHour = SimpleDateFormat("HH:mm").format(currentItemSave.Date.toDate()).toString()
-                                            val onlyDate = SimpleDateFormat("YYYY-MM-dd").format(currentItemSave.Date.toDate()).toString()
+                                            val onlyHour = SimpleDateFormat("HH:mm").format(
+                                                currentItemSave.Date.toDate()
+                                            ).toString()
+                                            val onlyDate = SimpleDateFormat("YYYY-MM-dd").format(
+                                                currentItemSave.Date.toDate()
+                                            ).toString()
                                             if(newDateChosen != onlyDate || newHourChosen != onlyHour){
                                                 val timestampToUpdatetext = "${newDateChosen} ${newHourChosen}"
                                                 val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm")
-                                                val temporaryDate : Date = formatter.parse(timestampToUpdatetext)
+                                                val temporaryDate : Date = formatter.parse(
+                                                    timestampToUpdatetext
+                                                )
                                                 val timeStampMeasure = Timestamp(temporaryDate)
                                                 doc.update("Date", timeStampMeasure)
                                                 Log.d(TAG, timestampToUpdatetext)
@@ -246,7 +273,10 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                     val currentPosition = adapter.getItem(this.adapterPosition)
                     val userId : String = FirebaseAuth.getInstance().currentUser?.uid.toString()
                     val docRef = db.collection("Measurements").document(userId).collection("Measurements")
-                    val view = LayoutInflater.from(adapter.parentAdapter.context).inflate(R.layout.dialoge_are_you_sure, null)
+                    val view = LayoutInflater.from(adapter.parentAdapter.context).inflate(
+                        R.layout.dialoge_are_you_sure,
+                        null
+                    )
                     val dialogWindow = AlertDialog.Builder(adapter.context)
                         .setView(view)
                         .setCancelable(false)
@@ -266,15 +296,19 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                     dialogWindow.setOnDismissListener{
                         if (result == "yes" || result == "no") {
                             when (result) {
-                                    "yes" -> {
-                                        docRef.document(adapter.getItem(this.adapterPosition).documentId.toString()).delete()
-                                        adapter.measurementsList.remove(currentPosition)
-                                        adapter.notifyDataSetChanged()
-                                        adapter.notifyItemRemoved(this.adapterPosition)
-                                        adapter.notifyItemChanged(this.adapterPosition, adapter.itemCount)
-                                    }
-                                    "no" -> {
-                                    }
+                                "yes" -> {
+                                    docRef.document(adapter.getItem(this.adapterPosition).documentId.toString())
+                                        .delete()
+                                    adapter.measurementsList.remove(currentPosition)
+                                    adapter.notifyDataSetChanged()
+                                    adapter.notifyItemRemoved(this.adapterPosition)
+                                    adapter.notifyItemChanged(
+                                        this.adapterPosition,
+                                        adapter.itemCount
+                                    )
+                                }
+                                "no" -> {
+                                }
                                 }
                             }
                         }
@@ -282,5 +316,15 @@ class MeasurementAdapter(private val measurementsList: ArrayList<SingleMeasureme
                     }
 
                 }
+
+        private fun selectSpinnerItemByValue(spnr: Spinner) {
+            val adapter = spnr.adapter
+            for (position in 0 until adapter.count) {
+                if (adapter.getItem(position).toString() == this.Mood.text.toString()) {
+                    spnr.setSelection(position)
+                    return
+                }
+            }
+        }
             }
         }
