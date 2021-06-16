@@ -3,6 +3,7 @@ package com.wpam.pressheart.fragments
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.os.HandlerCompat.postDelayed
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
@@ -74,14 +76,23 @@ class SettingsFragment: Fragment() {
                 refUser.update("name", newUserLog)
                 Firebase.auth.currentUser.updateProfile(userProfileChangeRequest{
                     displayName = newUserLog
-                }).addOnSuccessListener {  Toast.makeText(view.context, "Successfully changed user's login", Toast.LENGTH_SHORT).show() }
+                }).addOnSuccessListener {
+                    Handler().postDelayed({
+                        Toast.makeText(view.context, "Successfully changed user's login", Toast.LENGTH_SHORT).show()
+                    }, 1000)
+
+                }
 
             }
             if(newEmail != oldEmail){
                 if(SignUpWindow.isValidString(newEmail)){
                 refUser.update("email", newEmail).addOnSuccessListener { Log.d(TAG, "Done in data") }
-                Firebase.auth.currentUser!!.updateEmail(newEmail).addOnSuccessListener { }
-                    Toast.makeText(view.context, "Successfully changed user's e-mail", Toast.LENGTH_SHORT).show()
+                Firebase.auth.currentUser!!.updateEmail(newEmail).addOnSuccessListener {
+                    Handler().postDelayed({
+                        Toast.makeText(view.context, "Successfully changed user's e-mail", Toast.LENGTH_SHORT).show()
+                    }, 2000)
+                }
+
                 }
                 else{
                     view.findViewById<EditText>(R.id.editTextNewEmail).error = "Bad e-mail format"
@@ -91,13 +102,20 @@ class SettingsFragment: Fragment() {
                     Log.d(TAG, "jestem tuuu")
                     val neewPas = view.findViewById<EditText>(R.id.editTextPasswordConfirm).text.toString()
                     if(neewPas.length >= 6){
-                    Firebase.auth.currentUser!!.updatePassword(neewPas).addOnSuccessListener { Log.d(TAG, "CHANGED THIS") }
-                    Toast.makeText(view.context, "Successfully changes user's password", Toast.LENGTH_SHORT).show()}
+                    Firebase.auth.currentUser!!.updatePassword(neewPas).addOnSuccessListener {
+                        Log.d(TAG, "CHANGED THIS") }
+                        Handler().postDelayed({
+                            Toast.makeText(view.context, "Successfully changes user's password", Toast.LENGTH_SHORT).show()
+                        },2500)
+                        }
                     else{ view.findViewById<EditText>(R.id.editTextPasswordConfirm).error = "Insert longer password (min. 6 letters)"
                     view.findViewById<EditText>(R.id.editTextNewPasswordUpdate).error = "Insert longer password (min. 6 letters)"}
                 }
                 else{
-                    Toast.makeText(this.context, "Something went wrong, check new password", Toast.LENGTH_LONG).show()
+                    Handler().postDelayed({
+                        Toast.makeText(this.context, "Something went wrong, check new password", Toast.LENGTH_LONG).show()
+                    },3000)
+
                 }
 
             Toast.makeText(this.context, "Updated user's info", Toast.LENGTH_LONG).show()
