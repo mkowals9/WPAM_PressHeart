@@ -1,11 +1,12 @@
 package com.wpam.pressheart
 
-import android.content.ContentValues
+
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.content.ContentValues.TAG
 import androidx.core.os.HandlerCompat.postDelayed
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -25,29 +26,32 @@ class SplashScreenActivity : AppCompatActivity() {
         if(currentUser != null && currentUser2 != null){
 
             val intent = Intent(this@SplashScreenActivity, MainLoggedMenuActivity::class.java)
-
             val docRef = db.collection("Users_info").document(currentUser.uid)
             docRef.get()
                 .addOnSuccessListener {
                         document ->
                     if (document != null){
                         val userLogin:String = document.data?.getValue("name").toString()
-                        intent.putExtra("userName", userLogin)
+                        Log.d(TAG, "succes ${userLogin}")
                     }
                     else
                     {
-                        val userLogin = "No Name User"
-                        intent.putExtra("userName", userLogin)
                     }
                 }
         Handler().postDelayed({
+
             startActivity(intent)
+            finish()
         }, 2000)
 
         }
         else{
-            val intent = Intent(this@SplashScreenActivity, MainActivity::class.java)
-            startActivity(intent)
+
+            val intent2 = Intent(this@SplashScreenActivity, MainActivity::class.java)
+            Handler().postDelayed({
+                startActivity(intent2)
+            }, 2000)
+            startActivity(intent2)
             finish()
         }
 
