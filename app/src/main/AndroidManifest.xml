@@ -24,8 +24,7 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:noHistory="true"
             android:screenOrientation="portrait"
-            android:parentActivityName=".MainLoggedMenuActivity"
-            ></activity>
+            android:parentActivityName=".MainLoggedMenuActivity" />
         <activity
             android:name=".SettingsActivity"
             android:label="Settings"
