@@ -18,3 +18,4 @@ To install app, firstly you must open the project in Android Studio, then choose
 
 ## Application Structure
 
+After tapping the application icon in phone's menu should firstly a splash screen be seen. Later, depending if you're logged in or not, you should see main menu or login panel.
