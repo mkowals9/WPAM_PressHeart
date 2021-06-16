@@ -111,14 +111,9 @@ class SettingsFragment: Fragment() {
                     else{ view.findViewById<EditText>(R.id.editTextPasswordConfirm).error = "Insert longer password (min. 6 letters)"
                     view.findViewById<EditText>(R.id.editTextNewPasswordUpdate).error = "Insert longer password (min. 6 letters)"}
                 }
-                else{
-                    Handler().postDelayed({
-                        Toast.makeText(this.context, "Something went wrong, check new password", Toast.LENGTH_LONG).show()
-                    },3000)
 
-                }
 
-            Toast.makeText(this.context, "Updated user's info", Toast.LENGTH_LONG).show()
+            Handler().postDelayed({Toast.makeText(this.context, "Updated user's info", Toast.LENGTH_LONG).show()}, 3000)
         }
 
         buttonDeleteUser.setOnClickListener {

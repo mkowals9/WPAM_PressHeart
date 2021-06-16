@@ -28,6 +28,7 @@ class MainLoggedMenuFragment : Fragment() {
     private lateinit var viewFragmentFragment : View
     private var currentLogin : String = ""
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -112,18 +113,45 @@ class MainLoggedMenuFragment : Fragment() {
             }
         }
 
-        override fun onResume() {
-            super.onResume()
-            val user = Firebase.auth.currentUser
-            user?.let {
-                for (profile in it.providerData) {
-                    val name = profile.displayName
-                    currentLogin = name.toString()
-                    viewFragmentFragment.findViewById<TextView>(R.id.textview_first)
-                        .setText("Hello ${currentLogin}, nice to see you again ❤")
+    override fun onResume() {
+        super.onResume()
+
+        db.collection("Users_info").document(Firebase.auth.uid.toString()).get()
+            .addOnSuccessListener { documentSnapshot ->
+                currentLogin = documentSnapshot.data?.get("name").toString()
+                viewFragmentFragment.findViewById<TextView>(R.id.textview_first).text = "Hello ${
+                    documentSnapshot.data?.get("name").toString()
+                }, nice to see you again ❤"
+                val user2 = Firebase.auth.currentUser
+                val profileUpdates = userProfileChangeRequest { displayName = currentLogin.toString() }
+                user2!!.updateProfile(profileUpdates).addOnSuccessListener {
+                    Firebase.auth.currentUser?.let {
+                        for (profile in it.providerData) Log.d(
+                            TAG,
+                            "user LOGIN Res : ${profile.displayName}"
+                        )
+                    }
                 }
+                Log.d(TAG, "snapshotRes: ${documentSnapshot.data?.get("name").toString()}")
             }
-        }
+            .addOnFailureListener {
+                currentLogin = "user"
+                viewFragmentFragment.findViewById<TextView>(R.id.textview_first).text = "Hello, nice to see you again ❤"
+            }
+
+    }
+
+//        override fun onResume() {
+//            super.onResume()
+//            val user = Firebase.auth.currentUser
+//            user?.let {
+//                for (profile in it.providerData) {
+//                    val name = profile.displayName
+//                    currentLogin = name
+//                    viewFragmentFragment.findViewById<TextView>(R.id.textview_first).text = "Hello ${currentLogin}, nice to see you again ❤"
+//                }
+//            }
+//        }
 
 
         private fun updateUI(user: FirebaseUser?) {}
